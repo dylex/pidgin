@@ -142,7 +142,7 @@ void gnt_util_parse_widgets(const char *string, int num, ...);
  *
  * @since 2.2.0
  */
-gboolean gnt_util_parse_xhtml_to_textview(const char *string, GntTextView *tv);
+gboolean gnt_util_parse_xhtml_to_textview(const char *string, GntTextView *tv, GntTextFormatFlags flag);
 
 /**
  * Make some keypress activate a button when some key is pressed with 'wid' in focus.

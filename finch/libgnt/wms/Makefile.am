@@ -1,13 +1,14 @@
 wms = irssi.la
 if PURPLE_AVAILABLE
 # These custom wms depend on libpurple
-purple_wms = s.la
+purple_wms = s.la full.la
 else
 purple_wms =
 endif
 
 s_la_LDFLAGS             = -module -avoid-version
 irssi_la_LDFLAGS         = -module -avoid-version
+full_la_LDFLAGS          = -module -avoid-version
 
 plugin_LTLIBRARIES = \
 	$(wms) \
@@ -19,6 +20,11 @@ irssi_la_SOURCES = irssi.c
 irssi_la_LIBADD =  \
   $(GLIB_LIBS) \
   ../libgnt.la
+
+full_la_SOURCES = full.c
+full_la_LIBADD =  \
+  $(GLIB_LIBS) \
+  $(top_builddir)/finch/libgnt/libgnt.la
 
 s_la_SOURCES = s.c
 s_la_LIBADD =  \

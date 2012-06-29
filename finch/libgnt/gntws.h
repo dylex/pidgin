@@ -121,21 +121,19 @@ void gnt_ws_remove_widget(GntWS *ws, GntWidget *widget);
  * Hide a widget in a workspace.
  *
  * @param widget  The widget to hide.
- * @param nodes   A hashtable containing information about the widgets.
  *
  * @since 2.0.0 (gnt), 2.1.0 (pidgin)
  */
-void gnt_ws_widget_hide(GntWidget *widget, GHashTable *nodes);
+void gnt_ws_widget_hide(GntWidget *widget);
 
 /**
  * Show a widget in a workspace.
  *
  * @param widget   The widget to show.
- * @param nodes   A hashtable containing information about the widgets.
  *
  * @since 2.0.0 (gnt), 2.1.0 (pidgin)
  */
-void gnt_ws_widget_show(GntWidget *widget, GHashTable *nodes);
+void gnt_ws_widget_show(GntWidget *widget);
 
 /**
  * Draw the taskbar in a workspace.
@@ -155,7 +153,7 @@ void gnt_ws_draw_taskbar(GntWS *ws, gboolean reposition);
  *
  * @since 2.0.0 (gnt), 2.1.0 (pidgin)
  */
-void gnt_ws_hide(GntWS *ws, GHashTable *table);
+void gnt_ws_hide(GntWS *ws);
 
 /**
  * Show a workspace.
@@ -165,7 +163,7 @@ void gnt_ws_hide(GntWS *ws, GHashTable *table);
  *
  * @since 2.0.0 (gnt), 2.1.0 (pidgin)
  */
-void gnt_ws_show(GntWS *ws, GHashTable *table);
+void gnt_ws_show(GntWS *ws);
 
 /**
  * Get the name of a workspace.

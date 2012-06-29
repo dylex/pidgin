@@ -60,6 +60,7 @@ GType purple_media_backend_fs2_get_type(void);
  * Temporary function in order to be able to test while
  * integrating with PurpleMedia
  */
+#ifdef USE_GSTREAMER
 #include <gst/gst.h>
 GstElement *purple_media_backend_fs2_get_src(
 		PurpleMediaBackendFs2 *self,
@@ -71,6 +72,7 @@ void purple_media_backend_fs2_set_input_volume(PurpleMediaBackendFs2 *self,
 		const gchar *sess_id, double level);
 void purple_media_backend_fs2_set_output_volume(PurpleMediaBackendFs2 *self,
 		const gchar *sess_id, const gchar *who, double level);
+#endif
 /* end tmp */
 #endif /* USE_GSTREAMER */
 

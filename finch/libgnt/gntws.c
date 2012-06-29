@@ -30,10 +30,10 @@
 #include "gntws.h"
 
 static void
-widget_hide(gpointer data, gpointer nodes)
+widget_hide(gpointer data, gpointer unused)
 {
 	GntWidget *widget = GNT_WIDGET(data);
-	GntNode *node = g_hash_table_lookup(nodes, widget);
+	GntNode *node = widget->wmnode;
 	if (GNT_IS_WINDOW(widget))
 		gnt_window_workspace_hiding(GNT_WINDOW(widget));
 	if (node)
@@ -41,13 +41,14 @@ widget_hide(gpointer data, gpointer nodes)
 }
 
 static void
-widget_show(gpointer data, gpointer nodes)
+widget_show(gpointer data)
 {
-	GntNode *node = g_hash_table_lookup(nodes, data);
-	GNT_WIDGET_UNSET_FLAGS(GNT_WIDGET(data), GNT_WIDGET_INVISIBLE);
+	GntWidget *widget = GNT_WIDGET(data);
+	GntNode *node = widget->wmnode;
+	GNT_WIDGET_UNSET_FLAGS(widget, GNT_WIDGET_INVISIBLE);
 	if (node) {
 		show_panel(node->panel);
-		gnt_wm_copy_win(GNT_WIDGET(data), node);
+		gnt_wm_copy_win(widget, node);
 	}
 }
 
@@ -72,14 +73,21 @@ gnt_ws_draw_taskbar(GntWS *ws, gboolean reposition)
 	wbkgdset(taskbar, '\0' | gnt_color_pair(GNT_COLOR_NORMAL));
 	werase(taskbar);
 
-	n = g_list_length(ws->list);
+	for (n = 0, iter = ws->list; iter; iter = iter->next) {
+		if (GNT_WIDGET_IS_FLAG_SET(iter->data, GNT_WIDGET_SWITCH_SKIP))
+			continue;
+		n++;
+	}
 	if (n)
 		width = getmaxx(stdscr) / n;
 
-	for (i = 0, iter = ws->list; iter; iter = iter->next, i++) {
+	for (i = 0, iter = ws->list; iter; iter = iter->next) {
 		GntWidget *w = iter->data;
 		int color;
 		const char *title;
+
+		if (GNT_WIDGET_IS_FLAG_SET(w, GNT_WIDGET_SWITCH_SKIP))
+			continue;
 
 		if (w == ws->ordered->data) {
 			/* This is the current window in focus */
@@ -99,6 +107,7 @@ gnt_ws_draw_taskbar(GntWS *ws, gboolean reposition)
 		mvwprintw(taskbar, 0, width * i, "%s", title ? C_(title) : "<gnt>");
 		if (i)
 			mvwaddch(taskbar, 0, width *i - 1, ACS_VLINE | A_STANDOUT | gnt_color_pair(GNT_COLOR_NORMAL));
+		i++;
 	}
 	wrefresh(taskbar);
 }
@@ -136,27 +145,27 @@ gnt_ws_set_name(GntWS *ws, const gchar *name)
 }
 
 void
-gnt_ws_hide(GntWS *ws, GHashTable *nodes)
+gnt_ws_hide(GntWS *ws)
 {
-	g_list_foreach(ws->ordered, widget_hide, nodes);
+	g_list_foreach(ws->ordered, (GFunc)widget_hide, NULL);
 }
 
-void gnt_ws_widget_hide(GntWidget *widget, GHashTable *nodes)
+void gnt_ws_widget_hide(GntWidget *widget)
 {
-	widget_hide(widget, nodes);
+	widget_hide(widget, NULL);
 }
 
-void gnt_ws_widget_show(GntWidget *widget, GHashTable *nodes)
+void gnt_ws_widget_show(GntWidget *widget)
 {
-	widget_show(widget, nodes);
+	widget_show(widget);
 }
 
 void
-gnt_ws_show(GntWS *ws, GHashTable *nodes)
+gnt_ws_show(GntWS *ws)
 {
 	GList *l;
 	for (l = g_list_last(ws->ordered); l; l = g_list_previous(l))
-		widget_show(l->data, nodes);
+		widget_show(l->data);
 }
 
 GType

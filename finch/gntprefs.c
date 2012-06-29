@@ -53,10 +53,10 @@ void finch_prefs_init()
 
 	purple_prefs_add_none("/finch/conversations");
 	purple_prefs_add_bool("/finch/conversations/timestamps", TRUE);
+	purple_prefs_add_string("/finch/conversations/timestamp_fmt", "(%H:%M:%S)");
 	purple_prefs_add_bool("/finch/conversations/notify_typing", FALSE);
 
 	purple_prefs_add_none("/finch/filelocations");
-	purple_prefs_add_path("/finch/filelocations/last_save_folder", "");
 	purple_prefs_add_path("/finch/filelocations/last_save_folder", "");
 }
 
@@ -190,6 +190,7 @@ static Prefs blist[] =
 static Prefs convs[] =
 {
 	{PURPLE_PREF_BOOLEAN, "/finch/conversations/timestamps", N_("Show Timestamps"), NULL},
+	{PURPLE_PREF_STRING, "/finch/conversations/timestamp_fmt", N_("Timestamp Format"), NULL},
 	{PURPLE_PREF_BOOLEAN, "/finch/conversations/notify_typing", N_("Notify buddies when you are typing"), NULL},
 	{PURPLE_PREF_NONE, NULL, NULL, NULL}
 };

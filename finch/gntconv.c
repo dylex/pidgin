@@ -44,6 +44,7 @@
 #include "gntrequest.h"
 #include "gntsound.h"
 #include "gntstatus.h"
+#include "gntimhtml.h"
 
 #include "gnt.h"
 #include "gntbox.h"
@@ -150,7 +151,7 @@ entry_key_pressed(GntWidget *w, FinchConv *ggconv)
 		char *error = NULL, *escape;
 
 		escape = g_markup_escape_text(cmdline, -1);
-		status = purple_cmd_do_command(conv, cmdline, escape, &error);
+		status = purple_cmd_do_command(conv, escape, cmdline, &error);
 		g_free(escape);
 
 		switch (status)
@@ -906,7 +907,7 @@ finch_write_common(PurpleConversation *conv, const char *who, const char *messag
 		PurpleMessageFlags flags, time_t mtime)
 {
 	FinchConv *ggconv = FINCH_GET_DATA(conv);
-	char *strip, *newline;
+	char *strip;
 	GntTextFormatFlags fl = 0;
 	int pos;
 
@@ -933,7 +934,7 @@ finch_write_common(PurpleConversation *conv, const char *who, const char *messag
 		if (!mtime)
 			time(&mtime);
 		gnt_text_view_append_text_with_flags(GNT_TEXT_VIEW(ggconv->tv),
-					purple_utf8_strftime("(%H:%M:%S)", localtime(&mtime)), gnt_color_pair(color_timestamp));
+					purple_utf8_strftime(purple_prefs_get_string("/finch/conversations/timestamp_fmt"), localtime(&mtime)), gnt_color_pair(color_timestamp));
 	}
 
 	gnt_text_view_append_text_with_flags(GNT_TEXT_VIEW(ggconv->tv), " ", GNT_TEXT_FLAG_NORMAL);
@@ -976,14 +977,7 @@ finch_write_common(PurpleConversation *conv, const char *who, const char *messag
 	if (flags & PURPLE_MESSAGE_ERROR)
 		fl |= GNT_TEXT_FLAG_BOLD;
 
-	/* XXX: Remove this workaround when textview can parse messages. */
-	newline = purple_strdup_withhtml(message);
-	strip = purple_markup_strip_html(newline);
-	gnt_text_view_append_text_with_flags(GNT_TEXT_VIEW(ggconv->tv),
-				strip, fl);
-
-	g_free(newline);
-	g_free(strip);
+	gnt_imhtml_append_markup(GNT_TEXT_VIEW(ggconv->tv), message, fl);
 
 	if (purple_conversation_get_type(conv) == PURPLE_CONV_TYPE_IM &&
 			purple_conv_im_get_typing_state(PURPLE_CONV_IM(conv)) == PURPLE_TYPING) {

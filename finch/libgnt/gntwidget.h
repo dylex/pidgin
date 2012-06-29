@@ -66,6 +66,7 @@ typedef enum _GntWidgetFlags
 	GNT_WIDGET_INVISIBLE      = 1 << 10,
 	GNT_WIDGET_TRANSIENT      = 1 << 11,
 	GNT_WIDGET_DISABLE_ACTIONS = 1 << 12,
+	GNT_WIDGET_SWITCH_SKIP	  = 1 << 13,
 } GntWidgetFlags;
 
 /* XXX: This will probably move elsewhere */
@@ -103,6 +104,7 @@ struct _GntWidget
 
 	GntWidgetPriv priv;
 	WINDOW *window;
+	struct _GntNode *wmnode;
 
     void (*gnt_reserved1)(void);
     void (*gnt_reserved2)(void);

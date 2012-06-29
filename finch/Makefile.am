@@ -25,6 +25,7 @@ finch_SOURCES = \
 	gntft.c \
 	finch.c \
 	gntidle.c \
+	gntimhtml.c \
 	gntlog.c \
 	gntmedia.c \
 	gntnotify.c \
@@ -47,6 +48,7 @@ finch_headers = \
 	gntft.h \
 	finch.h \
 	gntidle.h \
+	gntimhtml.h \
 	gntlog.h \
 	gntmedia.h \
 	gntnotify.h \

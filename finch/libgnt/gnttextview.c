@@ -74,6 +74,13 @@ text_view_contains(GntTextView *view, const char *str)
 }
 
 static void
+gnt_text_view_draw_text(GntWidget *widget, GntTextFormatFlags fl, chtype at, char *s, char *e)
+{
+	wattrset(widget->window, at);
+	waddnstr(widget->window, s, e-s);
+}
+
+static void
 gnt_text_view_draw(GntWidget *widget)
 {
 	GntTextView *view = GNT_TEXT_VIEW(widget);
@@ -111,36 +118,26 @@ gnt_text_view_draw(GntWidget *widget)
 		for (iter = line->segments; iter; iter = iter->next)
 		{
 			GntTextSegment *seg = iter->data;
+			char *start = view->string->str + seg->start;
 			char *end = view->string->str + seg->end;
-			char back = *end;
-			chtype fl = seg->flags;
-			*end = '\0';
-			if (select_start && select_start < view->string->str + seg->start && select_end > view->string->str + seg->end) {
-				fl |= A_REVERSE;
-				wattrset(widget->window, fl);
-				wprintw(widget->window, "%s", C_(view->string->str + seg->start));
-			} else if (select_start && select_end &&
-				((select_start >= view->string->str + seg->start && select_start <= view->string->str + seg->end) ||
-				(select_end <= view->string->str + seg->end && select_start <= view->string->str + seg->start))) {
-				char *cur = view->string->str + seg->start;
-				while (*cur != '\0') {
-					gchar *last = g_utf8_next_char(cur);
-					gchar *str;
-					if (cur >= select_start && cur <= select_end)
-						fl |= A_REVERSE;
-					else
-						fl = seg->flags;
-					str = g_strndup(cur, last - cur);
-					wattrset(widget->window, fl);
-					waddstr(widget->window, C_(str));
-					g_free(str);
-					cur = g_utf8_next_char(cur);
-				}
-			} else {
-				wattrset(widget->window, fl);
-				wprintw(widget->window, "%s", C_(view->string->str + seg->start));
+			GntTextFormatFlags fl = seg->tvflag;
+			chtype at = seg->flags;
+			if (select_start && select_end && select_start < end && select_end >= start)
+			{
+				char *s = start;
+				char *e = select_start;
+				if (e > s)
+					gnt_text_view_draw_text(widget, fl, at, s, e);
+				s = MAX(select_start, start);
+				e = MIN(select_end+1, end);
+				gnt_text_view_draw_text(widget, fl, at | A_REVERSE, s, e);
+				s = select_end+1;
+				e = end;
+				if (e > s)
+					gnt_text_view_draw_text(widget, fl, at, s, e);
 			}
-			*end = back;
+			else
+				gnt_text_view_draw_text(widget, fl, at, start, end);
 		}
 		wattroff(widget->window, A_UNDERLINE | A_BLINK | A_REVERSE);
 		whline(widget->window, ' ', widget->priv.width - line->length - has_scroll);
@@ -660,10 +657,10 @@ chtype gnt_text_format_flag_to_chtype(GntTextFormatFlags flags)
 		fl |= A_UNDERLINE;
 	if (flags & GNT_TEXT_FLAG_BLINK)
 		fl |= A_BLINK;
-
 	if (flags & GNT_TEXT_FLAG_DIM)
-		fl |= (A_DIM | gnt_color_pair(GNT_COLOR_DISABLED));
-	else if (flags & GNT_TEXT_FLAG_HIGHLIGHT)
+		fl |= A_DIM;
+
+	if (flags & GNT_TEXT_FLAG_HIGHLIGHT)
 		fl |= (A_DIM | gnt_color_pair(GNT_COLOR_HIGHLIGHT));
 	else if ((flags & A_COLOR) == 0)
 		fl |= gnt_color_pair(GNT_COLOR_NORMAL);

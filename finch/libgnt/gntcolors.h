@@ -34,7 +34,16 @@
  */
 typedef enum
 {
-	GNT_COLOR_NORMAL = 1,
+	GNT_COLOR_BLACK = 0,
+	GNT_COLOR_RED,
+	GNT_COLOR_GREEN,
+	GNT_COLOR_YELLOW,
+	GNT_COLOR_BLUE,
+	GNT_COLOR_MAGENTA,
+	GNT_COLOR_CYAN,
+	GNT_COLOR_WHITE,
+
+	GNT_COLOR_NORMAL,
 	GNT_COLOR_HIGHLIGHT,		/* eg. when a button is selected */
 	GNT_COLOR_DISABLED,		/* eg. when a button is disabled */
 	GNT_COLOR_HIGHLIGHT_D,	/* eg. when a button is selected, but some other window is in focus */
@@ -48,18 +57,6 @@ typedef enum
 	GNT_COLOR_URGENT,       /* this is for the 'urgent' windows */
 	GNT_COLORS
 } GntColorType;
-
-enum
-{
-	GNT_COLOR_BLACK = 0,
-	GNT_COLOR_RED,
-	GNT_COLOR_GREEN,
-	GNT_COLOR_BLUE,
-	GNT_COLOR_WHITE,
-	GNT_COLOR_GRAY,
-	GNT_COLOR_DARK_GRAY,
-	GNT_TOTAL_COLORS
-};
 
 /**
  * Initialize the colors.
@@ -122,4 +119,5 @@ int gnt_color_pair(int color);
  * @since 2.4.0
  */
 int gnt_color_add_pair(int fg, int bg);
+
 #endif

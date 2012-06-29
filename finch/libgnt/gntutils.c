@@ -41,6 +41,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+#include "libpurple/util.h"
 #ifndef NO_LIBXML
 #include <libxml/parser.h>
 #include <libxml/tree.h>
@@ -389,7 +390,11 @@ util_parse_html_to_tv(xmlNode *node, GntTextView *tv, GntTextFormatFlags flag)
 	gboolean insert_nl_s = FALSE, insert_nl_e = FALSE;
 
 	if (node == NULL || node->name == NULL || node->type != XML_ELEMENT_NODE)
+	{
+		if (node->type == XML_TEXT_NODE)
+			gnt_text_view_append_text_with_flags(tv, (char *)node->content, flag);
 		return;
+	}
 
 	name = (char*)node->name;
 	if (g_ascii_strcasecmp(name, "b") == 0 ||
@@ -416,6 +421,41 @@ util_parse_html_to_tv(xmlNode *node, GntTextView *tv, GntTextFormatFlags flag)
 		insert_nl_s = TRUE;
 		insert_nl_e = TRUE;
 		flag |= GNT_TEXT_FLAG_BOLD | GNT_TEXT_FLAG_UNDERLINE;
+	} else if (g_ascii_strcasecmp(name, "span") == 0) {
+		xmlChar *style = xmlGetProp(node, (xmlChar *)"style");
+		if (style)
+		{
+			gchar *color, *textdec, *weight;
+			color = purple_markup_get_css_property((char *)style, "color");
+			textdec = purple_markup_get_css_property((char *)style, "text-decoration");
+			weight = purple_markup_get_css_property((char *)style, "font-weight");
+
+			if (color)
+			{
+				/* should use gdk_color_parse or similar */
+				if (!g_ascii_strcasecmp(color, "red"))
+					flag |= gnt_color_pair(GNT_COLOR_RED);
+				else if (!g_ascii_strcasecmp(color, "green"))
+					flag |= gnt_color_pair(GNT_COLOR_GREEN);
+				else if (!g_ascii_strcasecmp(color, "yellow"))
+					flag |= gnt_color_pair(GNT_COLOR_YELLOW);
+				else if (!g_ascii_strcasecmp(color, "blue"))
+					flag |= gnt_color_pair(GNT_COLOR_BLUE);
+				else if (!g_ascii_strcasecmp(color, "magenta"))
+					flag |= gnt_color_pair(GNT_COLOR_MAGENTA);
+				else if (!g_ascii_strcasecmp(color, "cyan"))
+					flag |= gnt_color_pair(GNT_COLOR_CYAN);
+			}
+			if (weight && !g_ascii_strcasecmp(textdec, "bold"))
+				flag |= GNT_TEXT_FLAG_BOLD;
+			if (textdec && !g_ascii_strcasecmp(textdec, "underline"))
+				flag |= GNT_TEXT_FLAG_UNDERLINE;
+
+			g_free(weight);
+			g_free(textdec);
+			g_free(color);
+			xmlFree(style);
+		}
 	} else {
 		/* XXX: Process other possible tags */
 	}
@@ -445,15 +485,14 @@ util_parse_html_to_tv(xmlNode *node, GntTextView *tv, GntTextFormatFlags flag)
 }
 #endif
 
-gboolean gnt_util_parse_xhtml_to_textview(const char *string, GntTextView *tv)
+gboolean gnt_util_parse_xhtml_to_textview(const char *string, GntTextView *tv, GntTextFormatFlags flag)
 {
 #ifdef NO_LIBXML
 	return FALSE;
 #else
 	xmlParserCtxtPtr ctxt;
-	xmlDocPtr doc;
+	xmlDocPtr doc = NULL;
 	xmlNodePtr node;
-	GntTextFormatFlags flag = GNT_TEXT_FLAG_NORMAL;
 	gboolean ret = FALSE;
 
 	ctxt = xmlNewParserCtxt();
@@ -463,6 +502,11 @@ gboolean gnt_util_parse_xhtml_to_textview(const char *string, GntTextView *tv)
 		util_parse_html_to_tv(node, tv, flag);
 		xmlFreeDoc(doc);
 		ret = TRUE;
+	}
+	else
+	{
+		gnt_text_view_append_text_with_flags(tv, "(HTML parse error) ", flag | GNT_TEXT_FLAG_BOLD);
+		gnt_text_view_append_text_with_flags(tv, string, flag);
 	}
 	xmlFreeParserCtxt(ctxt);
 	return ret;

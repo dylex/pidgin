@@ -1,4 +1,4 @@
-EXTRA_DIST = \
+EXTRA_DIST = config.rpath  \
 		COPYRIGHT \
 		ChangeLog.API \
 		ChangeLog.win32 \
@@ -145,3 +145,5 @@ distuninstallcheck_listfiles = \
 
 DISTCLEANFILES= $(DESKTOP_FILE) libpurple/gconf/purple.schemas intltool-extract \
 			intltool-merge intltool-update
+
+ACLOCAL_AMFLAGS = -I m4

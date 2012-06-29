@@ -10,8 +10,8 @@ noinst_HEADERS = gntinternal.h
 
 BUILT_SOURCES = gntmarshal.h
 
+nodist_libgnt_la_SOURCES = gntmarshal.c
 libgnt_la_SOURCES = \
-	gntmarshal.c \
 	gntwidget.c \
 	gntbindable.c \
 	gntbox.c \
@@ -53,7 +53,6 @@ libgnt_la_headers = \
 	gntkeys.h \
 	gntlabel.h \
 	gntline.h \
-	gntmarshal.h \
 	gntmenu.h \
 	gntmenuitem.h \
 	gntmenuitemcheck.h \
@@ -80,6 +79,7 @@ gntmarshal.h: $(srcdir)/genmarshal
 	glib-genmarshal --prefix=gnt_closure_marshal --header $(srcdir)/genmarshal > $@
 
 libgnt_laincludedir=$(includedir)/gnt
+nodist_libgnt_lainclude_HEADERS = gntmarshal.h
 libgnt_lainclude_HEADERS = \
 	$(libgnt_la_headers)
 

@@ -51,6 +51,7 @@ static GHashTable *logsize_users_decayed = NULL;
 
 static void log_get_log_sets_common(GHashTable *sets);
 
+static void html_logger_create(PurpleLog *log);
 static gsize html_logger_write(PurpleLog *log, PurpleMessageFlags type,
 							  const char *from, time_t time, const char *message);
 static void html_logger_finalize(PurpleLog *log);
@@ -66,6 +67,7 @@ static int old_logger_size (PurpleLog *log);
 static void old_logger_get_log_sets(PurpleLogSetCallback cb, GHashTable *sets);
 static void old_logger_finalize(PurpleLog *log);
 
+static void txt_logger_create(PurpleLog *log);
 static gsize txt_logger_write(PurpleLog *log,
 							 PurpleMessageFlags type,
 							 const char *from, time_t time, const char *message);
@@ -653,7 +655,7 @@ void purple_log_init(void)
 	purple_prefs_add_string("/purple/logging/format", "html");
 
 	html_logger = purple_log_logger_new("html", _("HTML"), 11,
-									  NULL,
+									  html_logger_create,
 									  html_logger_write,
 									  html_logger_finalize,
 									  html_logger_list,
@@ -667,7 +669,7 @@ void purple_log_init(void)
 	purple_log_logger_add(html_logger);
 
 	txt_logger = purple_log_logger_new("txt", _("Plain text"), 11,
-									 NULL,
+									 txt_logger_create,
 									 txt_logger_write,
 									 txt_logger_finalize,
 									 txt_logger_list,
@@ -755,7 +757,7 @@ static char *log_get_timestamp(PurpleLog *log, time_t when)
 	char *date;
 	struct tm tm;
 
-	show_date = (log->type == PURPLE_LOG_SYSTEM) || (time(NULL) > when + 20*60);
+	show_date = TRUE;
 
 	date = purple_signal_emit_return_1(purple_log_get_handle(),
 	                          "log-timestamp",
@@ -1369,14 +1371,9 @@ static PurpleLogLogger xml_logger =  {
  ** HTML LOGGER *************
  ****************************/
 
-static gsize html_logger_write(PurpleLog *log, PurpleMessageFlags type,
-							  const char *from, time_t time, const char *message)
+static void html_logger_create(PurpleLog *log)
 {
-	char *msg_fixed;
-	char *image_corrected_msg;
-	char *date;
 	char *header;
-	char *escaped_from;
 	PurplePlugin *plugin = purple_find_prpl(purple_account_get_protocol_id(log->account));
 	PurpleLogCommonLoggerData *data = log->logger_data;
 	gsize written = 0;
@@ -1391,7 +1388,7 @@ static gsize html_logger_write(PurpleLog *log, PurpleMessageFlags type,
 
 		/* if we can't write to the file, give up before we hurt ourselves */
 		if(!data->file)
-			return 0;
+			return;
 
 		date = purple_date_format_full(localtime(&log->time));
 
@@ -1409,6 +1406,22 @@ static gsize html_logger_write(PurpleLog *log, PurpleMessageFlags type,
 		written += fprintf(data->file, "</title></head><body>");
 		written += fprintf(data->file, "<h3>%s</h3>\n", header);
 		g_free(header);
+	}
+}
+
+static gsize html_logger_write(PurpleLog *log, PurpleMessageFlags type,
+							  const char *from, time_t time, const char *message)
+{
+	char *msg_fixed;
+	char *image_corrected_msg;
+	char *date;
+	char *escaped_from;
+	PurpleLogCommonLoggerData *data = log->logger_data;
+	gsize written = 0;
+
+	if(!data) {
+		html_logger_create(log);
+		data = log->logger_data;
 	}
 
 	/* if we can't write to the file, give up before we hurt ourselves */
@@ -1527,15 +1540,10 @@ static int html_logger_total_size(PurpleLogType type, const char *name, PurpleAc
  ** PLAIN TEXT LOGGER *******
  ****************************/
 
-static gsize txt_logger_write(PurpleLog *log,
-							 PurpleMessageFlags type,
-							 const char *from, time_t time, const char *message)
+static void txt_logger_create(PurpleLog *log)
 {
-	char *date;
 	PurplePlugin *plugin = purple_find_prpl(purple_account_get_protocol_id(log->account));
 	PurpleLogCommonLoggerData *data = log->logger_data;
-	char *stripped = NULL;
-
 	gsize written = 0;
 
 	if (data == NULL) {
@@ -1551,7 +1559,7 @@ static gsize txt_logger_write(PurpleLog *log,
 
 		/* if we can't write to the file, give up before we hurt ourselves */
 		if(!data->file)
-			return 0;
+			return;
 
 		if (log->type == PURPLE_LOG_SYSTEM)
 			written += fprintf(data->file, "System log for account %s (%s) connected at %s\n",
@@ -1561,6 +1569,22 @@ static gsize txt_logger_write(PurpleLog *log,
 			written += fprintf(data->file, "Conversation with %s at %s on %s (%s)\n",
 				log->name, purple_date_format_full(localtime(&log->time)),
 				purple_account_get_username(log->account), prpl);
+	}
+}
+
+static gsize txt_logger_write(PurpleLog *log,
+							 PurpleMessageFlags type,
+							 const char *from, time_t time, const char *message)
+{
+	char *date;
+	PurpleLogCommonLoggerData *data = log->logger_data;
+	char *stripped = NULL;
+
+	gsize written = 0;
+
+	if (data == NULL) {
+		txt_logger_create(log);
+		data = log->logger_data;
 	}
 
 	/* if we can't write to the file, give up before we hurt ourselves */

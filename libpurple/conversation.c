@@ -907,6 +907,7 @@ purple_find_conversation_with_account(PurpleConversationType type,
 	switch (type) {
 		case PURPLE_CONV_TYPE_IM:
 		case PURPLE_CONV_TYPE_CHAT:
+		case PURPLE_CONV_TYPE_MISC:
 			c = g_hash_table_lookup(conversation_cache, &hc);
 			break;
 		case PURPLE_CONV_TYPE_ANY:

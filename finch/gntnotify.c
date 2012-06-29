@@ -96,7 +96,7 @@ finch_notify_message(PurpleNotifyMsgType type, const char *title,
 			switch (type) {
 				case PURPLE_NOTIFY_FORMATTED:
 					plain = purple_markup_strip_html(secondary);
-					if (gnt_util_parse_xhtml_to_textview(secondary, GNT_TEXT_VIEW(msg)))
+					if (gnt_util_parse_xhtml_to_textview(secondary, GNT_TEXT_VIEW(msg), 0))
 						break;
 					/* Fallthrough */
 				default:
@@ -344,7 +344,7 @@ finch_notify_userinfo(PurpleConnection *gc, const char *who, PurpleNotifyUserInf
 		gnt_widget_get_size(GNT_WIDGET(msg), &tvw, &tvh);
 
 		gnt_text_view_clear(msg);
-		if (!gnt_util_parse_xhtml_to_textview(info, msg))
+		if (!gnt_util_parse_xhtml_to_textview(info, msg, 0))
 			gnt_text_view_append_text_with_flags(msg, strip, GNT_TEXT_FLAG_NORMAL);
 		gnt_text_view_scroll(msg, 0);
 		gnt_util_get_text_bound(strip, &ntvw, &ntvh);

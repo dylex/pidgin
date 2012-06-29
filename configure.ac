@@ -1413,7 +1413,7 @@ AC_ARG_WITH([python],
 
 if test "x$enable_dbus" = "xyes" || test "x$enable_consoleui" = "xyes" ; then
 	if test -z "$PYTHON" -o "x$PYTHON" = "xyes"; then
-		AC_PATH_PROG([PYTHON], [python], [no])
+	AC_PATH_PROG([PYTHON], [python], [no])
 	fi
 
 	if test x"$PYTHON" = x"no" ; then

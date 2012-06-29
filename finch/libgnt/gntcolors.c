@@ -38,22 +38,26 @@
 #include <string.h>
 
 static gboolean hascolors;
+static int bg_color = -1;
 static int custom_type = GNT_COLORS;
+#define MAX_COLORS 256
 static struct
 {
+	gboolean i;
 	short r, g, b;
-} colors[GNT_TOTAL_COLORS];
-
-static void
-backup_colors(void)
-{
-	short i;
-	for (i = 0; i < GNT_TOTAL_COLORS; i++)
-	{
-		color_content(i, &colors[i].r,
-				&colors[i].g, &colors[i].b);
-	}
-}
+	gboolean o;
+	short or, og, ob;
+} colors[MAX_COLORS] = {
+	/* assume default colors */
+	{ 1, 0, 0, 0, 0 },
+	{ 1, 1000, 0, 0, 0 },
+	{ 1, 0, 1000, 0, 0 },
+	{ 1, 1000, 1000, 0, 0 },
+	{ 1, 0, 0, 1000, 0 },
+	{ 1, 1000, 0, 1000, 0 },
+	{ 1, 0, 1000, 1000, 0 },
+	{ 1, 1000, 1000, 1000, 0 }
+};
 
 static gboolean
 can_use_custom_color(void)
@@ -65,10 +69,10 @@ static void
 restore_colors(void)
 {
 	short i;
-	for (i = 0; i < GNT_TOTAL_COLORS; i++)
+	for (i = 0; i < MAX_COLORS; i++)
 	{
-		init_color(i, colors[i].r,
-				colors[i].g, colors[i].b);
+		if (colors[i].o)
+			init_color(i, colors[i].or, colors[i].og, colors[i].ob);
 	}
 }
 
@@ -76,6 +80,7 @@ void gnt_init_colors()
 {
 	static gboolean init = FALSE;
 	int defaults;
+	int c;
 
 	if (init)
 		return;
@@ -86,53 +91,26 @@ void gnt_init_colors()
 		return;
 	defaults = use_default_colors();
 
-	if (can_use_custom_color())
-	{
-		backup_colors();
-
-		/* Do some init_color()s */
-		init_color(GNT_COLOR_BLACK, 0, 0, 0);
-		init_color(GNT_COLOR_RED, 1000, 0, 0);
-		init_color(GNT_COLOR_GREEN, 0, 1000, 0);
-		init_color(GNT_COLOR_BLUE, 250, 250, 700);
-		init_color(GNT_COLOR_WHITE, 1000, 1000, 1000);
-		init_color(GNT_COLOR_GRAY, 699, 699, 699);
-		init_color(GNT_COLOR_DARK_GRAY, 256, 256, 256);
-
-		/* Now some init_pair()s */
-		init_pair(GNT_COLOR_NORMAL, GNT_COLOR_BLACK, GNT_COLOR_WHITE);
-		init_pair(GNT_COLOR_HIGHLIGHT, GNT_COLOR_WHITE, GNT_COLOR_BLUE);
-		init_pair(GNT_COLOR_SHADOW, GNT_COLOR_BLACK, GNT_COLOR_DARK_GRAY);
-
-		init_pair(GNT_COLOR_TITLE, GNT_COLOR_WHITE, GNT_COLOR_BLUE);
-		init_pair(GNT_COLOR_TITLE_D, GNT_COLOR_WHITE, GNT_COLOR_GRAY);
-
-		init_pair(GNT_COLOR_TEXT_NORMAL, GNT_COLOR_WHITE, GNT_COLOR_BLUE);
-		init_pair(GNT_COLOR_HIGHLIGHT_D, GNT_COLOR_BLACK, GNT_COLOR_GRAY);
-		init_pair(GNT_COLOR_DISABLED, GNT_COLOR_GRAY, GNT_COLOR_WHITE);
-		init_pair(GNT_COLOR_URGENT, GNT_COLOR_WHITE, GNT_COLOR_RED);
+	if (defaults == OK) {
+		bg_color = -1;
+		init_pair(GNT_COLOR_NORMAL, -1, bg_color);
+	} else {
+		bg_color = COLOR_WHITE;
+		init_pair(GNT_COLOR_NORMAL, COLOR_BLACK, bg_color);
 	}
-	else
-	{
-		int bg;
 
-		if (defaults == OK) {
-			init_pair(GNT_COLOR_NORMAL, -1, -1);
-			bg = -1;
-		} else {
-			init_pair(GNT_COLOR_NORMAL, COLOR_BLACK, COLOR_WHITE);
-			bg = COLOR_WHITE;
-		}
-		init_pair(GNT_COLOR_DISABLED, COLOR_YELLOW, bg);
-		init_pair(GNT_COLOR_URGENT, COLOR_GREEN, bg);
+	for (c = 1; c < GNT_COLOR_NORMAL; c ++)
+		init_pair(c, c, bg_color);
 
-		init_pair(GNT_COLOR_HIGHLIGHT, COLOR_WHITE, COLOR_BLUE);
-		init_pair(GNT_COLOR_SHADOW, COLOR_BLACK, COLOR_BLACK);
-		init_pair(GNT_COLOR_TITLE, COLOR_WHITE, COLOR_BLUE);
-		init_pair(GNT_COLOR_TITLE_D, COLOR_WHITE, COLOR_BLACK);
-		init_pair(GNT_COLOR_TEXT_NORMAL, COLOR_WHITE, COLOR_BLUE);
-		init_pair(GNT_COLOR_HIGHLIGHT_D, COLOR_CYAN, COLOR_BLACK);
-	}
+	init_pair(GNT_COLOR_DISABLED, COLOR_YELLOW, bg_color);
+	init_pair(GNT_COLOR_URGENT, COLOR_GREEN, bg_color);
+
+	init_pair(GNT_COLOR_HIGHLIGHT, COLOR_WHITE, COLOR_BLUE);
+	init_pair(GNT_COLOR_SHADOW, COLOR_BLACK, COLOR_BLACK);
+	init_pair(GNT_COLOR_TITLE, COLOR_WHITE, COLOR_BLUE);
+	init_pair(GNT_COLOR_TITLE_D, COLOR_WHITE, COLOR_BLACK);
+	init_pair(GNT_COLOR_TEXT_NORMAL, COLOR_WHITE, COLOR_BLUE);
+	init_pair(GNT_COLOR_HIGHLIGHT_D, COLOR_CYAN, COLOR_BLACK);
 }
 
 void
@@ -147,31 +125,34 @@ int
 gnt_colors_get_color(char *key)
 {
 	int color;
-	gboolean custom = can_use_custom_color();
 
 	key = g_strstrip(key);
 
 	if (strcmp(key, "black") == 0)
-		color = custom ? GNT_COLOR_BLACK : COLOR_BLACK;
+		color = COLOR_BLACK;
 	else if (strcmp(key, "red") == 0)
-		color = custom ? GNT_COLOR_RED : COLOR_RED;
+		color = COLOR_RED;
 	else if (strcmp(key, "green") == 0)
-		color = custom ? GNT_COLOR_GREEN : COLOR_GREEN;
+		color = COLOR_GREEN;
+	else if (strcmp(key, "yellow") == 0)
+		color = COLOR_YELLOW;
 	else if (strcmp(key, "blue") == 0)
-		color = custom ? GNT_COLOR_BLUE : COLOR_BLUE;
-	else if (strcmp(key, "white") == 0)
-		color = custom ? GNT_COLOR_WHITE : COLOR_WHITE;
-	else if (strcmp(key, "gray") == 0 || strcmp(key, "grey") == 0)
-		color = custom ? GNT_COLOR_GRAY : COLOR_YELLOW;  /* eh? */
-	else if (strcmp(key, "darkgray") == 0 || strcmp(key, "darkgrey") == 0)
-		color = custom ? GNT_COLOR_DARK_GRAY : COLOR_BLACK;
+		color = COLOR_BLUE;
 	else if (strcmp(key, "magenta") == 0)
 		color = COLOR_MAGENTA;
 	else if (strcmp(key, "cyan") == 0)
 		color = COLOR_CYAN;
+	else if (strcmp(key, "white") == 0)
+		color = COLOR_WHITE;
 	else if (strcmp(key, "default") == 0)
 		color = -1;
 	else {
+		if (strncmp(key, "color", 5) == 0)
+		{
+			color = atoi(&key[5]);
+			if (color > 0 && color < COLORS && color < MAX_COLORS)
+				return color;
+		}
 		g_warning("Invalid color name: %s\n", key);
 		color = -EINVAL;
 	}
@@ -213,7 +194,17 @@ void gnt_colors_parse(GKeyFile *kfile)
 					continue;
 				}
 
-				init_color(color, r, g, b);
+				if (!colors[color].o)
+				{
+					colors[color].o = color_content(color, &colors[color].or, &colors[color].og, &colors[color].ob) != ERR;
+				}
+				if (init_color(color, r, g, b) != ERR)
+				{
+					colors[color].i = 1;
+					colors[color].r = r;
+					colors[color].g = g;
+					colors[color].b = b;
+				}
 			}
 			g_strfreev(list);
 		}
@@ -304,6 +295,8 @@ int gnt_color_pair(int pair)
 
 int gnt_color_add_pair(int fg, int bg)
 {
+	if (bg == -1)
+		bg = bg_color;
 	init_pair(custom_type, fg, bg);
 	return custom_type++;
 }
