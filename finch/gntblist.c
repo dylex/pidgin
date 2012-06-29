@@ -2764,6 +2764,55 @@ block_select(GntMenuItem *item, gpointer n)
 						NULL);
 }
 
+static void
+privacy_select_cb(gpointer data, PurpleRequestFields *fields)
+{
+	PurpleAccount *account = purple_request_fields_get_account(fields, "account");
+	if (account) {
+		account->perm_deny = purple_request_fields_get_choice(fields, "privacy");
+		serv_set_permit_deny(purple_account_get_connection(account));
+	}
+}
+
+static void
+privacy_select(GntMenuItem *item, gpointer n)
+{
+	PurpleRequestFields *fields;
+	PurpleRequestFieldGroup *group;
+	PurpleRequestField *field;
+
+	fields = purple_request_fields_new();
+
+	group = purple_request_field_group_new(NULL);
+	purple_request_fields_add_group(fields, group);
+
+	field = purple_request_field_account_new("account", _("Account"), NULL);
+	purple_request_field_set_type_hint(field, "account");
+	purple_request_field_set_visible(field,
+		(purple_connections_get_all() != NULL &&
+		 purple_connections_get_all()->next != NULL));
+	purple_request_field_set_required(field, TRUE);
+	purple_request_field_group_add_field(group, field);
+
+	field = purple_request_field_choice_new("privacy", _("Privacy"), 1);
+	/* these are assumed to be in PurplePrivacyType order */
+	purple_request_field_choice_add(field, _("Allow all"));
+	purple_request_field_choice_add(field, _("Allow only buddy list"));
+	purple_request_field_choice_add(field, _("Allow only unblocked"));
+	purple_request_field_choice_add(field, _("Deny all"));
+	purple_request_field_choice_add(field, _("Deny only blocked"));
+	purple_request_field_group_add_field(group, field);
+
+	purple_request_fields(purple_get_blist(), _("Set"),
+						NULL,
+						_("Select which users may contact you on the specified account."),
+						fields,
+						_("OK"), G_CALLBACK(privacy_select_cb),
+						_("Cancel"), NULL,
+						NULL, NULL, NULL,
+						NULL);
+}
+
 /* send_im_select* -- Xerox */
 static void
 send_im_select_cb(gpointer data, PurpleRequestFields *fields)
@@ -3011,6 +3060,11 @@ create_menu(void)
 	gnt_menuitem_set_id(GNT_MENU_ITEM(item), "block-unblock");
 	gnt_menu_add_item(GNT_MENU(sub), item);
 	gnt_menuitem_set_callback(GNT_MENU_ITEM(item), block_select, NULL);
+
+	item = gnt_menuitem_new(_("Privacy..."));
+	gnt_menuitem_set_id(GNT_MENU_ITEM(item), "privacy");
+	gnt_menu_add_item(GNT_MENU(sub), item);
+	gnt_menuitem_set_callback(GNT_MENU_ITEM(item), privacy_select, NULL);
 
 	item = gnt_menuitem_new(_("Join Chat..."));
 	gnt_menuitem_set_id(GNT_MENU_ITEM(item), "join-chat");
