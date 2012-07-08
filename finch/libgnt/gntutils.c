@@ -464,7 +464,7 @@ util_parse_html_to_tv(xmlNode *node, GntTextView *tv, GntTextFormatFlags flag)
 		gnt_text_view_append_text_with_flags(tv, "\n", flag);
 
 	for (ch = node->children; ch; ch = ch->next) {
-		if (ch->type == XML_ELEMENT_NODE) {
+		if (ch->type == XML_ELEMENT_NODE /* || ch->type == XML_TEXT_NODE */) {
 			util_parse_html_to_tv(ch, tv, flag);
 		} else if (ch->type == XML_TEXT_NODE) {
 			content = (char*)xmlNodeGetContent(ch);
