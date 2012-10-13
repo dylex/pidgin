@@ -125,10 +125,10 @@ focus_blist(GntBindable *bindable, GList *null)
 }
 
 static gboolean
-return_false(GntWM *wm, GntWidget *w, int *a, int *b)
+full_only_transients(GntWM *wm, GntWidget *win, int *a, int *b)
 {
 	// purple_debug(PURPLE_DEBUG_INFO, "full", "confirm %s %p %p %d,%d\n", gnt_widget_get_name(w), w, w->parent, *a,*b);
-	return FALSE;
+	return GNT_IS_MENU(win) || GNT_WIDGET_IS_FLAG_SET(win, GNT_WIDGET_TRANSIENT);
 }
 
 static void
@@ -141,8 +141,8 @@ full_class_init(FullClass *klass)
 	pclass->new_window = full_new_window;
 	//pclass->window_resized = full_window_resized;
 	//pclass->close_window = full_close_window;
-	pclass->window_resize_confirm = return_false;
-	pclass->window_move_confirm = return_false;
+	pclass->window_resize_confirm = full_only_transients;
+	pclass->window_move_confirm = full_only_transients;
 	pclass->terminal_refresh = full_terminal_refresh;
 
 	gnt_bindable_class_register_action(GNT_BINDABLE_CLASS(klass), "window-blist", focus_blist, "\033" "b", NULL);
