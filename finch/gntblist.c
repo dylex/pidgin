@@ -1322,6 +1322,13 @@ toggle_show_offline(GntMenuItem *item, gpointer buddy)
 }
 
 static void
+toggle_log(GntMenuItem *item, gpointer buddy)
+{
+	purple_blist_node_set_bool(buddy, "log",
+			!purple_blist_node_get_bool(buddy, "log"));
+}
+
+static void
 create_buddy_menu(GntMenu *menu, PurpleBuddy *buddy)
 {
 	PurpleAccount *account;
@@ -1359,6 +1366,11 @@ create_buddy_menu(GntMenu *menu, PurpleBuddy *buddy)
 	item = gnt_menuitem_check_new(_("Show when offline"));
 	gnt_menuitem_check_set_checked(GNT_MENU_ITEM_CHECK(item), purple_blist_node_get_bool((PurpleBlistNode*)buddy, "show_offline"));
 	gnt_menuitem_set_callback(item, toggle_show_offline, buddy);
+	gnt_menu_add_item(menu, item);
+
+	item = gnt_menuitem_check_new(_("Always log"));
+	gnt_menuitem_check_set_checked(GNT_MENU_ITEM_CHECK(item), purple_blist_node_get_bool((PurpleBlistNode*)buddy, "log"));
+	gnt_menuitem_set_callback(item, toggle_log, buddy);
 	gnt_menu_add_item(menu, item);
 
 	/* Protocol actions */

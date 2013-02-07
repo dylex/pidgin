@@ -335,6 +335,8 @@ purple_conversation_new(PurpleConversationType type, PurpleAccount *account,
 	PurpleConnection *gc;
 	PurpleConversationUiOps *ops;
 	struct _purple_hconv *hc;
+	gboolean log = FALSE;
+	PurpleBlistNode *node = NULL;
 
 	g_return_val_if_fail(type    != PURPLE_CONV_TYPE_UNKNOWN, NULL);
 	g_return_val_if_fail(account != NULL, NULL);
@@ -386,6 +388,8 @@ purple_conversation_new(PurpleConversationType type, PurpleAccount *account,
 	if (type == PURPLE_CONV_TYPE_IM)
 	{
 		PurpleBuddyIcon *icon;
+		PurpleBuddy *b;
+
 		conv->u.im = g_new0(PurpleConvIm, 1);
 		conv->u.im->conv = conv;
 		PURPLE_DBUS_REGISTER_POINTER(conv->u.im, PurpleConvIm);
@@ -398,15 +402,14 @@ purple_conversation_new(PurpleConversationType type, PurpleAccount *account,
 			purple_buddy_icon_unref(icon);
 		}
 
-		if (purple_prefs_get_bool("/purple/logging/log_ims"))
-		{
-			purple_conversation_set_logging(conv, TRUE);
-			open_log(conv);
-		}
+		log = purple_prefs_get_bool("/purple/logging/log_ims");
+		if ((b = purple_find_buddy(account, name)))
+			node = &b->node;
 	}
 	else if (type == PURPLE_CONV_TYPE_CHAT)
 	{
 		const char *disp;
+		PurpleChat *c;
 
 		conv->u.chat = g_new0(PurpleConvChat, 1);
 		conv->u.chat->conv = conv;
@@ -422,11 +425,18 @@ purple_conversation_new(PurpleConversationType type, PurpleAccount *account,
 			purple_conv_chat_set_nick(conv->u.chat,
 									purple_account_get_username(account));
 
-		if (purple_prefs_get_bool("/purple/logging/log_chats"))
-		{
-			purple_conversation_set_logging(conv, TRUE);
-			open_log(conv);
-		}
+		log = purple_prefs_get_bool("/purple/logging/log_chats");
+		if ((c = purple_blist_find_chat(account, name)))
+			node = &c->node;
+	}
+
+	if (!log && node)
+		log = purple_blist_node_get_bool(node, "log");
+
+	if (log)
+	{
+		purple_conversation_set_logging(conv, TRUE);
+		open_log(conv);
 	}
 
 	conversations = g_list_prepend(conversations, conv);
