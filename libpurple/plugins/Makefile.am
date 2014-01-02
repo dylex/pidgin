@@ -44,6 +44,7 @@ simple_la_LDFLAGS			= -module -avoid-version
 statenotify_la_LDFLAGS      = -module -avoid-version
 statelog_la_LDFLAGS      = -module -avoid-version
 syncnotify_la_LDFLAGS      = -module -avoid-version
+alertcount_la_LDFLAGS      = -module -avoid-version
 
 # this can't be in a conditional otherwise automake 1.4 yells
 dbus_example_la_LDFLAGS     = -module -avoid-version
@@ -62,6 +63,7 @@ plugin_LTLIBRARIES = \
 	statenotify.la      \
 	statelog.la      \
 	syncnotify.la      \
+	alertcount.la      \
 	$(DBUS_LTLIB)
 
 noinst_LTLIBRARIES = \
@@ -95,6 +97,7 @@ simple_la_SOURCES			= simple.c
 statenotify_la_SOURCES      = statenotify.c
 statelog_la_SOURCES      = statelog.c
 syncnotify_la_SOURCES      = syncnotify.c
+alertcount_la_SOURCES      = alertcount.c
 
 autoaccept_la_LIBADD        = $(GLIB_LIBS)
 buddynote_la_LIBADD         = $(GLIB_LIBS)
@@ -114,6 +117,7 @@ simple_la_LIBADD			= $(GLIB_LIBS)
 statenotify_la_LIBADD       = $(GLIB_LIBS)
 statelog_la_LIBADD       = $(GLIB_LIBS)
 syncnotify_la_LIBADD       = $(GLIB_LIBS)
+alertcount_la_LIBADD       = $(GLIB_LIBS)
 
 if ENABLE_DBUS
 
