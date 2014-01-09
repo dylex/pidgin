@@ -12,6 +12,7 @@ static int Listener = -1;
 static guint Incoming = 0;
 static int Connection = -1;
 static guint Outgoing = 0;
+static int Count = -1;
 
 static unsigned
 alerts_get_count()
@@ -26,6 +27,7 @@ alerts_get_count()
 			c = !!c;
 		count += c;
 	}
+	Count = count;
 	return count;
 }
 
@@ -33,7 +35,7 @@ static void
 alerts_outgoing_cb(gpointer data, gint source, PurpleInputCondition cond)
 {
 	unsigned count;
-	unsigned char c;
+	char c;
 
 	if (Outgoing) {
 		purple_input_remove(Outgoing);
@@ -41,8 +43,8 @@ alerts_outgoing_cb(gpointer data, gint source, PurpleInputCondition cond)
 	}
 
 	count = alerts_get_count();
-	if (count > 255)
-		c = 255;
+	if (count > 127)
+		c = 127;
 	else
 		c = count;
 	if (send(Connection, &c, sizeof(c), 0) <= 0) {
@@ -84,6 +86,8 @@ alerts_conversation_cb(PurpleConversation *conv, PurpleConvUpdateType type, void
 	if (!(type & PURPLE_CONV_UPDATE_UNSEEN))
 		return;
 	if (Connection < 0 || Outgoing)
+		return;
+	if (!Count && !GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count")))
 		return;
 	Outgoing = purple_input_add(Connection, PURPLE_INPUT_WRITE, alerts_outgoing_cb, NULL);
 }
@@ -189,7 +193,7 @@ static void
 init_plugin(PurplePlugin *plugin)
 {
 	purple_prefs_add_none("/plugins/core/alertcount");
-	purple_prefs_add_bool("/plugins/core/alertcount/aggregate", FALSE);
+	purple_prefs_add_bool("/plugins/core/alertcount/aggregate", TRUE);
 }
 
 PURPLE_INIT_PLUGIN(alertcount, init_plugin, info)
