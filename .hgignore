@@ -7,6 +7,7 @@ syntax: regexp
 .*/perl/common/[^/]+\.c$
 .*/perl/common/blib.*
 .*/perl/common/pm_to_blib$
+.*/perl/common/MYMETA\.(json|yml)
 .*~$
 .*\.a$
 .*\.asc$
@@ -86,6 +87,7 @@ pidgin-.*.tar.bz2
 pidgin-.*.tar.gz
 pidgin.apspec$
 pidgin.desktop$
+pidgin.desktop.in$
 pidgin.spec$
 pidgin/pidgin$
 pidgin/pixmaps/emotes/default/24/theme
@@ -111,4 +113,5 @@ po/notexist
 po/pidgin.pot
 po/stamp-it
 stamp-h1
+test-driver
 win32-install-dir(\.release)?
