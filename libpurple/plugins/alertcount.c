@@ -35,7 +35,7 @@ static void
 alerts_outgoing_cb(gpointer data, gint source, PurpleInputCondition cond)
 {
 	unsigned count;
-	char c;
+	unsigned char c;
 
 	if (Outgoing) {
 		purple_input_remove(Outgoing);
