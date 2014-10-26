@@ -154,7 +154,7 @@ gnt_wm_copy_win(GntWidget *widget, GntNode *node)
 			int curx = active->priv.x + getcurx(active->window);
 			int cury = active->priv.y + getcury(active->window);
 			if (wmove(node->window, cury - widget->priv.y, curx - widget->priv.x) != OK)
-				wmove(node->window, 0, 0);
+				(void)wmove(node->window, 0, 0);
 		}
 	}
 }
@@ -784,14 +784,16 @@ dump_file_save(GntFileSel *fs, const char *path, const char *f, gpointer n)
 			if ((now & A_COLOR) != (old & A_COLOR) ||
 				(now & A_REVERSE) != (old & A_REVERSE))
 			{
-				int ret;
 				short fgp, bgp, r, g, b;
 				struct
 				{
 					int r, g, b;
 				} fg, bg;
 
-				ret = pair_content(PAIR_NUMBER(now & A_COLOR), &fgp, &bgp);
+				if (pair_content(PAIR_NUMBER(now & A_COLOR), &fgp, &bgp) != OK) {
+					fgp = -1;
+					bgp = -1;
+				}
 				if (fgp == -1)
 					fgp = COLOR_BLACK;
 				if (bgp == -1)
@@ -802,9 +804,13 @@ dump_file_save(GntFileSel *fs, const char *path, const char *f, gpointer n)
 					fgp = bgp;
 					bgp = tmp;
 				}
-				ret = color_content(fgp, &r, &g, &b);
+				if (color_content(fgp, &r, &g, &b) != OK) {
+					r = g = b = 0;
+				}
 				fg.r = r; fg.b = b; fg.g = g;
-				ret = color_content(bgp, &r, &g, &b);
+				if (color_content(bgp, &r, &g, &b) != OK) {
+					r = g = b = 255;
+				}
 				bg.r = r; bg.b = b; bg.g = g;
 #define ADJUST(x) (x = x * 255 / 1000)
 				ADJUST(fg.r);
@@ -1156,13 +1162,11 @@ toggle_clipboard(GntBindable *bindable, GList *n)
 {
 	static GntWidget *clip;
 	gchar *text;
-	int maxx, maxy;
 	if (clip) {
 		gnt_widget_destroy(clip);
 		clip = NULL;
 		return TRUE;
 	}
-	getmaxyx(stdscr, maxy, maxx);
 	text = gnt_get_clipboard_string();
 	clip = gnt_hwindow_new(FALSE);
 	GNT_WIDGET_SET_FLAGS(clip, GNT_WIDGET_TRANSIENT);
@@ -1293,7 +1297,12 @@ python_script_selected(GntFileSel *fs, const char *path, const char *f, gpointer
 {
 	char *dir = g_path_get_dirname(path);
 	FILE *file = fopen(path, "r");
-	PyObject *pp = PySys_GetObject("path"), *dirobj = PyString_FromString(dir);
+	PyObject *pp = PySys_GetObject("path");
+#if PY_MAJOR_VERSION >= 3
+	PyObject *dirobj = PyUnicode_FromString(dir);
+#else
+	PyObject *dirobj = PyString_FromString(dir);
+#endif
 
 	PyList_Insert(pp, 0, dirobj);
 	Py_DECREF(dirobj);
@@ -1582,7 +1591,17 @@ gnt_wm_class_init(GntWMClass *klass)
 	gnt_bindable_class_register_action(GNT_BINDABLE_CLASS(klass), "run-python", run_python,
 				GNT_KEY_F3, NULL);
 	if (!Py_IsInitialized()) {
+#if PY_MAJOR_VERSION >= 3
+		wchar_t *name;
+		size_t len;
+		len = mbstowcs(NULL, "gnt", 0);
+		name = g_new(wchar_t, len + 1);
+		mbstowcs(name, "gnt", len + 1);
+		Py_SetProgramName(name);
+		g_free(name);
+#else
 		Py_SetProgramName("gnt");
+#endif
 		Py_Initialize();
 		started_python = TRUE;
 	}
@@ -1847,6 +1866,8 @@ gnt_wm_new_window_real(GntWM *wm, GntWidget *widget)
 
 		maxx = getmaxx(stdscr);
 		maxy = getmaxy(stdscr) - 1;              /* room for the taskbar */
+		maxx = MAX(0, maxx);
+		maxy = MAX(0, maxy);
 
 		x = MAX(0, x);
 		y = MAX(0, y);
