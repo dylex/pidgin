@@ -6,26 +6,77 @@
 /** Plugin id : type-author-name (to guarantee uniqueness) */
 #define ALERTS_PLUGIN_ID "core-dylex-alertcount"
 
-#define ALERTS_PORT	6652
-
 static int Listener = -1;
 static guint Incoming = 0;
 static int Connection = -1;
 static guint Outgoing = 0;
 static int Count = -1;
 
+#ifdef ACTIVITY
+static struct activity {
+	struct activity *next;
+	PurpleConversation *conv;
+	uint16_t count;
+	uint8_t ident;
+} *Activity = NULL;
+#endif
+
+static uint8_t
+conversation_ident(PurpleConversation *conv)
+{
+	unsigned h = g_str_hash(conv->name);
+	while (!(h & 0x7F) && h)
+		h >>= 7;
+	if (!h)
+		h = 0x7F;
+	return (conv->type << 7) | (h & 0x7F);
+}
+
+#ifdef ACTIVITY
+static void
+activity_update(PurpleConversation *conv, int count)
+{
+	struct activity **p, *a;
+	for (p = &Activity; *p && (*p)->conv != conv; p = &(*p)->next);
+	if ((a = *p)) {
+		if (count)
+			a->count = count;
+		else {
+			*p = a->next;
+			g_slice_free(struct activity, a);
+		}
+	} else if (count) {
+		a = *p = g_slice_new(struct activity);
+		a->next = NULL;
+		a->conv = conv;
+		a->count = count;
+		a->ident = conversation_ident(conv);
+	}
+}
+#endif
+
 static unsigned
-alerts_get_count()
+alerts_get_count(uint8_t *buf, size_t buflen)
 {
 	const gboolean aggregate = purple_prefs_get_bool("/plugins/core/alertcount/aggregate");
 	unsigned count = 0;
 	GList *l;
+	if (!aggregate)
+		buflen &= ~1;
 
 	for (l = purple_get_conversations(); l != NULL; l = l->next) {
-		int c = GPOINTER_TO_INT(purple_conversation_get_data((PurpleConversation *)l->data, "unseen-count"));
-		if (aggregate)
-			c = !!c;
-		count += c;
+		PurpleConversation *conv = (PurpleConversation *)l->data;
+		int c = GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count"));
+		if (!c)
+			continue;
+		if (count < buflen) {
+			buf[count++] = conversation_ident(conv);
+			if (!aggregate)
+				buf[count++] = c;
+		} else if (aggregate)
+			count ++;
+		else
+			count += c;
 	}
 	Count = count;
 	return count;
@@ -34,20 +85,25 @@ alerts_get_count()
 static void
 alerts_outgoing_cb(gpointer data, gint source, PurpleInputCondition cond)
 {
-	unsigned count;
-	unsigned char c;
+	const gboolean ident = purple_prefs_get_bool("/plugins/core/alertcount/ident");
+	unsigned c;
+	uint8_t buf[128];
 
 	if (Outgoing) {
 		purple_input_remove(Outgoing);
 		Outgoing = 0;
 	}
 
-	count = alerts_get_count();
-	if (count > 127)
+	c = alerts_get_count(buf, ident ? 127 : 0);
+	if (c > 127)
 		c = 127;
-	else
-		c = count;
-	if (send(Connection, &c, sizeof(c), 0) <= 0) {
+	if (ident)
+		buf[c++] = 0;
+	else {
+		*buf = c;
+		c = 1;
+	}
+	if (send(Connection, buf, c, 0) <= 0) { /* ignore short reads */
 		purple_debug_info("alertcount", "send: %m\n");
 		close(Connection);
 		Connection = -1;
@@ -83,12 +139,18 @@ alerts_incoming_cb(gpointer data, gint source, PurpleInputCondition cond)
 static void
 alerts_conversation_cb(PurpleConversation *conv, PurpleConvUpdateType type, void *data)
 {
+	int c;
+
 	if (!(type & PURPLE_CONV_UPDATE_UNSEEN))
 		return;
 	if (Connection < 0 || Outgoing)
 		return;
-	if (!Count && !GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count")))
+	c = GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count"));
+	if (!Count && !c)
 		return;
+#ifdef ACTIVITY
+	activity_update(conv, c);
+#endif
 	Outgoing = purple_input_add(Connection, PURPLE_INPUT_WRITE, alerts_outgoing_cb, NULL);
 }
 
@@ -98,7 +160,7 @@ plugin_load(PurplePlugin *plugin)
 	const int on = 1;
 	const struct sockaddr_in addr = {
 		.sin_family = AF_INET,
-		.sin_port = htons(ALERTS_PORT),
+		.sin_port = htons(purple_prefs_get_int("/plugins/core/alertcount/port")),
 		.sin_addr = { htonl(INADDR_LOOPBACK) }
 	};
 
@@ -139,6 +201,12 @@ error:
 static gboolean
 plugin_unload(PurplePlugin *plugin)
 {
+#ifdef ACTIVITY
+	if (Activity) {
+		g_slice_free_chain(struct activity, Activity, next);
+		Activity = NULL;
+	}
+#endif
 	if (Outgoing) {
 		purple_input_remove(Outgoing);
 		Outgoing = 0;
@@ -157,6 +225,37 @@ plugin_unload(PurplePlugin *plugin)
 	}
 	return TRUE;
 }
+
+static PurplePluginPrefFrame *
+get_plugin_pref_frame(PurplePlugin *plugin)
+{
+	PurplePluginPrefFrame *frame;
+	PurplePluginPref *ppref;
+
+	frame = purple_plugin_pref_frame_new();
+
+	ppref = purple_plugin_pref_new_with_name_and_label("/plugins/core/alertcount/port", _("Listen on _port"));
+	purple_plugin_pref_frame_add(frame, ppref);
+
+	ppref = purple_plugin_pref_new_with_name_and_label("/plugins/core/alertcount/aggregate", _("_Aggregate conversation"));
+	purple_plugin_pref_frame_add(frame, ppref);
+
+	ppref = purple_plugin_pref_new_with_name_and_label("/plugins/core/alertcount/ident", _("_Identify conversations"));
+	purple_plugin_pref_frame_add(frame, ppref);
+
+	return frame;
+}
+
+static PurplePluginUiInfo prefs_info =
+{
+	get_plugin_pref_frame,
+	0,   /* page_num (Reserved) */
+	NULL, /* frame (Reserved) */
+	NULL,
+	NULL,
+	NULL,
+	NULL
+};
 
 static PurplePluginInfo info =
 {
@@ -185,6 +284,10 @@ static PurplePluginInfo info =
 
 	NULL,                                             /**< ui_info        */
 	NULL,                                             /**< extra_info     */
+	&prefs_info,
+	NULL,
+	NULL,
+	NULL,
 	NULL,
 	NULL
 };
@@ -193,7 +296,9 @@ static void
 init_plugin(PurplePlugin *plugin)
 {
 	purple_prefs_add_none("/plugins/core/alertcount");
+	purple_prefs_add_int("/plugins/core/alertcount/port", 6652);
 	purple_prefs_add_bool("/plugins/core/alertcount/aggregate", TRUE);
+	purple_prefs_add_bool("/plugins/core/alertcount/ident", FALSE);
 }
 
 PURPLE_INIT_PLUGIN(alertcount, init_plugin, info)
