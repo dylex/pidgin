@@ -1,3 +1,4 @@
+#define _GNU_SOURCE
 #include "internal.h"
 #include "debug.h"
 #include "plugin.h"
@@ -24,7 +25,13 @@ static struct activity {
 static uint8_t
 conversation_ident(PurpleConversation *conv)
 {
-	unsigned h = g_str_hash(conv->name);
+	unsigned h;
+	/* hack to get rid of variables resource markers (jabber only?) */
+	char *p = strchrnul(strchrnul(conv->name, '@'), '/');
+	char o = *p;
+	*p = '\0';
+	h = g_str_hash(conv->name);
+	*p = o;
 	while (!(h & 0x7F) && h)
 		h >>= 7;
 	if (!h)
