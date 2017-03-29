@@ -22,6 +22,13 @@ static struct activity {
 } *Activity = NULL;
 #endif
 
+static gboolean
+conversation_ignore(PurpleConversation *conv)
+{
+	return !strcmp(conv->name, "slackbot")
+		|| !strcmp(conv->name, "NickServ");
+}
+
 static uint8_t
 conversation_ident(PurpleConversation *conv)
 {
@@ -73,6 +80,8 @@ alerts_get_count(uint8_t *buf, size_t buflen)
 
 	for (l = purple_get_conversations(); l != NULL; l = l->next) {
 		PurpleConversation *conv = (PurpleConversation *)l->data;
+		if (conversation_ignore(conv))
+			continue;
 		int c = GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count"));
 		if (!c)
 			continue;
@@ -151,6 +160,8 @@ alerts_conversation_cb(PurpleConversation *conv, PurpleConvUpdateType type, void
 	if (!(type & PURPLE_CONV_UPDATE_UNSEEN))
 		return;
 	if (Connection < 0 || Outgoing)
+		return;
+	if (conversation_ignore(conv))
 		return;
 	c = GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count"));
 	if (!Count && !c)
