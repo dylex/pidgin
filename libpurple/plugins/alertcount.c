@@ -157,7 +157,7 @@ alerts_conversation_cb(PurpleConversation *conv, PurpleConvUpdateType type, void
 {
 	int c;
 
-	if (!(type & PURPLE_CONV_UPDATE_UNSEEN))
+	if (type != PURPLE_CONV_UPDATE_UNSEEN)
 		return;
 	if (Connection < 0 || Outgoing)
 		return;
