@@ -22,6 +22,19 @@ static struct activity {
 } *Activity = NULL;
 #endif
 
+static PurpleBlistNode *
+conversation_buddy(PurpleConversation *conv)
+{
+	switch (conv->type) {
+		case PURPLE_CONV_TYPE_IM:
+			return PURPLE_BLIST_NODE(purple_find_buddy(conv->account, conv->name));
+		case PURPLE_CONV_TYPE_CHAT:
+			return PURPLE_BLIST_NODE(purple_blist_find_chat(conv->account, conv->name));
+		default:
+			return NULL;
+	}
+}
+
 static gboolean
 conversation_ignore(PurpleConversation *conv)
 {
@@ -32,15 +45,34 @@ conversation_ignore(PurpleConversation *conv)
 static uint8_t
 conversation_ident(PurpleConversation *conv)
 {
-	unsigned h;
+	PurpleBlistNode *blist;
+	unsigned h = 0x7f;
+
+	if (conversation_ignore(conv))
+		return 0;
+
+	blist = conversation_buddy(conv);
+	if (blist) {
+		int r = purple_blist_node_get_int(blist, "alertcount");
+		if (r)
+			return r;
+	}
+
+#ifdef HASH_NAME
+	char *name;
+	if (blist)
+		name = PURPLE_BLIST_NODE_NAME(blist);
+	if (!name)
+		name = conv->name;
 	/* hack to get rid of variables resource markers (jabber only?) */
-	char *p = strchrnul(strchrnul(conv->name, '@'), '/');
+	char *p = strchrnul(strchrnul(name, '@'), '/');
 	char o = *p;
 	*p = '\0';
-	h = g_str_hash(conv->name);
+	h = g_str_hash(name);
 	*p = o;
 	while (!(h & 0x7F) && h)
 		h >>= 7;
+#endif
 	if (!h)
 		h = 0x7F;
 	return (conv->type << 7) | (h & 0x7F);
@@ -80,13 +112,16 @@ alerts_get_count(uint8_t *buf, size_t buflen)
 
 	for (l = purple_get_conversations(); l != NULL; l = l->next) {
 		PurpleConversation *conv = (PurpleConversation *)l->data;
-		if (conversation_ignore(conv))
-			continue;
 		int c = GPOINTER_TO_INT(purple_conversation_get_data(conv, "unseen-count"));
+		uint8_t id;
 		if (!c)
 			continue;
+		id = conversation_ident(conv);
+		purple_debug_misc("alertcount", "conversation %s = %u\n", conv->name, id);
+		if (!id)
+			continue;
 		if (count < buflen) {
-			buf[count++] = conversation_ident(conv);
+			buf[count++] = id;
 			if (!aggregate)
 				buf[count++] = c;
 		} else if (aggregate)

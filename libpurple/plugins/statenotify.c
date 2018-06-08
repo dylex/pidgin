@@ -26,7 +26,7 @@ write_status(PurpleBuddy *buddy, const char *message)
 	buddy_name = purple_buddy_get_name(buddy);
 
 	conv = purple_find_conversation_with_account(PURPLE_CONV_TYPE_IM,
-												 buddy_name, account);
+			buddy_name, account);
 
 	if (conv == NULL)
 		return;
