@@ -11,15 +11,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-23 20:58+0000\n"
-"Last-Translator: Irriep Nala Novram <allannkorh@yahoo.fr>\n"
+"POT-Creation-Date: 2020-06-09 22:08-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Breton (http://www.transifex.com/pidgin/pidgin/language/br/)\n"
 "Language: br\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Plural-Forms: nplurals=5; plural=((n%10 == 1) && (n%100 != 11) && (n%100 !"
+"=71) && (n%100 !=91) ? 0 :(n%10 == 2) && (n%100 != 12) && (n%100 !=72) && (n"
+"%100 !=92) ? 1 :(n%10 ==3 || n%10==4 || n%10==9) && (n%100 < 10 || n% 100 > "
+"19) && (n%100 < 70 || n%100 > 79) && (n%100 < 90 || n%100 > 99) ? 2 :(n != 0 "
+"&& n % 1000000 == 0) ? 3 : 4);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -652,6 +656,9 @@ msgid "List of %d user:\n"
 msgid_plural "List of %d users:\n"
 msgstr[0] "Listenn gant %d implijer :\n"
 msgstr[1] "Listenn gant %d implijer :\n"
+msgstr[2] "Listenn gant %d implijer :\n"
+msgstr[3] "Listenn gant %d implijer :\n"
+msgstr[4] "Listenn gant %d implijer :\n"
 
 msgid "Supported debug options are: plugins version"
 msgstr "An dibarzhioù diveugañ skoret a zo : handelv an enlugellad"
@@ -761,6 +768,9 @@ msgid "File Transfers - %d%% of %d file"
 msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] "Treuzkasadennoù restr - %d%% war %d restr"
 msgstr[1] "Treuzkasadennoù restr - %d%% war %d restr"
+msgstr[2] "Treuzkasadennoù restr - %d%% war %d restr"
+msgstr[3] "Treuzkasadennoù restr - %d%% war %d restr"
+msgstr[4] "Treuzkasadennoù restr - %d%% war %d restr"
 
 #. Create the window.
 msgid "File Transfers"
@@ -931,6 +941,9 @@ msgid "%s (%s) has %d new message."
 msgid_plural "%s (%s) has %d new messages."
 msgstr[0] "%s (%s) en/he deus %d kemennadenn nevez."
 msgstr[1] "%s (%s) en/he deus %d kemennadenn nevez."
+msgstr[2] "%s (%s) en/he deus %d kemennadenn nevez."
+msgstr[3] "%s (%s) en/he deus %d kemennadenn nevez."
+msgstr[4] "%s (%s) en/he deus %d kemennadenn nevez."
 
 msgid "New Mail"
 msgstr "Postel nevez"
@@ -1840,6 +1853,10 @@ msgstr "Re vras eo ar gemenadenn."
 msgid "Unable to send message."
 msgstr "Dic'houest da gas ar gemennadenn."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "Kas ar gemenadenn"
 
@@ -2182,19 +2199,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;RESPONT "
-"EMGEFREEK&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;RESPONT "
-"EMGEFREEK&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr ""
@@ -2266,6 +2279,27 @@ msgstr "Fazi "
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Fazi krouidigezh an estez : %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Diweredekaet"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4886,6 +4920,19 @@ msgstr ""
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Diuzit loaz %s a fell deoc'h kas ur restr dezhañ"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "Aonik"
 
@@ -5898,12 +5945,18 @@ msgid "You missed %hu message from %s because it was invalid."
 msgid_plural "You missed %hu messages from %s because they were invalid."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
 msgid_plural "You missed %hu messages from %s because they were too large."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid ""
@@ -5912,6 +5965,9 @@ msgid_plural ""
 "You missed %hu messages from %s because the rate limit has been exceeded."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid ""
@@ -5920,6 +5976,9 @@ msgid_plural ""
 "You missed %hu messages from %s because his/her warning level is too high."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
@@ -5927,12 +5986,18 @@ msgid_plural ""
 "You missed %hu messages from %s because your warning level is too high."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
 msgid_plural "You missed %hu messages from %s for an unknown reason."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 msgid "Your AIM connection may be lost."
 msgstr ""
@@ -5955,6 +6020,9 @@ msgid "The following username is associated with %s"
 msgid_plural "The following usernames are associated with %s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 #, c-format
 msgid "No results found for email address %s"
@@ -6037,6 +6105,9 @@ msgid_plural ""
 "truncated for you."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 msgid "Profile too long."
 msgstr ""
@@ -6050,6 +6121,9 @@ msgid_plural ""
 "truncated for you."
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 msgid "Away message too long."
 msgstr ""
@@ -8178,36 +8252,54 @@ msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] "%d eilenn"
 msgstr[1] "%d eilenn"
+msgstr[2] "%d eilenn"
+msgstr[3] "%d eilenn"
+msgstr[4] "%d eilenn"
 
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d devezh"
 msgstr[1] "%d a zevezhioù"
+msgstr[2] "%d a zevezhioù"
+msgstr[3] "%d a zevezhioù"
+msgstr[4] "%d a zevezhioù"
 
 #, c-format
 msgid "%s, %d hour"
 msgid_plural "%s, %d hours"
 msgstr[0] "%s, %d eur"
 msgstr[1] "%s, %d eur"
+msgstr[2] "%s, %d eur"
+msgstr[3] "%s, %d eur"
+msgstr[4] "%s, %d eur"
 
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d eur"
 msgstr[1] "%d eur"
+msgstr[2] "%d eur"
+msgstr[3] "%d eur"
+msgstr[4] "%d eur"
 
 #, c-format
 msgid "%s, %d minute"
 msgid_plural "%s, %d minutes"
 msgstr[0] "%s, %d vunutenn"
 msgstr[1] "%s, %d a vunutennoù"
+msgstr[2] "%s, %d a vunutennoù"
+msgstr[3] "%s, %d a vunutennoù"
+msgstr[4] "%s, %d a vunutennoù"
 
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d a vunutennoù"
 msgstr[1] "%d a vunutennoù"
+msgstr[2] "%d a vunutennoù"
+msgstr[3] "%d a vunutennoù"
+msgstr[4] "%d a vunutennoù"
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8305,11 +8397,8 @@ msgstr "Postelerezh Kenrouedad Pidgin"
 msgid "Internet Messenger"
 msgstr "Postelerezh Kenrouedad"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Kaozeit dre postelerezh prim. Skor AIM, Google Talk, Jabber/XMPP, MSN, Yahoo "
-"ha muioc'h c'hoazh."
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -8585,6 +8674,12 @@ msgid_plural ""
 msgstr[0] ""
 "%d a zarempredoù a zo anvet %s. Ha c'hoant ho peus da gendeuziñ anezho ?"
 msgstr[1] ""
+"%d a zarempredoù a zo anvet %s. Ha c'hoant ho peus da gendeuziñ anezho ?"
+msgstr[2] ""
+"%d a zarempredoù a zo anvet %s. Ha c'hoant ho peus da gendeuziñ anezho ?"
+msgstr[3] ""
+"%d a zarempredoù a zo anvet %s. Ha c'hoant ho peus da gendeuziñ anezho ?"
+msgstr[4] ""
 "%d a zarempredoù a zo anvet %s. Ha c'hoant ho peus da gendeuziñ anezho ?"
 
 msgid ""
@@ -8921,6 +9016,9 @@ msgid "%d unread message from %s\n"
 msgid_plural "%d unread messages from %s\n"
 msgstr[0] "%d kemenadenn amlennet a-berzh %s\n"
 msgstr[1] "%d kemenadenn amlennet a-berzh %s\n"
+msgstr[2] "%d kemenadenn amlennet a-berzh %s\n"
+msgstr[3] "%d kemenadenn amlennet a-berzh %s\n"
+msgstr[4] "%d kemenadenn amlennet a-berzh %s\n"
 
 msgid "Manually"
 msgstr "Dre-zorn"
@@ -8958,6 +9056,12 @@ msgid_plural ""
 msgstr[0] ""
 "Diweredekaet eo bet %d kont peogwir oc'h kennasket adalek ul lec'h all."
 msgstr[1] ""
+"Diweredekaet eo bet %d kont peogwir oc'h kennasket adalek ul lec'h all."
+msgstr[2] ""
+"Diweredekaet eo bet %d kont peogwir oc'h kennasket adalek ul lec'h all."
+msgstr[3] ""
+"Diweredekaet eo bet %d kont peogwir oc'h kennasket adalek ul lec'h all."
+msgstr[4] ""
 "Diweredekaet eo bet %d kont peogwir oc'h kennasket adalek ul lec'h all."
 
 msgid "<b>Username:</b>"
@@ -9349,6 +9453,9 @@ msgid "%d person in room"
 msgid_plural "%d people in room"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+msgstr[4] ""
 
 msgid "Stopped Typing"
 msgstr ""
@@ -9464,6 +9571,9 @@ msgstr ""
 msgid "artist"
 msgstr "arzour"
 
+msgid "lead developer"
+msgstr "diorroer pennañ"
+
 msgid "voice and video"
 msgstr "mouezh ha video"
 
@@ -9499,9 +9609,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "aozer orin"
-
-msgid "lead developer"
-msgstr "diorroer pennañ"
 
 msgid "Senior Contributor/QA"
 msgstr ""
@@ -9932,6 +10039,15 @@ msgstr[0] ""
 "Emaoc'h o vont da dilemel an darempred oc'h enbarzhiañ %s ha %d darempred "
 "all eus ho listenn darempredoù. Ha fell ra deoc'h kenderc'hel ?"
 msgstr[1] ""
+"Emaoc'h o vont da dilemel an darempred oc'h enbarzhiañ %s ha %d darempred "
+"all eus ho listenn darempredoù. Ha fell ra deoc'h kenderc'hel ?"
+msgstr[2] ""
+"Emaoc'h o vont da dilemel an darempred oc'h enbarzhiañ %s ha %d darempred "
+"all eus ho listenn darempredoù. Ha fell ra deoc'h kenderc'hel ?"
+msgstr[3] ""
+"Emaoc'h o vont da dilemel an darempred oc'h enbarzhiañ %s ha %d darempred "
+"all eus ho listenn darempredoù. Ha fell ra deoc'h kenderc'hel ?"
+msgstr[4] ""
 "Emaoc'h o vont da dilemel an darempred oc'h enbarzhiañ %s ha %d darempred "
 "all eus ho listenn darempredoù. Ha fell ra deoc'h kenderc'hel ?"
 
@@ -10523,12 +10639,18 @@ msgid "%s has %d new message."
 msgid_plural "%s has %d new messages."
 msgstr[0] "%s en deus %d kemennadenn"
 msgstr[1] "%s en deus %d kemennadenn"
+msgstr[2] "%s en deus %d kemennadenn"
+msgstr[3] "%s en deus %d kemennadenn"
+msgstr[4] "%s en deus %d kemennadenn"
 
 #, c-format
 msgid "<b>%d new email.</b>"
 msgid_plural "<b>%d new emails.</b>"
 msgstr[0] "<b>%d postel nevez.</b>"
 msgstr[1] "<b>%d postel nevez.</b>"
+msgstr[2] "<b>%d postel nevez.</b>"
+msgstr[3] "<b>%d postel nevez.</b>"
+msgstr[4] "<b>%d postel nevez.</b>"
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -10890,9 +11012,6 @@ msgstr ""
 msgid "Cannot start browser configuration program."
 msgstr ""
 
-msgid "Disabled"
-msgstr "Diweredekaet"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr ""
@@ -11156,6 +11275,37 @@ msgstr ""
 msgid "Status to a_pply at startup:"
 msgstr ""
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "Ampled :"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Trobarzhell"
+
+msgid "Audio"
+msgstr "Aodio"
+
+msgid "Input"
+msgstr "Enkas"
+
+msgid "Output"
+msgstr "Ezkas"
+
+msgid "Video"
+msgstr "Video"
+
 msgid "Interface"
 msgstr "Etrefas"
 
@@ -11166,6 +11316,9 @@ msgid "Status / Idle"
 msgstr "Statud / Dizoberiant"
 
 msgid "Themes"
+msgstr ""
+
+msgid "Voice/Video"
 msgstr ""
 
 msgid "Allow all users to contact me"
@@ -11250,6 +11403,43 @@ msgstr "Dibab un anv nevez"
 
 msgid "Select Folder..."
 msgstr "Diuzañ un doser"
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12570,35 +12760,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "Aodio"
-
-msgid "Video"
-msgstr "Video"
-
-msgid "Output"
-msgstr "Ezkas"
-
 msgid "_Plugin"
 msgstr "_Enlugellad"
-
-msgid "_Device"
-msgstr "_Trobarzhell"
-
-msgid "Input"
-msgstr "Enkas"
 
 msgid "P_lugin"
 msgstr "E_nlugellad"
 
 msgid "D_evice"
 msgstr "T_robarzhell"
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
-msgstr "Ampled :"
 
 msgid "Silence threshold:"
 msgstr ""

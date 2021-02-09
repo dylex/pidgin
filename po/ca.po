@@ -4,13 +4,14 @@
 #
 # Translators:
 # Copyright (c) 2004, 2005-2011
+# Jordi Mas <jmas@softcatala.org>, 2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 11:38+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:08-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Catalan (http://www.transifex.com/pidgin/pidgin/language/"
 "ca/)\n"
 "Language: ca\n"
@@ -1832,6 +1833,10 @@ msgstr "El missatge és massa llarg."
 msgid "Unable to send message."
 msgstr "No s'ha pogut enviar el missatge."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "Envia el missatge"
 
@@ -2169,19 +2174,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"RESPOSTA&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"RESPOSTA&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr ""
@@ -2248,6 +2249,27 @@ msgstr "Error en la conferència"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "S'ha produït un error en crear la sessió: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Inhabilitat"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4861,6 +4883,19 @@ msgstr ""
 #, c-format
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Escolliu a quin recurs de %s voleu enviar un fitxer"
+
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
 
 msgid "Afraid"
 msgstr "Espantat"
@@ -8508,11 +8543,8 @@ msgstr "Missatger d'Internet Pidgin"
 msgid "Internet Messenger"
 msgstr "Missatger d'Internet"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Xategeu amb missatgeria instantània, amb AIM, Google Talk, Jabber/XMPP, MSN, "
-"Yahoo i més"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9657,6 +9689,9 @@ msgstr "Error fatal"
 msgid "artist"
 msgstr "artista"
 
+msgid "lead developer"
+msgstr "desenvolupador principal"
+
 msgid "voice and video"
 msgstr "veu i vídeo"
 
@@ -9692,9 +9727,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "autor original"
-
-msgid "lead developer"
-msgstr "desenvolupador principal"
 
 msgid "Senior Contributor/QA"
 msgstr "Col·laborador veterà/CQ"
@@ -11051,10 +11083,10 @@ msgid "Bottom"
 msgstr "A baix"
 
 msgid "Left"
-msgstr "A la dreta"
+msgstr "A l'esquerra"
 
 msgid "Right"
-msgstr "A l'esquerra"
+msgstr "A la dreta"
 
 msgid "Left Vertical"
 msgstr "Vertical esquerre"
@@ -11123,9 +11155,6 @@ msgstr ""
 
 msgid "Cannot start browser configuration program."
 msgstr "No s'ha pogut iniciar el programa de configuració del navegador."
-
-msgid "Disabled"
-msgstr "Inhabilitat"
 
 #, c-format
 msgid "Use _automatically detected IP address: %s"
@@ -11395,6 +11424,37 @@ msgstr "En i_niciar, empra el mateix estat que en sortir per darrer cop"
 msgid "Status to a_pply at startup:"
 msgstr "Estat a _utilitzar en iniciar:"
 
+msgid "DROP"
+msgstr "DROP"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "Volum:"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Dispositiu"
+
+msgid "Audio"
+msgstr "Àudio"
+
+msgid "Input"
+msgstr "Entrada"
+
+msgid "Output"
+msgstr "Sortida"
+
+msgid "Video"
+msgstr "Vídeo"
+
 msgid "Interface"
 msgstr "Interfície"
 
@@ -11406,6 +11466,9 @@ msgstr "Estat / Inactiu"
 
 msgid "Themes"
 msgstr "Temes"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "Permet a tots els usuaris contactar amb mi"
@@ -11489,6 +11552,43 @@ msgstr "Trieu un nom nou"
 
 msgid "Select Folder..."
 msgstr "Selecciona una carpeta..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12863,35 +12963,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "Àudio"
-
-msgid "Video"
-msgstr "Vídeo"
-
-msgid "Output"
-msgstr "Sortida"
-
 msgid "_Plugin"
 msgstr "_Connectors"
-
-msgid "_Device"
-msgstr "_Dispositiu"
-
-msgid "Input"
-msgstr "Entrada"
 
 msgid "P_lugin"
 msgstr "C_onnectors"
 
 msgid "D_evice"
 msgstr "D_ispositiu"
-
-msgid "DROP"
-msgstr "DROP"
-
-msgid "Volume:"
-msgstr "Volum:"
 
 msgid "Silence threshold:"
 msgstr "Llindar per al silenci:"

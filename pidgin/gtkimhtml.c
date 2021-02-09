@@ -2054,48 +2054,44 @@ static gint
 gtk_smiley_tree_lookup (GtkSmileyTree *tree,
 			const gchar   *text)
 {
-	gunichar text_ch = g_utf8_get_char(text);
 	GtkSmileyTree *t = tree;
+	const gchar *x = text;
+	const gchar *amp;
+	gint alen;
 	gint len = 0;
 	gint lastlen = 0;
-	
-	while (text_ch) {
-		const gchar *amp;
+
+	while (*x) {
 		gchar *pos;
-		gint alen;
 
 		if (!t->values)
 			break;
 
-		if((amp = purple_markup_unescape_entity(text, &alen))) {
+		if(*x == '&' && (amp = purple_markup_unescape_entity(x, &alen))) {
 			gboolean matched = TRUE;
-			const char *amp_next = g_utf8_next_char(amp);
-			
 			/* Make sure all chars of the unescaped value match */
-			while (g_utf8_get_char(amp_next)) {
-				pos = g_utf8_strchr (t->values->str, -1, g_utf8_get_char(amp));
+			while (*(amp + 1)) {
+				pos = strchr (t->values->str, *amp);
 				if (pos)
 					t = t->children [GPOINTER_TO_INT(pos) - GPOINTER_TO_INT(t->values->str)];
 				else {
 					matched = FALSE;
 					break;
 				}
-				amp = amp_next;
-				amp_next = g_utf8_next_char(amp_next);
+				amp++;
 			}
-			
 			if (!matched)
 				break;
-			
-			pos = g_utf8_strchr (t->values->str, -1, g_utf8_get_char(amp));
+
+			pos = strchr (t->values->str, *amp);
 		}
-		else if (text_ch == '<') /* Because we're all WYSIWYG now, a '<'
+		else if (*x == '<') /* Because we're all WYSIWYG now, a '<'
 				     * char should only appear as the start of a tag.  Perhaps a safer (but costlier)
 				     * check would be to call gtk_imhtml_is_tag on it */
 			break;
 		else {
-			alen = g_unichar_to_utf8 (text_ch, NULL);
-			pos = g_utf8_strchr (t->values->str, -1, text_ch);
+			alen = 1;
+			pos = strchr (t->values->str, *x);
 		}
 
 		if (pos) {
@@ -2105,9 +2101,8 @@ gtk_smiley_tree_lookup (GtkSmileyTree *tree,
 		} else
 			break;
 
+		x += alen;
 		len += alen;
-		text = g_utf8_next_char(text);
-		text_ch = g_utf8_get_char(text);
 	}
 
 	if (t->image)
@@ -2863,6 +2858,8 @@ void gtk_imhtml_insert_html_at_iter(GtkIMHtml        *imhtml,
 				case 25:	/* BR */
 				case 58:	/* BR/ */
 				case 61:	/* BR (opt) */
+				case 29:	/* P */
+				case 30:	/* /P */
 					ws[wpos] = '\n';
 					wpos++;
 					br = TRUE;
@@ -2936,8 +2933,6 @@ void gtk_imhtml_insert_html_at_iter(GtkIMHtml        *imhtml,
 					ws[0] = '\0'; wpos = 0;
 					break;
 
-				case 29:	/* P */
-				case 30:	/* /P */
 				case 31:	/* H3 */
 				case 32:	/* /H3 */
 				case 33:	/* HTML */

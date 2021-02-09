@@ -11,17 +11,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-23 18:36+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:11-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Lithuanian (http://www.transifex.com/pidgin/pidgin/language/"
 "lt/)\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && (n"
-"%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 10 == 1 && (n % 100 > 19 || n % 100 < "
+"11) ? 0 : (n % 10 >= 2 && n % 10 <=9) && (n % 100 > 19 || n % 100 < 11) ? "
+"1 : n % 1 != 0 ? 2: 3);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -660,6 +661,7 @@ msgid_plural "List of %d users:\n"
 msgstr[0] "Sąrašas su %d naudotoju:\n"
 msgstr[1] "Sąrašas su %d naudotojais:\n"
 msgstr[2] "Sąrašas su %d naudotojų:\n"
+msgstr[3] "Sąrašas su %d naudotojų:\n"
 
 msgid "Supported debug options are: plugins version"
 msgstr "Palaikomos derinimo parinktys: plugins version"
@@ -775,6 +777,7 @@ msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] "Failų perdavimai – %d%% iš %d failo"
 msgstr[1] "Failų perdavimai – %d%% iš %d failų"
 msgstr[2] "Failų perdavimai – %d%% iš %d failų"
+msgstr[3] "Failų perdavimai – %d%% iš %d failų"
 
 #. Create the window.
 msgid "File Transfers"
@@ -946,6 +949,7 @@ msgid_plural "%s (%s) has %d new messages."
 msgstr[0] "%s (%s) turi %d naują pranešimą."
 msgstr[1] "%s (%s) turi %d naujus pranešimus."
 msgstr[2] "%s (%s) turi %d naujų pranešimų."
+msgstr[3] "%s (%s) turi %d naujų pranešimų."
 
 msgid "New Mail"
 msgstr "Naujas paštas"
@@ -1849,6 +1853,10 @@ msgstr "Žinutė per ilga."
 msgid "Unable to send message."
 msgstr "Negalima išsiųsti žinutės."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "Nusiųsti žinutę"
 
@@ -2192,19 +2200,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTOMATINIS "
-"ATSAKYMAS&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTOMATINIS "
-"ATSAKYMAS&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>Negalima rasti žurnalų kelio!</b></font>"
@@ -2276,6 +2280,27 @@ msgstr "Konferencijos klaida"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Seanso sukūrimo klaida: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Išjungta"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4888,6 +4913,19 @@ msgstr ""
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Parinkite %s išteklių, į kurį norite nusiųsti failą"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "Išsigandęs"
 
@@ -5951,6 +5989,7 @@ msgid_plural "You missed %hu messages from %s because they were invalid."
 msgstr[0] "Jūs praleidote %hu neteisingą pranešimą nuo naudotojo %s."
 msgstr[1] "Jūs praleidote %hu neteisingus pranešimus nuo naudotojo %s."
 msgstr[2] "Jūs praleidote %hu neteisingų pranešimų nuo naudotojo %s."
+msgstr[3] "Jūs praleidote %hu neteisingų pranešimų nuo naudotojo %s."
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
@@ -5958,6 +5997,7 @@ msgid_plural "You missed %hu messages from %s because they were too large."
 msgstr[0] "Jūs praleidote %hu per ilgą pranešimą nuo naudotojo %s."
 msgstr[1] "Jūs praleidote %hu per ilgus pranešimus nuo naudotojo %s."
 msgstr[2] "Jūs praleidote %hu per ilgų pranešimų nuo naudotojo %s."
+msgstr[3] "Jūs praleidote %hu per ilgų pranešimų nuo naudotojo %s."
 
 #, c-format
 msgid ""
@@ -5969,6 +6009,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Jūs praleidote %hu pranešimus nuo naudotojo %s, kadangi viršyta spartos riba."
 msgstr[2] ""
+"Jūs praleidote %hu pranešimų nuo naudotojo %s, kadangi viršyta spartos riba."
+msgstr[3] ""
 "Jūs praleidote %hu pranešimų nuo naudotojo %s, kadangi viršyta spartos riba."
 
 #, c-format
@@ -5985,6 +6027,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Jūs praleidote %hu žinučių nuo naudotojo %s, kadangi jo/jos perspėjimo lygis "
 "yra yra per aukštas."
+msgstr[3] ""
+"Jūs praleidote %hu žinučių nuo naudotojo %s, kadangi jo/jos perspėjimo lygis "
+"yra yra per aukštas."
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
@@ -5999,6 +6044,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Jūs praleidote %hu žinučių nuo naudotojo %s, kadangi Jūsų perspėjimo lygis "
 "yra per aukštas."
+msgstr[3] ""
+"Jūs praleidote %hu žinučių nuo naudotojo %s, kadangi Jūsų perspėjimo lygis "
+"yra per aukštas."
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
@@ -6008,6 +6056,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Jūs praleidote %hu pranešimus nuo naudotojo %s dėl nežinomos priežasties."
 msgstr[2] ""
+"Jūs praleidote %hu pranešimų nuo naudotojo %s dėl nežinomos priežasties."
+msgstr[3] ""
 "Jūs praleidote %hu pranešimų nuo naudotojo %s dėl nežinomos priežasties."
 
 msgid "Your AIM connection may be lost."
@@ -6034,6 +6084,7 @@ msgid_plural "The following usernames are associated with %s"
 msgstr[0] "Tolesni naudotojų vardai yra susieti su %s"
 msgstr[1] "Tolesni naudotojų vardai yra susieti su %s"
 msgstr[2] "Tolesni naudotojų vardai yra susieti su %s"
+msgstr[3] "Tolesni naudotojų vardai yra susieti su %s"
 
 #, c-format
 msgid "No results found for email address %s"
@@ -6140,6 +6191,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Viršytas maksimalus %d baitų profilio ilgis, todėl profilis buvo "
 "sutrumpintas."
+msgstr[3] ""
+"Viršytas maksimalus %d baitų profilio ilgis, todėl profilis buvo "
+"sutrumpintas."
 
 msgid "Profile too long."
 msgstr "Profilis per ilgas."
@@ -6158,6 +6212,9 @@ msgstr[1] ""
 "Viršytas maksimalus %d baitų pasitraukimo žinutės ilgis, todėl žinutė buvo "
 "sutrumpinta."
 msgstr[2] ""
+"Viršytas maksimalus %d baitų pasitraukimo žinutės ilgis, todėl žinutė buvo "
+"sutrumpinta."
+msgstr[3] ""
 "Viršytas maksimalus %d baitų pasitraukimo žinutės ilgis, todėl žinutė buvo "
 "sutrumpinta."
 
@@ -8427,6 +8484,7 @@ msgid_plural "%d seconds"
 msgstr[0] "%d sekundė"
 msgstr[1] "%d sekundės"
 msgstr[2] "%d sekundžių"
+msgstr[3] "%d sekundžių"
 
 #, c-format
 msgid "%d day"
@@ -8434,6 +8492,7 @@ msgid_plural "%d days"
 msgstr[0] "%d diena"
 msgstr[1] "%d dienos"
 msgstr[2] "%d dienų"
+msgstr[3] "%d dienų"
 
 #, c-format
 msgid "%s, %d hour"
@@ -8441,6 +8500,7 @@ msgid_plural "%s, %d hours"
 msgstr[0] "%s, %d valanda"
 msgstr[1] "%s, %d valandos"
 msgstr[2] "%s, %d valandų"
+msgstr[3] "%s, %d valandų"
 
 #, c-format
 msgid "%d hour"
@@ -8448,6 +8508,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d valanda"
 msgstr[1] "%d valandos"
 msgstr[2] "%d valandų"
+msgstr[3] "%d valandų"
 
 #, c-format
 msgid "%s, %d minute"
@@ -8455,6 +8516,7 @@ msgid_plural "%s, %d minutes"
 msgstr[0] "%s, %d minutė"
 msgstr[1] "%s, %d minutės"
 msgstr[2] "%s, %d minučių"
+msgstr[3] "%s, %d minučių"
 
 #, c-format
 msgid "%d minute"
@@ -8462,6 +8524,7 @@ msgid_plural "%d minutes"
 msgstr[0] "%d minutė"
 msgstr[1] "%d minutės"
 msgstr[2] "%d minučių"
+msgstr[3] "%d minučių"
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8560,11 +8623,8 @@ msgstr "Pidgin pokalbiai internete"
 msgid "Internet Messenger"
 msgstr "Pokalbiai internete"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Bendraukite per IM.  Palaikoma AIM, Google Talk, Jabber/XMPP, MSN, Yahoo ir "
-"daug kitų"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -8834,6 +8894,7 @@ msgid_plural ""
 msgstr[0] "Šiuo metu turite %d kontaktą vardu %s.  Ar norite juos sujungti?"
 msgstr[1] "Šiuo metu turite %d kontaktus vardu %s.  Ar norite juos sujungti?"
 msgstr[2] "Šiuo metu turite %d kontaktų vardu %s.  Ar norite juos sujungti?"
+msgstr[3] "Šiuo metu turite %d kontaktų vardu %s.  Ar norite juos sujungti?"
 
 msgid ""
 "Merging these contacts will cause them to share a single entry on the buddy "
@@ -9171,6 +9232,7 @@ msgid_plural "%d unread messages from %s\n"
 msgstr[0] "%d neperskaityta žinutė iš %s\n"
 msgstr[1] "%d neperskaitytos žinutės iš %s\n"
 msgstr[2] "%d neperskaitytų žinučių iš %s\n"
+msgstr[3] "%d neperskaitytų žinučių iš %s\n"
 
 msgid "Manually"
 msgstr "rankiniu būdu"
@@ -9208,6 +9270,7 @@ msgid_plural ""
 msgstr[0] "%d paskyra buvo išjungta, nes prisijungėte iš kitur:"
 msgstr[1] "%d paskyros buvo išjungtos, nes prisijungėte iš kitur:"
 msgstr[2] "%d paskyrų buvo išjungta, nes prisijungėte iš kitur:"
+msgstr[3] "%d paskyrų buvo išjungta, nes prisijungėte iš kitur:"
 
 msgid "<b>Username:</b>"
 msgstr "<b>Naudotojo vardas:</b>"
@@ -9603,6 +9666,7 @@ msgid_plural "%d people in room"
 msgstr[0] "%d asmuo kambaryje"
 msgstr[1] "%d asmenys kambaryje"
 msgstr[2] "%d asmenų kambaryje"
+msgstr[3] "%d asmenų kambaryje"
 
 msgid "Stopped Typing"
 msgstr "Nustota rinkti tekstą"
@@ -9716,6 +9780,9 @@ msgstr "Lemtingos klaidos"
 msgid "artist"
 msgstr "dailininkas"
 
+msgid "lead developer"
+msgstr "pagrindinis kūrėjas"
+
 msgid "voice and video"
 msgstr "garsas ir vaizdas"
 
@@ -9751,9 +9818,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "pradinis autorius"
-
-msgid "lead developer"
-msgstr "pagrindinis kūrėjas"
 
 msgid "Senior Contributor/QA"
 msgstr "Vyresnysis bendradarbis/kokybės kontrolė"
@@ -10192,6 +10256,9 @@ msgstr[1] ""
 "Jūs ruošiatės pašalinti kontaktą su %s ir turintį dar %d kitas bičiulio "
 "paskyras iš Jūsų bičiulių sąrašo.  Ar norite tęsti?"
 msgstr[2] ""
+"Jūs ruošiatės pašalinti kontaktą su %s ir turintį dar %d kitų bičiulio "
+"paskyrų iš Jūsų bičiulių sąrašo.  Ar norite tęsti?"
+msgstr[3] ""
 "Jūs ruošiatės pašalinti kontaktą su %s ir turintį dar %d kitų bičiulio "
 "paskyrų iš Jūsų bičiulių sąrašo.  Ar norite tęsti?"
 
@@ -10797,6 +10864,7 @@ msgid_plural "%s has %d new messages."
 msgstr[0] "%s turi %d naują pranešimą."
 msgstr[1] "%s turi %d naujus pranešimus."
 msgstr[2] "%s turi %d naujų pranešimų."
+msgstr[3] "%s turi %d naujų pranešimų."
 
 #, c-format
 msgid "<b>%d new email.</b>"
@@ -10804,6 +10872,7 @@ msgid_plural "<b>%d new emails.</b>"
 msgstr[0] "<b>%d naujas laiškas.</b>"
 msgstr[1] "<b>%d nauji laiškai.</b>"
 msgstr[2] "<b>%d naujų laiškų.</b>"
+msgstr[3] "<b>%d naujų laiškų.</b>"
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -11169,9 +11238,6 @@ msgstr "Nepavyko paleisti įgaliotojo serverio konfigūravimo programos."
 msgid "Cannot start browser configuration program."
 msgstr "Nepavyko paleisti naršyklės nustatymų programos."
 
-msgid "Disabled"
-msgstr "Išjungta"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "Naudoti _automatiškai aptiktą IP adresą: %s"
@@ -11437,6 +11503,37 @@ msgstr "Programos paleidimo metu nustatyti paskutinę prieš tai naudotą būsen
 msgid "Status to a_pply at startup:"
 msgstr "Programos paleidimo metu nustatyti būseną:"
 
+msgid "DROP"
+msgstr "DROP"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "Garsumas:"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Įrenginys"
+
+msgid "Audio"
+msgstr "Garsas"
+
+msgid "Input"
+msgstr "Įvestis"
+
+msgid "Output"
+msgstr "Išvestis"
+
+msgid "Video"
+msgstr "Vaizdas"
+
 msgid "Interface"
 msgstr "Sąsaja"
 
@@ -11448,6 +11545,9 @@ msgstr "Būsenos ir neveiklumas"
 
 msgid "Themes"
 msgstr "Temos"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "Leisti visiems naudotojams susisiekti su manimi"
@@ -11532,6 +11632,43 @@ msgstr "Parinkti kitą vardą"
 
 msgid "Select Folder..."
 msgstr "Pasirinkite aplanką..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12898,35 +13035,14 @@ msgstr "Suteikia Unity integravimą."
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr "Suteikia integravimą į Unity pranešimų meniu ir leistuką."
 
-msgid "Audio"
-msgstr "Garsas"
-
-msgid "Video"
-msgstr "Vaizdas"
-
-msgid "Output"
-msgstr "Išvestis"
-
 msgid "_Plugin"
 msgstr "_Papildinys"
-
-msgid "_Device"
-msgstr "_Įrenginys"
-
-msgid "Input"
-msgstr "Įvestis"
 
 msgid "P_lugin"
 msgstr "P_apildinys"
 
 msgid "D_evice"
 msgstr "Į_renginys"
-
-msgid "DROP"
-msgstr "DROP"
-
-msgid "Volume:"
-msgstr "Garsumas:"
 
 msgid "Silence threshold:"
 msgstr "Tylos slenkstis:"

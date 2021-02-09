@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-23 18:09+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:10-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Hindi (http://www.transifex.com/pidgin/pidgin/language/hi/)\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -1793,6 +1793,10 @@ msgstr "यह संदेश बहुत बड़ा है."
 msgid "Unable to send message."
 msgstr "संदेश भेजने में असमर्थ."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "सन्देश भेजें"
 
@@ -2132,19 +2136,15 @@ msgstr "एक्सएमएल"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;स्वतः जवाब "
-"दीजिए&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;स्वतः जवाब "
-"दीजिए&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>लॉग खोजने में विफल!</b></font>"
@@ -2208,6 +2208,27 @@ msgstr "सम्मेलन त्रुटि"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "सत्र बनाने में त्रुटि: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "अक्षम"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4771,6 +4792,19 @@ msgstr "%s मे फाइल भेजने में असमर्थ, उ
 #, c-format
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "कृपया %s को संसाधन चुनें जिसमें आप फाइल भेजने के लिए चाहेंगे"
+
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
 
 msgid "Afraid"
 msgstr ""
@@ -8319,10 +8353,8 @@ msgstr "पिडगिन इंटरनेट मैसेंजर"
 msgid "Internet Messenger"
 msgstr "इंटरनेट मेसेंजर"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"IM पर चैट.  AIM, Google Talk, Jabber/XMPP, MSN, Yahoo और कुछ और का समर्थन करता है"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9458,6 +9490,9 @@ msgstr "गंभीर त्रुटि"
 msgid "artist"
 msgstr "कलाकार"
 
+msgid "lead developer"
+msgstr "मुख्य विकासकर्ता"
+
 msgid "voice and video"
 msgstr "आवाज और वीडियो"
 
@@ -9493,9 +9528,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "मूल लेखक"
-
-msgid "lead developer"
-msgstr "मुख्य विकासकर्ता"
 
 msgid "Senior Contributor/QA"
 msgstr "वरिष्ठ योगदानकर्ता/QA"
@@ -10891,9 +10923,6 @@ msgstr "प्राक्सी विन्यास प्रोग्रा�
 msgid "Cannot start browser configuration program."
 msgstr "ब्राउजर विन्यास प्रोग्राम आरंभ नहीं कर सका."
 
-msgid "Disabled"
-msgstr "अक्षम"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "स्वतः पता करने योग्य IP पता का उपयोग करें (_a): %s"
@@ -11159,6 +11188,37 @@ msgstr "अंतिम निकास से आरंभन पर वस्�
 msgid "Status to a_pply at startup:"
 msgstr "आरंभ पर लागू करने के लिए वस्तुस्थिति (_p):"
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr ""
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "युक्ति (_D)"
+
+msgid "Audio"
+msgstr "ऑडियो"
+
+msgid "Input"
+msgstr "इनपुट"
+
+msgid "Output"
+msgstr "आउटपुट"
+
+msgid "Video"
+msgstr "वीडियो"
+
 msgid "Interface"
 msgstr "अंतरफलक"
 
@@ -11170,6 +11230,9 @@ msgstr "स्थिति / बेकार"
 
 msgid "Themes"
 msgstr "प्रसंग"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "प्रयोक्ता को मुझसे संपर्क की अनुमति दीजिए"
@@ -11253,6 +11316,43 @@ msgstr "नया नाम चुनिए"
 
 msgid "Select Folder..."
 msgstr "फोल्डर चुनिए..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12601,35 +12701,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "ऑडियो"
-
-msgid "Video"
-msgstr "वीडियो"
-
-msgid "Output"
-msgstr "आउटपुट"
-
 msgid "_Plugin"
 msgstr "पल्गिन (_P)"
-
-msgid "_Device"
-msgstr "युक्ति (_D)"
-
-msgid "Input"
-msgstr "इनपुट"
 
 msgid "P_lugin"
 msgstr "पल्गिन (_l)"
 
 msgid "D_evice"
 msgstr "युक्ति (_e)"
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
-msgstr ""
 
 msgid "Silence threshold:"
 msgstr ""

@@ -10,7 +10,7 @@
 # Copyright (C) Piotr Makowski <pmakowski@aviary.pl>, 2008
 # Copyright (C) Przemysław Sułek <pbs@linux.net.pl>, 2001
 # Copyright (C) Tomasz Sałaciński <tsalacinski@gmail.com>, 2007
-# Piotr Drąg <piotrdrag@gmail.com>, 2009,2012-2017
+# Piotr Drąg <piotrdrag@gmail.com>, 2009,2012-2018,2020
 # Tomek Wasilczyk <twasilczyk@pidgin.im>, 2013
 # Tomek Wasilczyk <twasilczyk@pidgin.im>, 2013
 # tomkiewicz, 2013
@@ -18,8 +18,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 11:38+0000\n"
+"POT-Creation-Date: 2020-06-09 22:12-0500\n"
+"PO-Revision-Date: 2020-06-06 10:32+0000\n"
 "Last-Translator: Piotr Drąg <piotrdrag@gmail.com>\n"
 "Language-Team: Polish (http://www.transifex.com/pidgin/pidgin/language/pl/)\n"
 "Language: pl\n"
@@ -1863,6 +1863,10 @@ msgstr "Ta wiadomość jest za duża."
 msgid "Unable to send message."
 msgstr "Nie można wysłać wiadomości."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr "(wewnętrzne) Tymczasowi partnerzy komunikatora"
+
 msgid "Send Message"
 msgstr "Wyślij wiadomość"
 
@@ -2206,19 +2210,19 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;ODPOWIEDŹ-"
-"AUTOMATYCZNA&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;ODPOWIEDŹ-AUTOMATYCZNA&gt;:</b></span> %s<br>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;ODPOWIEDŹ-"
-"AUTOMATYCZNA&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;ODPOWIEDŹ-AUTOMATYCZNA&gt;:</b></span> %s<br>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr ""
@@ -2292,6 +2296,27 @@ msgstr "Błąd konferencji"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Błąd podczas tworzenia sesji: %s"
+
+msgid "Could not create media pipeline"
+msgstr "Nie można utworzyć potoku multimediów"
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr "Dźwięk testowy"
+
+msgid "Disabled"
+msgstr "Wyłączone"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr "Obraz testowy"
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4614,7 +4639,7 @@ msgid "Unsupported Encoding"
 msgstr "Nieobsługiwane kodowanie"
 
 msgid "Unsupported Stanza Type"
-msgstr "Nieobsługiwany typ stanzy"
+msgstr "Nieobsługiwany typ strofy"
 
 msgid "Unsupported Version"
 msgstr "Nieobsługiwana wersja"
@@ -4932,6 +4957,19 @@ msgstr ""
 #, c-format
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Proszę wybrać zasób użytkownika %s, do którego wysłać plik"
+
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr "Kolejka dla %s osiągnęła swoją maksymalną długość, %u."
+
+msgid "XMPP stream management"
+msgstr "Zarządzanie strumieniem XMPP"
+
+msgid "Stanza queue is full"
+msgstr "Kolejka strof jest pełna"
+
+msgid "No further messages will be queued"
+msgstr "Kolejne wiadomości nie będą dodawane do kolejki"
 
 msgid "Afraid"
 msgstr "Przestraszony"
@@ -8630,11 +8668,10 @@ msgstr "Pidgin"
 msgid "Internet Messenger"
 msgstr "Komunikator"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Rozmawianie przez komunikator. Obsługuje sieci AIM, Google Talk, Jabber/"
-"XMPP, MSN, Yahoo oraz więcej"
+"Rozmawianie przez komunikator. Obsługuje sieci AIM, Google Talk, Jabber/XMPP "
+"oraz więcej"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9792,6 +9829,9 @@ msgstr "Błąd krytyczny"
 msgid "artist"
 msgstr "artysta"
 
+msgid "lead developer"
+msgstr "główny programista"
+
 msgid "voice and video"
 msgstr "dźwięk i wideo"
 
@@ -9827,9 +9867,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "autor pierwszej wersji"
-
-msgid "lead developer"
-msgstr "główny programista"
 
 msgid "Senior Contributor/QA"
 msgstr "Starszy współtwórca/ocena jakości"
@@ -11267,9 +11304,6 @@ msgstr "Nie można uruchomić programu konfiguracji pośrednika."
 msgid "Cannot start browser configuration program."
 msgstr "Nie można uruchomić programu konfiguracji przeglądarki."
 
-msgid "Disabled"
-msgstr "Wyłączone"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "_Automatyczne wykrywanie adresu IP: %s"
@@ -11537,6 +11571,37 @@ msgstr "Stan z ostatniej s_esji programu"
 msgid "Status to a_pply at startup:"
 msgstr "Stan _ustawiany podczas uruchamiania:"
 
+msgid "DROP"
+msgstr "Upuszczenie"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr "Próg ciszy: %d%%"
+
+msgid "Volume:"
+msgstr "Głośność:"
+
+msgid "Test Audio"
+msgstr "Przetestuj dźwięk"
+
+msgid "Test Video"
+msgstr "Przetestuj wideo"
+
+msgid "_Device"
+msgstr "Urzą_dzenie"
+
+msgid "Audio"
+msgstr "Dźwięk"
+
+msgid "Input"
+msgstr "Wejście"
+
+msgid "Output"
+msgstr "Wyjście"
+
+msgid "Video"
+msgstr "Obraz"
+
 msgid "Interface"
 msgstr "Interfejs"
 
@@ -11548,6 +11613,9 @@ msgstr "Stan/bezczynność"
 
 msgid "Themes"
 msgstr "Motywy"
+
+msgid "Voice/Video"
+msgstr "Dźwięk/wideo"
 
 msgid "Allow all users to contact me"
 msgstr "Zezwalanie wszystkim użytkownikom na kontakt"
@@ -11632,6 +11700,43 @@ msgstr "Wybór nowej nazwy"
 
 msgid "Select Folder..."
 msgstr "Wybierz katalog…"
+
+msgid "Screen share error"
+msgstr "Błąd podczas udostępniania ekranu"
+
+msgid "Error creating screencast request"
+msgstr "Błąd podczas tworzenia żądania nagrania ekranu"
+
+msgid "OpenPipeWireRemote request failed"
+msgstr "Żądanie OpenPipeWireRemote się nie powiodło"
+
+msgid "No file descriptor found"
+msgstr "Nie odnaleziono deskryptora pliku"
+
+msgid "Screencast \"Start\" failed"
+msgstr "„Start” nagrania ekranu się nie powiodło"
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr "„SelectSources” nagrania ekranu się nie powiodło"
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr "„CreateSession” nagrania ekranu się nie powiodło"
+
+msgid "Test image"
+msgstr "Obraz testowy"
+
+msgid "Select window"
+msgstr "Wybierz okno"
+
+msgid "Use monitor"
+msgstr "Użyj monitora"
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr "%s (%d✕%d @ %d,%d)"
+
+msgid "Unknown output"
+msgstr "Nieznane wejście"
 
 #. list button
 msgid "_Get List"
@@ -13010,35 +13115,14 @@ msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 "Dostarcza integrację z menu komunikatora i aktywatorem środowiska Unity."
 
-msgid "Audio"
-msgstr "Dźwięk"
-
-msgid "Video"
-msgstr "Obraz"
-
-msgid "Output"
-msgstr "Wyjście"
-
 msgid "_Plugin"
 msgstr "_Wtyczka"
-
-msgid "_Device"
-msgstr "Urzą_dzenie"
-
-msgid "Input"
-msgstr "Wejście"
 
 msgid "P_lugin"
 msgstr "W_tyczka"
 
 msgid "D_evice"
 msgstr "Urządz_enie"
-
-msgid "DROP"
-msgstr "Upuszczenie"
-
-msgid "Volume:"
-msgstr "Głośność:"
 
 msgid "Silence threshold:"
 msgstr "Próg ciszy:"

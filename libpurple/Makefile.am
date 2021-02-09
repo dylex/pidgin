@@ -47,6 +47,7 @@ purple_coresources = \
 	desktopitem.c \
 	eventloop.c \
 	ft.c \
+	glibcompat.c \
 	idle.c \
 	imgstore.c \
 	log.c \
@@ -115,6 +116,7 @@ purple_coreheaders = \
 	eventloop.h \
 	ft.h \
 	gaim-compat.h \
+	glibcompat.h \
 	idle.h \
 	imgstore.h \
 	log.h \

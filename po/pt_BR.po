@@ -4,15 +4,16 @@
 #
 # Translators:
 # Renato Silva, 2014
+# M3741 <luiz.linux@gmail.com>, 2018
 # Rafael H L Moretti <rafael.moretti@gmail.com>, 2015
-# Renato Silva, 2014-2016
+# Renato Silva, 2014-2016,2018
 msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-23 18:12+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:13-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Portuguese (Brazil) (http://www.transifex.com/pidgin/pidgin/"
 "language/pt_BR/)\n"
 "Language: pt_BR\n"
@@ -58,7 +59,7 @@ msgid ""
 msgstr ""
 "%s encontrou erros ao migrar suas configurações de %s para %s. Por favor, "
 "investigue e complete a migração manualmente. Pedimos também que você relate "
-"este erro em http://developer.pidgin.im"
+"este erro em https://developer.pidgin.im"
 
 msgid "Error"
 msgstr "Erro"
@@ -1289,7 +1290,7 @@ msgid "(default)"
 msgstr "(padrão)"
 
 msgid "Select Sound File..."
-msgstr ""
+msgstr "Selecionar Arquivo de Som..."
 
 msgid "Sound Preferences"
 msgstr "Preferências de som"
@@ -1409,11 +1410,11 @@ msgid "Edit Status"
 msgstr "Editar status"
 
 msgid "Use a different status for some accounts"
-msgstr ""
+msgstr "Usar status diferente para algumas contas"
 
 #. Save and Use
 msgid "Save and Use"
-msgstr ""
+msgstr "Salvar e Usar"
 
 msgid "Certificates"
 msgstr "Certificados"
@@ -1545,7 +1546,7 @@ msgid "TinyURL for above: %s"
 msgstr "TinyURL para o item acima: %s"
 
 msgid "Please wait while TinyURL fetches a shorter URL..."
-msgstr ""
+msgstr "Por favor aguarde o TinyURL encurtar o endereço..."
 
 msgid "Only create TinyURL for URLs of this length or greater"
 msgstr "Somente criar TinyURL para endereços deste tamanho ou maiores"
@@ -1560,7 +1561,7 @@ msgid "TinyURL plugin"
 msgstr "Plug-in do TinyURL"
 
 msgid "Shorten URLs in messages using TinyURL"
-msgstr ""
+msgstr "Encurtar endereços em mensagens usando TinyURL"
 
 msgid "Online"
 msgstr "Conectado"
@@ -1843,6 +1844,10 @@ msgstr "A mensagem é muito extensa."
 
 msgid "Unable to send message."
 msgstr "Não foi possível enviar mensagem."
+
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
 
 msgid "Send Message"
 msgstr "Enviar mensagem"
@@ -2187,19 +2192,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"RESPOSTA&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"RESPOSTA&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr ""
@@ -2274,6 +2275,27 @@ msgstr "Erro de conferência"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Erro ao criar a sessão: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Desabilitado"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -2836,6 +2858,8 @@ msgid ""
 "Causes conversation windows to appear as other users begin to message you.  "
 "This works for AIM, ICQ, XMPP, and Sametime"
 msgstr ""
+"Faz as janelas de conversa aparecerem quando outros usuários começarem a "
+"enviar uma mensagem. Funciona para AIM, ICQ, XMPP e Sametime"
 
 msgid "You feel a disturbance in the force..."
 msgstr "Você sente uma perturbação na Força..."
@@ -3055,6 +3079,8 @@ msgid ""
 "Unable to find Apple's \"Bonjour for Windows\" toolkit, see https://"
 "developer.pidgin.im/BonjourWindows for more information."
 msgstr ""
+"Não foi encontrado o toolkit \"Bonjour for Windows\" da Apple, visite "
+"https://developer.pidgin.im/BonjourWindows para mais informações."
 
 msgid "Unable to listen for incoming IM connections"
 msgstr "Não foi possível escutar por conexões de mensagens instantâneas"
@@ -4906,6 +4932,19 @@ msgstr ""
 "Favor selecionar o recurso de %s para o qual você gostaria de mandar um "
 "arquivo"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "Amedrontado"
 
@@ -5694,10 +5733,10 @@ msgid "Received invalid data on connection with server"
 msgstr "Dados inválidos foram recebidos na conexão com o servidor"
 
 msgid "Error parsing response from authentication server"
-msgstr ""
+msgstr "Erro interpretando resposta do servidor de autenticação"
 
 msgid "Unknown error during authentication"
-msgstr ""
+msgstr "Erro desconhecido durante autenticação"
 
 #. *< type
 #. *< ui_requirement
@@ -5831,6 +5870,8 @@ msgid ""
 "You required Kerberos authentication but encryption is disabled in your "
 "account settings."
 msgstr ""
+"Você requisitou autenticação Kerberos mas a criptografia está desabilitada "
+"nas suas configurações de conta."
 
 #, c-format
 msgid "You may be disconnected shortly.  If so, check %s for updates."
@@ -6371,16 +6412,16 @@ msgid "Search for Buddy by Email Address..."
 msgstr "Procurar por amigos pelo endereço de Email..."
 
 msgid "clientLogin"
-msgstr ""
+msgstr "clientLogin"
 
 msgid "Kerberos"
-msgstr ""
+msgstr "Kerberos"
 
 msgid "MD5-based"
-msgstr ""
+msgstr "Baseado em MD5"
 
 msgid "Authentication method"
-msgstr ""
+msgstr "Método de autenticação"
 
 msgid ""
 "Always use AIM/ICQ proxy server for\n"
@@ -8542,6 +8583,8 @@ msgid ""
 "This means that you can be chatting with friends on AIM, talking to a friend "
 "on Google Talk, and sitting in an IRC chat room all at the same time."
 msgstr ""
+"Isso significa que você pode estar conversando com amigos no AIM, falando "
+"com um amigo no Google Talk, e estar numa sala IRC tudo ao mesmo tempo."
 
 msgid "The buddy list showing friends on different networks."
 msgstr "A lista de amigos mostrando amigos em diferentes redes."
@@ -8552,11 +8595,10 @@ msgstr "Mensageiro da Internet Pidgin"
 msgid "Internet Messenger"
 msgstr "Mensageiro da Internet"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Bate-papos instantâneos.  Suporta AIM, Google Talk, Jabber/XMPP, MSN, Yahoo "
-"e outros"
+"Conversas via mensagens instantâneas.  Supporta AIM, Google Talk, Jabber/"
+"XMPP e mais"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9290,10 +9332,10 @@ msgid "_Group:"
 msgstr "_Grupo:"
 
 msgid "Automatically _join when account connects"
-msgstr ""
+msgstr "_Entrar automaticamente quando a conta conectar"
 
 msgid "_Remain in chat after window is closed"
-msgstr ""
+msgstr "_Permanecer na conversa após fechar janela"
 
 msgid "Please enter the name of the group to be added."
 msgstr "Por favor, digite o nome do grupo a ser criado."
@@ -9333,7 +9375,7 @@ msgid "SSL Servers"
 msgstr "Servidores SSL"
 
 msgid "Supported debug options are: plugins, version"
-msgstr ""
+msgstr "As opções de depuração suportadas são: plugins, version"
 
 msgid "Unknown command."
 msgstr "Comando desconhecido."
@@ -9429,7 +9471,7 @@ msgid "/Conversation/Media/_Video Call"
 msgstr "/Conversa/Chamada de _vídeo"
 
 msgid "/Conversation/Media/Audio\\/Video _Call"
-msgstr "/Conversa/_Chamada de áudio/vídeio"
+msgstr "/Conversa/_Chamada de áudio/vídeo"
 
 msgid "/Conversation/Se_nd File..."
 msgstr "/Conversa/E_nviar arquivo..."
@@ -9710,6 +9752,9 @@ msgstr "Erro fatal"
 msgid "artist"
 msgstr "Artista"
 
+msgid "lead developer"
+msgstr "desenvolvedor principal"
+
 msgid "voice and video"
 msgstr "voz e vídeo"
 
@@ -9745,9 +9790,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "autor original"
-
-msgid "lead developer"
-msgstr "desenvolvedor principal"
 
 msgid "Senior Contributor/QA"
 msgstr "Contribuidor Sênior/QA"
@@ -10088,6 +10130,13 @@ msgid ""
 "welcome to post in another language, but the responses may be less helpful."
 "<br/>"
 msgstr ""
+"<font size=\"4\"><b>Ajuda de outros usuários do Pidgin</b></font> está "
+"disponível pelo email <a href=\"mailto:support@pidgin.im\">support@pidgin."
+"im</a><br/>Esta é uma lista de emails <b>pública</b> ! (<a href=\"http://"
+"pidgin.im/pipermail/support/\">arquivo</a>)<br/>Não podemos ajudar com "
+"plugins ou protocolos de terceiros!<br/>O idioma primário desta lista é o "
+"<b>inglês</b>.  Você pode postar em outro idioma, mas as respostas podem ser "
+"menos úteis.<br/>"
 
 #, c-format
 msgid "About %s"
@@ -11172,9 +11221,6 @@ msgstr "Não foi possível iniciar o programa de configuração do proxy."
 msgid "Cannot start browser configuration program."
 msgstr "Não foi possível iniciar o programa de configuração do navegador."
 
-msgid "Disabled"
-msgstr "Desabilitado"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "Usar endereço de IP _automaticamente detectado: %s"
@@ -11441,6 +11487,37 @@ msgstr "Usar o s_tatus da última saída ao iniciar"
 msgid "Status to a_pply at startup:"
 msgstr "Status a a_plicar na inicialização:"
 
+msgid "DROP"
+msgstr "DROP"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "Volume:"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Dispositivo"
+
+msgid "Audio"
+msgstr "Aúdio"
+
+msgid "Input"
+msgstr "Entrada"
+
+msgid "Output"
+msgstr "Saída"
+
+msgid "Video"
+msgstr "Video"
+
 msgid "Interface"
 msgstr "Interface"
 
@@ -11452,6 +11529,9 @@ msgstr "Status / Inativo"
 
 msgid "Themes"
 msgstr "Temas"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "Permitir que todos os usuários me contatem"
@@ -11538,6 +11618,43 @@ msgstr "Escolher novo nome"
 msgid "Select Folder..."
 msgstr "Selecionar pasta..."
 
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
+
 #. list button
 msgid "_Get List"
 msgstr "Ob_ter lista"
@@ -11573,7 +11690,7 @@ msgstr "Use um status _diferente para algumas contas"
 
 #. Save and Use button
 msgid "Sa_ve and Use"
-msgstr ""
+msgstr "Sal_var e Usar"
 
 #, c-format
 msgid "Status for %s"
@@ -12327,7 +12444,7 @@ msgid "Notify For"
 msgstr "Notificar para"
 
 msgid "\tS_ystem messages"
-msgstr ""
+msgstr "Mensagens do s_istema"
 
 msgid "\t_Only when someone says your username"
 msgstr "\t_Apenas quando alguém menciona seu nome"
@@ -12520,6 +12637,9 @@ msgid ""
 "Lets you send raw input to text-based protocols (XMPP, IRC, TOC). Hit "
 "'Enter' in the entry box to send. Watch the debug window."
 msgstr ""
+"Permite enviar dados brutos para protocolos baseados em texto (XMPP, IRC, "
+"TOC). Pressione 'Enter' na caixa de entrada para enviar. Observe a janela de "
+"depuração."
 
 #, c-format
 msgid "You can upgrade to %s %s today."
@@ -12867,6 +12987,8 @@ msgid ""
 "This plugin enables variable alpha transparency on conversation windows and "
 "the buddy list."
 msgstr ""
+"Este plugin habilita a transparência alfa variável em janelas de conversa e "
+"na lista de amigos."
 
 #. Alerts
 msgid "Chatroom alerts"
@@ -12917,35 +13039,14 @@ msgstr "Fornece integração com o Unity."
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr "Fornece integração com o menu de mensagens e lançador do Unity"
 
-msgid "Audio"
-msgstr "Aúdio"
-
-msgid "Video"
-msgstr "Video"
-
-msgid "Output"
-msgstr "Saída"
-
 msgid "_Plugin"
 msgstr "_Plug-in"
-
-msgid "_Device"
-msgstr "_Dispositivo"
-
-msgid "Input"
-msgstr "Entrada"
 
 msgid "P_lugin"
 msgstr "P_lug-in"
 
 msgid "D_evice"
 msgstr "Dispositivo"
-
-msgid "DROP"
-msgstr "DROP"
-
-msgid "Volume:"
-msgstr "Volume:"
 
 msgid "Silence threshold:"
 msgstr "Limiar de silêncio:"
@@ -13126,6 +13227,8 @@ msgid ""
 "Pidgin requires a compatible GTK+ Runtime (which does not appear to be "
 "installed).$\\rAre you sure you want to skip installing the GTK+ Runtime?"
 msgstr ""
+"O Pidgin requer um runtime GTK+ compatível (que parece não estar instalado).$"
+"\\rDeseja realmente pular a instalação do runtime GTK+?"
 
 #. Installer Subsection Text
 msgid "URI Handlers"

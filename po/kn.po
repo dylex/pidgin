@@ -9,16 +9,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 19:20+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:11-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Kannada (http://www.transifex.com/pidgin/pidgin/language/"
 "kn/)\n"
 "Language: kn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -648,6 +648,7 @@ msgstr "<ತಂತಾನೇ-ಉತ್ತರಿಸು> "
 msgid "List of %d user:\n"
 msgid_plural "List of %d users:\n"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Supported debug options are: plugins version"
 msgstr "ಬೆಂಬಲಿಸಲಾಗುವ ದೋಷನಿವಾರಣಾ ಆಯ್ಕೆಗಳೆಂದರೆ: ಪ್ಲಗ್‌ಇನ್‌ಗಳ ಆವೃತ್ತಿ"
@@ -753,6 +754,7 @@ msgstr "ತಡೆಯಿರಿ"
 msgid "File Transfers - %d%% of %d file"
 msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] ""
+msgstr[1] ""
 
 #. Create the window.
 msgid "File Transfers"
@@ -924,6 +926,7 @@ msgstr "ವಿಷಯ"
 msgid "%s (%s) has %d new message."
 msgid_plural "%s (%s) has %d new messages."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "New Mail"
 msgstr "ಹೊಸ ಅಂಚೆ"
@@ -1814,6 +1817,10 @@ msgstr "ಸಂದೇಶವು ಬಹಳ ದೊಡ್ಡದು."
 msgid "Unable to send message."
 msgstr "ಸಂದೇಶವನ್ನು ಕಳಿಸಲು ಆಗಲಿಲ್ಲ."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "ಸಂದೇಶವನ್ನು ಕಳುಹಿಸು"
 
@@ -2153,19 +2160,15 @@ msgstr "ವಿಸ್ತೃತ ಪಠ್ಯ(ಎಕ್ಸ್.ಎಂ.ಎಲ್)"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;ತಂತಾನೆ-"
-"ಉತ್ತರ&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;ತಂತಾನೆ-"
-"ಉತ್ತರ&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr ""
@@ -2232,6 +2235,27 @@ msgstr "ಸಮ್ಮೇಳನ(ಕಾನ್ಫರೆನ್ಸ್ ದೋಷ)"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "ಅಧಿವೇಶನವನ್ನು ರಚಿಸುವಲ್ಲಿ ದೋಷ: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "ಅಶಕ್ತಗೊಳಿಸಲಾದ"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4840,6 +4864,19 @@ msgstr ""
 "ನೀವು ಯಾವುದರೊಂದಿಗೆ ಒಂದು ಕಡತವನ್ನು ಕಳುಹಿಸಲು ಬಯಸುತ್ತೀರೊ ಅದರ %s ಸಂಪನ್ಮೂಲವನ್ನು ಆಯ್ಕೆ "
 "ಮಾಡಿ"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "ಹೆದರಿದ"
 
@@ -5899,11 +5936,13 @@ msgstr "ತಿರಸ್ಕರಿಸು(_D)"
 msgid "You missed %hu message from %s because it was invalid."
 msgid_plural "You missed %hu messages from %s because they were invalid."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
 msgid_plural "You missed %hu messages from %s because they were too large."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid ""
@@ -5911,6 +5950,7 @@ msgid ""
 msgid_plural ""
 "You missed %hu messages from %s because the rate limit has been exceeded."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid ""
@@ -5918,17 +5958,20 @@ msgid ""
 msgid_plural ""
 "You missed %hu messages from %s because his/her warning level is too high."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
 msgid_plural ""
 "You missed %hu messages from %s because your warning level is too high."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
 msgid_plural "You missed %hu messages from %s for an unknown reason."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Your AIM connection may be lost."
 msgstr "ನಿಮ್ಮ AIM ಸಂಪರ್ಕವು ಇಲ್ಲವಾಗಬಹುದು."
@@ -5952,6 +5995,7 @@ msgstr "ಪುಟಿಕೆ(ಪಾಪಪ್) ಸಂದೇಶ"
 msgid "The following username is associated with %s"
 msgid_plural "The following usernames are associated with %s"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "No results found for email address %s"
@@ -6049,6 +6093,7 @@ msgid_plural ""
 "The maximum profile length of %d bytes has been exceeded.  It has been "
 "truncated for you."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Profile too long."
 msgstr "ವ್ಯಕ್ತಿಪರಿಚಯದ ಗಾತ್ರವು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ."
@@ -6061,6 +6106,7 @@ msgid_plural ""
 "The maximum away message length of %d bytes has been exceeded.  It has been "
 "truncated for you."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Away message too long."
 msgstr "ಆಚೆ ಹೋಗುವ ಸಂದೇಶವು ಬಹಳ ದೊಡ್ಡದಾಗಿದೆ."
@@ -8326,31 +8372,37 @@ msgstr "ತಿಳಿಯದ"
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%s, %d hour"
 msgid_plural "%s, %d hours"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%s, %d minute"
 msgid_plural "%s, %d minutes"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8446,11 +8498,8 @@ msgstr "ಪಿಜಿನ್ ಇಂಟರ್ನೆಟ್ ಮೆಸೆಂಜರ್"
 msgid "Internet Messenger"
 msgstr "ಇಂಟರ್ನೆಟ್ ಮೆಸ್ಸೆಂಜರ್ "
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"IM ಮೂಲಕ ಮಾತುಕತೆ.  AIM, Google Talk, Jabber/XMPP, MSN, Yahoo ಹಾಗು ಇನ್ನೂ "
-"ಬಹಳಷ್ಟನ್ನು ಬೆಂಬಲಿಸುತ್ತದೆ"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -8719,6 +8768,7 @@ msgid "You have %d contact named %s. Would you like to merge them?"
 msgid_plural ""
 "You currently have %d contacts named %s. Would you like to merge them?"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "Merging these contacts will cause them to share a single entry on the buddy "
@@ -9052,6 +9102,7 @@ msgstr "/ಸಾಧನಗಳು/ಕೋಣೆಗಳ ಪಟ್ಟಿ"
 msgid "%d unread message from %s\n"
 msgid_plural "%d unread messages from %s\n"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Manually"
 msgstr "ಕೈಯಾರೆ "
@@ -9087,6 +9138,7 @@ msgid "%d account was disabled because you signed on from another location:"
 msgid_plural ""
 "%d accounts were disabled because you signed on from another location:"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "<b>Username:</b>"
 msgstr "<b>ಬಳಕೆದಾರ ಹೆಸರು:</b>"
@@ -9476,6 +9528,7 @@ msgstr "ಹುಡುಕು:"
 msgid "%d person in room"
 msgid_plural "%d people in room"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Stopped Typing"
 msgstr "ಬರೆಯುವುದನ್ನು ನಿಲ್ಲಿಸಿದ್ದಾರೆ"
@@ -9587,6 +9640,9 @@ msgstr "ಮಾರಕ ದೋಷ"
 msgid "artist"
 msgstr "ಕಲಾವಿದ"
 
+msgid "lead developer"
+msgstr "ಪ್ರಧಾನ ವಿಕಸನಾಗಾರರು"
+
 msgid "voice and video"
 msgstr "ಧ್ವನಿ ಹಾಗು ವೀಡಿಯೊ"
 
@@ -9622,9 +9678,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "ಮೂಲ ಲೇಖಕ"
-
-msgid "lead developer"
-msgstr "ಪ್ರಧಾನ ವಿಕಸನಾಗಾರರು"
 
 msgid "Senior Contributor/QA"
 msgstr "ಹಿರಿಯ ಸಹಾಯಕರು/QA"
@@ -10057,6 +10110,7 @@ msgid_plural ""
 "You are about to remove the contact containing %s and %d other buddies from "
 "your buddy list.  Do you want to continue?"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Remove Contact"
 msgstr "ಸಂಪರ್ಕವನ್ನು ತೆಗೆದುಹಾಕಿ"
@@ -10664,11 +10718,13 @@ msgstr ""
 msgid "%s has %d new message."
 msgid_plural "%s has %d new messages."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "<b>%d new email.</b>"
 msgid_plural "<b>%d new emails.</b>"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -11036,9 +11092,6 @@ msgstr "ಪ್ರಾಕ್ಸಿ ಸಂರಚನಾ ಪ್ರೊಗ್ರಾಮ�
 msgid "Cannot start browser configuration program."
 msgstr "ವೀಕ್ಷಕ ಸಂರಚನಾ ಪ್ರೊಗ್ರಾಮ್ ಅನ್ನು ಆರಂಭಿಸಲು ಸಾಧ್ಯವಾಗಿಲ್ಲ."
 
-msgid "Disabled"
-msgstr "ಅಶಕ್ತಗೊಳಿಸಲಾದ"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "ಸ್ವಯಂಚಾಲಿತವಾಗಿ ಪತ್ತೆಮಾಡಲಾದ IP ವಿಳಾಸವನ್ನು ಬಳಸು(_a): %s"
@@ -11304,6 +11357,37 @@ msgstr "ಕೊನೆಯ ಬಾರಿಗೆ ನಿರ್ಗಮಿಸುವಾಗ 
 msgid "Status to a_pply at startup:"
 msgstr "ಆರಂಭದಲ್ಲಿ ಅನ್ವಯಿಸಬೇಕಿರುವ ಸ್ಥಿತಿ(_p):"
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr ""
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "ಸಾಧನ(_D)"
+
+msgid "Audio"
+msgstr "ಆಡಿಯೊ"
+
+msgid "Input"
+msgstr "ಇನ್‌ಪುಟ್‌"
+
+msgid "Output"
+msgstr "ಔಟ್‌ಪುಟ್"
+
+msgid "Video"
+msgstr "ವೀಡಿಯೋ"
+
 msgid "Interface"
 msgstr "ಸಂಪರ್ಕಸಾಧನ"
 
@@ -11315,6 +11399,9 @@ msgstr "ಸ್ಥಿತಿ / ನಿಶ್ಚಲ"
 
 msgid "Themes"
 msgstr "ಪರಿಸರವಿನ್ಯಾಸಗಳು"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "ಎಲ್ಲ ಬಳಕೆದಾರರಿಗೂ ನನ್ನನ್ನು ಸಂಪರ್ಕಿಸಲು ಅನುಮತಿಸಿ"
@@ -11398,6 +11485,43 @@ msgstr "ಹೊಸ ಹೆಸರು ಆಯ್ದುಕೊಳ್ಳಿ"
 
 msgid "Select Folder..."
 msgstr "ಕದತಕೋಶ ಆಯ್ದುಕೊಳ್ಳಿ ...."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12767,35 +12891,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "ಆಡಿಯೊ"
-
-msgid "Video"
-msgstr "ವೀಡಿಯೋ"
-
-msgid "Output"
-msgstr "ಔಟ್‌ಪುಟ್"
-
 msgid "_Plugin"
 msgstr "ಪ್ಲಗಿನ್‌(_P)"
-
-msgid "_Device"
-msgstr "ಸಾಧನ(_D)"
-
-msgid "Input"
-msgstr "ಇನ್‌ಪುಟ್‌"
 
 msgid "P_lugin"
 msgstr "ಪ್ಲಗಿನ್‌ಗಳು(_l)"
 
 msgid "D_evice"
 msgstr "ಸಾಧನ(_e)"
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
-msgstr ""
 
 msgid "Silence threshold:"
 msgstr ""

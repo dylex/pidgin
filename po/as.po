@@ -10,9 +10,9 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 19:20+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:07-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Assamese (http://www.transifex.com/pidgin/pidgin/language/"
 "as/)\n"
 "Language: as\n"
@@ -1805,6 +1805,10 @@ msgstr "সম্বাদৰ মাপ অত্যাধিক বড় ।"
 msgid "Unable to send message."
 msgstr "সম্বাদ পাঠাতে ব্যৰ্থ ।"
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "সম্বাদ পঠিয়াই দিয়ক"
 
@@ -2145,19 +2149,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO "
-"REPLY&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO "
-"REPLY&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>লগৰ পাথ সন্ধান কৰিবলৈ ব্যৰ্থ!</b></font>"
@@ -2223,6 +2223,27 @@ msgstr "কনফাৰেন্স সংক্ৰান্ত ত্ৰুট�
 #, c-format
 msgid "Error creating session: %s"
 msgstr "অধিবেশন নিৰ্মাণ কৰিবলৈ ব্যৰ্থ: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "নিষ্ক্ৰিয়"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4813,6 +4834,19 @@ msgstr "%s কে নথিপত্ৰ পাঠাতে ব্যৰ্থ, �
 #, c-format
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "নথিপত্ৰ পঠিওৱাৰ উদ্দেশ্যে অনুগ্ৰহ কৰি %s ৰ এটা ৰিসোৰ্স নিৰ্বাচন কৰক"
+
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
 
 msgid "Afraid"
 msgstr ""
@@ -8449,11 +8483,8 @@ msgstr "Pidgin ইন্টাৰনেট মেসেঞ্জাৰ"
 msgid "Internet Messenger"
 msgstr "ইন্টাৰনেট মেসেঞ্জাৰ"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"IM ৰ মাধ্যমে সম্বাদ ।  AIM, Google Talk, Jabber/XMPP, MSN, Yahoo আৰু আৰো অনেক "
-"সমৰ্থিত হয়"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9597,6 +9628,9 @@ msgstr "গুৰুতৰ ত্ৰুটি"
 msgid "artist"
 msgstr "শিল্পী"
 
+msgid "lead developer"
+msgstr "প্ৰধান ডিভেলপাৰ"
+
 msgid "voice and video"
 msgstr "ধ্বনি আৰু ভিডিও"
 
@@ -9632,9 +9666,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "মূল লেখক"
-
-msgid "lead developer"
-msgstr "প্ৰধান ডিভেলপাৰ"
 
 msgid "Senior Contributor/QA"
 msgstr "প্ৰবীণ অংশগ্ৰহণকৰ্তা/পৰীক্ষক"
@@ -11040,9 +11071,6 @@ msgstr "প্ৰক্সি বিন্যাসৰ প্ৰোগ্ৰা�
 msgid "Cannot start browser configuration program."
 msgstr "ব্ৰাউজাৰ বিন্যাসৰ প্ৰোগ্ৰাম আৰম্ভ কৰিবলৈ ব্যৰ্থ ।"
 
-msgid "Disabled"
-msgstr "নিষ্ক্ৰিয়"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "স্বয়ংক্ৰিয়ভাবে চিনাক্ত IP ঠিকনা ব্যৱহাৰ কৰা হ'ব: %s (_a)"
@@ -11308,6 +11336,37 @@ msgstr "সৰ্বশেষ প্ৰস্থানকালে ধাৰ্�
 msgid "Status to a_pply at startup:"
 msgstr "প্ৰাৰম্ভকালে ব্যৱহাৰযোগ্য অৱস্থা: (_p)"
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr ""
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "যন্ত্ৰ(_D)"
+
+msgid "Audio"
+msgstr "অডিঅ'"
+
+msgid "Input"
+msgstr "নিবেশ"
+
+msgid "Output"
+msgstr "আউটপুট"
+
+msgid "Video"
+msgstr "ভিডিঅ'"
+
 msgid "Interface"
 msgstr "সংযোগক্ষেত্ৰ"
 
@@ -11319,6 +11378,9 @@ msgstr "অৱস্থা / কামবিহীন অৱস্থা"
 
 msgid "Themes"
 msgstr "থিম"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "সকলো ব্যৱহাৰকৰ্তা আমাৰ সৈতে যোগাযোগ কৰিবলৈ পাৰিব"
@@ -11405,6 +11467,43 @@ msgstr "নতুন নাম নিৰ্বাচন কৰক"
 
 msgid "Select Folder..."
 msgstr "ফোল্ডাৰ নিৰ্বাচন কৰক..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12774,35 +12873,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "অডিঅ'"
-
-msgid "Video"
-msgstr "ভিডিঅ'"
-
-msgid "Output"
-msgstr "আউটপুট"
-
 msgid "_Plugin"
 msgstr "প্লাগ ইন (_P)"
-
-msgid "_Device"
-msgstr "যন্ত্ৰ(_D)"
-
-msgid "Input"
-msgstr "নিবেশ"
 
 msgid "P_lugin"
 msgstr "প্লাগ ইন (_l)"
 
 msgid "D_evice"
 msgstr "ডিভাইস (_e)"
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
-msgstr ""
 
 msgid "Silence threshold:"
 msgstr ""

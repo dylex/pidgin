@@ -3,14 +3,15 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Translators:
+# A S Alam <alam.yellow@gmail.com>, 2018
 # A S Alam <alam.yellow@gmail.com>, 2012
 msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 11:38+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:12-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Panjabi (Punjabi) (http://www.transifex.com/pidgin/pidgin/"
 "language/pa/)\n"
 "Language: pa\n"
@@ -1254,7 +1255,7 @@ msgid "(default)"
 msgstr "(ਡਿਫਾਲਟ)"
 
 msgid "Select Sound File..."
-msgstr ""
+msgstr "...ਆਵਾਜ਼ ਫਾਇਲ ਚੁਣੋ"
 
 msgid "Sound Preferences"
 msgstr "ਸਾਊਂਡ ਪਸੰਦ"
@@ -1374,11 +1375,11 @@ msgid "Edit Status"
 msgstr "ਹਾਲਤ ਸੋਧ"
 
 msgid "Use a different status for some accounts"
-msgstr ""
+msgstr "ਕੁਝ ਖਾਤਿਆਂ ਲਈ ਵੱਖਰਾ ਹਾਲਤ ਦੇਣ ਲਈ ਵਰਤੋਂ"
 
 #. Save and Use
 msgid "Save and Use"
-msgstr ""
+msgstr "ਸੰਭਾਲੋ ਅਤੇ ਵਰਤੋ"
 
 msgid "Certificates"
 msgstr "ਸਰਟੀਫਿਕੇਟ"
@@ -1787,6 +1788,10 @@ msgstr "ਸੁਨੇਹਾ ਬਹੁਤ ਵੱਡਾ ਹੈ।"
 msgid "Unable to send message."
 msgstr "ਸੁਨੇਹਾ ਭੇਜਣ ਲਈ ਅਸਫਲ ਹੈ।"
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "ਸੁਨੇਹਾ ਭੇਜੋ"
 
@@ -2112,19 +2117,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;ਸਵੈ-ਜਵਾਬ&gt;:</"
-"b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;ਸਵੈ-ਜਵਾਬ&gt;:</"
-"b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>ਲਾਗ ਮਾਰਗ ਖੋਜਣ ਲਈ ਅਸਫਲ!</b></font>"
@@ -2186,6 +2187,27 @@ msgstr "ਕਾਨਫਰੰਸ ਗਲਤੀ"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "ਸ਼ੈਸ਼ਨ ਬਣਾਉਣ ਦੌਰਾਨ ਗਲਤੀ: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "ਆਯੋਗ ਹੈ"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -2782,13 +2804,13 @@ msgid "Maximum Version"
 msgstr ""
 
 msgid "SSL 2"
-msgstr ""
+msgstr "SSL 2"
 
 msgid "SSL 3"
-msgstr ""
+msgstr "SSL 3"
 
 msgid "TLS 1.0"
-msgstr ""
+msgstr "TLS 1.0"
 
 msgid "TLS 1.1"
 msgstr ""
@@ -3350,10 +3372,10 @@ msgid "Nick"
 msgstr "ਨਾਂ"
 
 msgid "Login name"
-msgstr ""
+msgstr "ਲਾਗਇਨ ਨਾਂ"
 
 msgid "Host name"
-msgstr ""
+msgstr "ਹੋਸਟ ਨਾਂ"
 
 msgid "Currently on"
 msgstr "ਇਸ ਸਮੇਂ"
@@ -3515,7 +3537,7 @@ msgid "SASL authentication failed: Initializing SASL failed."
 msgstr ""
 
 msgid "Incorrect Password"
-msgstr ""
+msgstr "ਗ਼ਲਤ ਪਾਸਵਰਡ"
 
 msgid "SASL authentication failed: No worthy mechanisms found"
 msgstr ""
@@ -4748,6 +4770,19 @@ msgstr "%s ਨੂੰ ਫਾਇਲ ਭੇਜਣ ਲਈ ਅਸਮਰੱਥ ਹੈ,
 #, c-format
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "ਚੁਣੋ ਕਿ ਕਿਹੜੇ %s ਦੇ ਸਰੋਤ ਤੁਸੀਂ ਇੱਕ ਫਾਇਲ ਤੋਂ ਤੁਸੀਂ ਭੇਜਣੇ ਚਾਹੁੰਦੇ ਹੋ"
+
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
 
 msgid "Afraid"
 msgstr "ਡਰਿਆ"
@@ -8296,9 +8331,8 @@ msgstr "ਪਿਡਗਿਨ ਇੰਟਰਨੈਟ ਮੈਸੰਜ਼ਰ"
 msgid "Internet Messenger"
 msgstr "ਇੰਟਰਨੈਟ ਮੈਸੰਜ਼ਰ"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
-msgstr "IM ਰਾਹੀਂ ਗੱਲਬਾਤ। AIM, ਗੂਗਲ ਟਾਕ, ਜੱਬਰ/XMPP, MSN, ਯਾਹੂ ਅਤੇ ਹੋਰ ਲਈ ਸਹਾਇਕ।"
+msgstr ""
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -9434,6 +9468,9 @@ msgstr "ਘਾਤਕ ਗਲਤੀ"
 msgid "artist"
 msgstr "ਕਲਾਕਾਰ"
 
+msgid "lead developer"
+msgstr "ਮੁੱਖ ਖੋਜੀ"
+
 msgid "voice and video"
 msgstr "ਆਵਾਜ਼ ਅਤੇ ਵੀਡਿਓ"
 
@@ -9469,9 +9506,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "ਅਸਲੀ ਲੇਖਕ"
-
-msgid "lead developer"
-msgstr "ਮੁੱਖ ਖੋਜੀ"
 
 msgid "Senior Contributor/QA"
 msgstr "ਸੀਨੀਅਰ ਯੋਗਦਾਨੀ/QA"
@@ -10861,9 +10895,6 @@ msgstr "ਪਰਾਕਸੀ ਸੰਰਚਨਾ ਪਰੋਗਰਾਮ ਸਟਾਰ
 msgid "Cannot start browser configuration program."
 msgstr "ਬਰਾਊਜ਼ਰ ਸੰਰਚਨਾ ਪਰੋਗਾਰਮ ਸਟਾਰਟ ਨਹੀਂ ਕੀਤਾ ਜਾ ਸਕਦਾ ਹੈ।"
 
-msgid "Disabled"
-msgstr "ਆਯੋਗ ਹੈ"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "ਆਟੋ-ਖੋਜਿਆ IP ਐਡਰੈੱਸ ਵਰਤੋਂ(_A): %s"
@@ -11129,6 +11160,37 @@ msgstr "ਸ਼ੁਰੂ ਸਮੇਂ ਆਖਰੀ ਸਮੇਂ ਬੰਦ ਕਰ�
 msgid "Status to a_pply at startup:"
 msgstr "ਸਟਾਰਟ ਸਮੇਂ ਲਾਗੂ ਕਰਨ ਲਈ ਸਟੇਟਸ(_p):"
 
+msgid "DROP"
+msgstr "ਛੱਡੋ"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "ਵਾਲੀਅਮ"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "ਜੰਤਰ(_D)"
+
+msgid "Audio"
+msgstr "ਆਡੀਓ"
+
+msgid "Input"
+msgstr "ਇੰਪੁੱਟ"
+
+msgid "Output"
+msgstr "ਆਉਟਪੁੱਟ"
+
+msgid "Video"
+msgstr "ਵਿਡੀਓ"
+
 msgid "Interface"
 msgstr "ਇੰਟਰਫੇਸ"
 
@@ -11140,6 +11202,9 @@ msgstr "ਹਾਲਤ / ਵੇਹਲਾ"
 
 msgid "Themes"
 msgstr "ਥੀਮ"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "ਸਭ ਵਿਅਕਤੀਆਂ ਨੂੰ ਮੈਨੂੰ ਸੰਪਰਕ ਕਰਨ ਦਿਓ"
@@ -11224,6 +11289,43 @@ msgstr "ਨਵਾਂ ਨਾਂ ਚੁਣੋ"
 msgid "Select Folder..."
 msgstr "ਫੋਲਡਰ ਚੁਣੋ..."
 
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
+
 #. list button
 msgid "_Get List"
 msgstr "ਲਿਸਟ ਲਵੋ(_G)"
@@ -11257,7 +11359,7 @@ msgstr "ਕੁਝ ਅਕਾਊਂਟਾਂ ਲਈ ਵੱਖਰੀ ਹਾਲਤ �
 
 #. Save and Use button
 msgid "Sa_ve and Use"
-msgstr ""
+msgstr "ਸੰਭਾਲੋ ਅਤੇ ਵਰਤੋਂ(_v)"
 
 #, c-format
 msgid "Status for %s"
@@ -11979,7 +12081,7 @@ msgid "Notify For"
 msgstr "ਸੂਚਨਾ ਦਿਓ"
 
 msgid "\tS_ystem messages"
-msgstr ""
+msgstr "\tਸਿਸਟਮ ਸੁਨੇਹੇ(_y)"
 
 msgid "\t_Only when someone says your username"
 msgstr "\tਜਦੋਂ ਕੋਈ ਤੁਹਾਡਾ ਯੂਜ਼ਰ ਨਾਂ ਲਵੇ(_O)"
@@ -12518,7 +12620,7 @@ msgstr ""
 
 #. Launcher integration
 msgid "Launcher Icon"
-msgstr ""
+msgstr "ਲਾਂਚਰ ਆਈਕਾਨ"
 
 msgid "_Disable launcher integration"
 msgstr ""
@@ -12558,35 +12660,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "ਆਡੀਓ"
-
-msgid "Video"
-msgstr "ਵਿਡੀਓ"
-
-msgid "Output"
-msgstr "ਆਉਟਪੁੱਟ"
-
 msgid "_Plugin"
 msgstr "ਪਲੱਗਇਨ(_P)"
-
-msgid "_Device"
-msgstr "ਜੰਤਰ(_D)"
-
-msgid "Input"
-msgstr "ਇੰਪੁੱਟ"
 
 msgid "P_lugin"
 msgstr "ਪਲੱਗਇਨ(_l)"
 
 msgid "D_evice"
 msgstr "ਜੰਤਰ(_e)"
-
-msgid "DROP"
-msgstr "ਛੱਡੋ"
-
-msgid "Volume:"
-msgstr "ਵਾਲੀਅਮ"
 
 msgid "Silence threshold:"
 msgstr ""

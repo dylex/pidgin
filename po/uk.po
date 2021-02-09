@@ -7,17 +7,19 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 11:38+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:14-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Ukrainian (http://www.transifex.com/pidgin/pidgin/language/"
 "uk/)\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
-"%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n % 10 == 1 && n % 100 != "
+"11 ? 0 : n % 1 == 0 && n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 12 || n % "
+"100 > 14) ? 1 : n % 1 == 0 && (n % 10 ==0 || (n % 10 >=5 && n % 10 <=9) || "
+"(n % 100 >=11 && n % 100 <=14 )) ? 2: 3);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -659,6 +661,7 @@ msgid_plural "List of %d users:\n"
 msgstr[0] "Перелік %d користувача:\n"
 msgstr[1] "Перелік %d користувачів:\n"
 msgstr[2] "Перелік %d користувачів:\n"
+msgstr[3] "Перелік %d користувачів:\n"
 
 msgid "Supported debug options are: plugins version"
 msgstr "Підтримуються параметри зневадження: plugins version"
@@ -769,6 +772,7 @@ msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] "Передавання файлів - %d%% of %d файлу"
 msgstr[1] "Передавання файлів - %d%% of %d файлів"
 msgstr[2] "Передавання файлів - %d%% of %d файлів"
+msgstr[3] "Передавання файлів - %d%% of %d файлів"
 
 #. Create the window.
 msgid "File Transfers"
@@ -940,6 +944,7 @@ msgid_plural "%s (%s) has %d new messages."
 msgstr[0] "%s (%s) має %d нове повідомлення."
 msgstr[1] "%s (%s) має %d нові повідомлення."
 msgstr[2] "%s (%s) має %d нових повідомлень."
+msgstr[3] "%s (%s) має %d нових повідомлень."
 
 msgid "New Mail"
 msgstr "Нова пошта"
@@ -1832,6 +1837,10 @@ msgstr "Повідомлення надто довге."
 msgid "Unable to send message."
 msgstr "Не вдається відправити повідомлення."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "Надсилання повідомлення"
 
@@ -2179,19 +2188,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;"
-"АВТО_ВІДПОВІДЬ&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;"
-"АВТО_ВІДПОВІДЬ&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>Не вдається знайти шлях до журналу!</b></font>"
@@ -2257,6 +2262,27 @@ msgstr "Помилка конференції"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Помилка створення сеансу: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Вимкнений"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4859,6 +4885,19 @@ msgstr "Не вдалося надіслати файл до %s, не підпи
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Виберіть ресурс %s, до якого ви хочете надіслати файл"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "Боюся"
 
@@ -5933,6 +5972,8 @@ msgstr[1] ""
 "Ви не отримали %hu повідомлення від %s, тому що вони були некоректними."
 msgstr[2] ""
 "Ви не отримали %hu повідомлень від %s, тому що вони були некоректними."
+msgstr[3] ""
+"Ви не отримали %hu повідомлень від %s, тому що вони були некоректними."
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
@@ -5942,6 +5983,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Ви не отримали %hu повідомлення від %s, тому що вони були надто великими."
 msgstr[2] ""
+"Ви не отримали %hu повідомлень від %s, тому що вони були надто великими."
+msgstr[3] ""
 "Ви не отримали %hu повідомлень від %s, тому що вони були надто великими."
 
 #, c-format
@@ -5954,6 +5997,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Ви не отримали %hu повідомлення від %s, тому що було перевищено межу оцінки."
 msgstr[2] ""
+"Ви не отримали %hu повідомлень від %s, тому що було перевищено межу оцінки."
+msgstr[3] ""
 "Ви не отримали %hu повідомлень від %s, тому що було перевищено межу оцінки."
 
 #, c-format
@@ -5970,6 +6015,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Ви пропустили %hu повідомлень від %s, тому що його рівень попередження "
 "зависокий."
+msgstr[3] ""
+"Ви пропустили %hu повідомлень від %s, тому що його рівень попередження "
+"зависокий."
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
@@ -5984,6 +6032,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Ви пропустили %hu повідомлень від %s, тому що ваш рівень попередження "
 "зависокий."
+msgstr[3] ""
+"Ви пропустили %hu повідомлень від %s, тому що ваш рівень попередження "
+"зависокий."
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
@@ -5991,6 +6042,7 @@ msgid_plural "You missed %hu messages from %s for an unknown reason."
 msgstr[0] "Ви не отримали %hu повідомлення від %s, з невідомої причини."
 msgstr[1] "Ви не отримали %hu повідомлення від %s, з невідомої причини."
 msgstr[2] "Ви не отримали %hu повідомлень від %s, з невідомої причини."
+msgstr[3] "Ви не отримали %hu повідомлень від %s, з невідомої причини."
 
 msgid "Your AIM connection may be lost."
 msgstr "Ваше з'єднання AIM можливо буде розірване."
@@ -6014,6 +6066,7 @@ msgid_plural "The following usernames are associated with %s"
 msgstr[0] "Це ім'я користувача пов'язане з %s"
 msgstr[1] "Це імена користувачів пов'язані з %s"
 msgstr[2] "Це імена користувачів пов'язані з %s"
+msgstr[3] "Це імена користувачів пов'язані з %s"
 
 #, c-format
 msgid "No results found for email address %s"
@@ -6114,6 +6167,7 @@ msgid_plural ""
 msgstr[0] "Досягнута максимальна довжина профілю у %d байт. Обрізано."
 msgstr[1] "Досягнута максимальна довжина профілю у %d байти. Обрізано."
 msgstr[2] "Досягнута максимальна довжина профілю у %d байт. Обрізано."
+msgstr[3] "Досягнута максимальна довжина профілю у %d байт. Обрізано."
 
 msgid "Profile too long."
 msgstr "Профіль занадто довгий."
@@ -6130,6 +6184,8 @@ msgstr[0] ""
 msgstr[1] ""
 "Максимальна довжина повідомлення складає %d байти. Pidgin обрізав його."
 msgstr[2] ""
+"Максимальна довжина повідомлення складає %d байтів. Pidgin обрізав його."
+msgstr[3] ""
 "Максимальна довжина повідомлення складає %d байтів. Pidgin обрізав його."
 
 msgid "Away message too long."
@@ -8401,6 +8457,7 @@ msgid_plural "%d seconds"
 msgstr[0] "%d секунда"
 msgstr[1] "%d секунди"
 msgstr[2] "%d секунд"
+msgstr[3] "%d секунд"
 
 #, c-format
 msgid "%d day"
@@ -8408,6 +8465,7 @@ msgid_plural "%d days"
 msgstr[0] "%d доба"
 msgstr[1] "%d доби"
 msgstr[2] "%d діб"
+msgstr[3] "%d діб"
 
 #, c-format
 msgid "%s, %d hour"
@@ -8415,6 +8473,7 @@ msgid_plural "%s, %d hours"
 msgstr[0] "%s, %d година"
 msgstr[1] "%s, %d години"
 msgstr[2] "%s, %d годин"
+msgstr[3] "%s, %d годин"
 
 #, c-format
 msgid "%d hour"
@@ -8422,6 +8481,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d година"
 msgstr[1] "%d години"
 msgstr[2] "%d годин"
+msgstr[3] "%d годин"
 
 #, c-format
 msgid "%s, %d minute"
@@ -8429,6 +8489,7 @@ msgid_plural "%s, %d minutes"
 msgstr[0] "%s, %d хвилина"
 msgstr[1] "%s, %d хвилини"
 msgstr[2] "%s, %d хвилин"
+msgstr[3] "%s, %d хвилин"
 
 #, c-format
 msgid "%d minute"
@@ -8436,6 +8497,7 @@ msgid_plural "%d minutes"
 msgstr[0] "%d хвилина"
 msgstr[1] "%d хвилини"
 msgstr[2] "%d хвилин"
+msgstr[3] "%d хвилин"
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8531,11 +8593,8 @@ msgstr "Клієнт обміну миттєвими повідомленням�
 msgid "Internet Messenger"
 msgstr "Спілкування миттєвими повідомленнями"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Балачка через миттєві повідомлення. Підтримує AIM, Google Talk, Jabber/XMPP, "
-"MSN, Yahoo та інші"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -8809,6 +8868,7 @@ msgid_plural ""
 msgstr[0] "Наразі ви маєте %d контакт з іменем %s. Хочете об'єднати його?"
 msgstr[1] "Наразі ви маєте %d контакти з іменем %s. Хочете об'єднати їх?"
 msgstr[2] "Наразі ви маєте %d контактів з іменем %s. Хочете об'єднати їх?"
+msgstr[3] "Наразі ви маєте %d контактів з іменем %s. Хочете об'єднати їх?"
 
 msgid ""
 "Merging these contacts will cause them to share a single entry on the buddy "
@@ -9146,6 +9206,7 @@ msgid_plural "%d unread messages from %s\n"
 msgstr[0] "%d непрочитане повідомлення від %s\n"
 msgstr[1] "%d непрочитані повідомлення від %s\n"
 msgstr[2] "%d непрочитаних повідомлення від %s\n"
+msgstr[3] "%d непрочитаних повідомлення від %s\n"
 
 msgid "Manually"
 msgstr "Вручну"
@@ -9185,6 +9246,8 @@ msgstr[0] ""
 msgstr[1] ""
 "%d облікових записи були вимкнені, тому що ви увійшли з іншого місця:"
 msgstr[2] ""
+"%d облікових записів були вимкнені, тому що ви увійшли з іншого місця:"
+msgstr[3] ""
 "%d облікових записів були вимкнені, тому що ви увійшли з іншого місця:"
 
 msgid "<b>Username:</b>"
@@ -9579,6 +9642,7 @@ msgid_plural "%d people in room"
 msgstr[0] "%d користувач у кімнаті"
 msgstr[1] "%d користувача у кімнаті"
 msgstr[2] "%d користувачів у кімнаті"
+msgstr[3] "%d користувачів у кімнаті"
 
 msgid "Stopped Typing"
 msgstr "Закінчив писати"
@@ -9690,6 +9754,9 @@ msgstr "Фатальна помилка"
 msgid "artist"
 msgstr "виконавець"
 
+msgid "lead developer"
+msgstr "головний розробник"
+
 msgid "voice and video"
 msgstr "голос та відео"
 
@@ -9725,9 +9792,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "початковий автор"
-
-msgid "lead developer"
-msgstr "головний розробник"
 
 msgid "Senior Contributor/QA"
 msgstr "Головний сприяльник та спеціаліст з якості"
@@ -10166,6 +10230,9 @@ msgstr[1] ""
 "Ви видаляєте контакт, що містить %s та %d інших контактів з вашого переліку. "
 "Хочете продовжити?"
 msgstr[2] ""
+"Ви видаляєте контакт, що містить %s та %d інших контактів з вашого переліку. "
+"Хочете продовжити?"
+msgstr[3] ""
 "Ви видаляєте контакт, що містить %s та %d інших контактів з вашого переліку. "
 "Хочете продовжити?"
 
@@ -10769,6 +10836,7 @@ msgid_plural "%s has %d new messages."
 msgstr[0] "%s має %d нове повідомлення."
 msgstr[1] "%s має %d нових повідомлення."
 msgstr[2] "%s має %d нових повідомлень."
+msgstr[3] "%s має %d нових повідомлень."
 
 #, c-format
 msgid "<b>%d new email.</b>"
@@ -10776,6 +10844,7 @@ msgid_plural "<b>%d new emails.</b>"
 msgstr[0] "<b>%d новий лист.</b>"
 msgstr[1] "<b>%d нові листи.</b>"
 msgstr[2] "<b>%d нових листів.</b>"
+msgstr[3] "<b>%d нових листів.</b>"
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -11143,9 +11212,6 @@ msgstr "Не вдається запустити програму налашту
 msgid "Cannot start browser configuration program."
 msgstr "Не вдалося запустити програму налаштування переглядача."
 
-msgid "Disabled"
-msgstr "Вимкнений"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "Використовувати визначену _автоматично адресу IP: %s"
@@ -11411,6 +11477,37 @@ msgstr "Використовувати останній стан після за
 msgid "Status to a_pply at startup:"
 msgstr "Застосувати _стан після запуску:"
 
+msgid "DROP"
+msgstr "ПРОПУСК"
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr "Гучність:"
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Пристрій"
+
+msgid "Audio"
+msgstr "Аудіо"
+
+msgid "Input"
+msgstr "Введення"
+
+msgid "Output"
+msgstr "Виведення"
+
+msgid "Video"
+msgstr "Відео"
+
 msgid "Interface"
 msgstr "Зовнішній вигляд"
 
@@ -11422,6 +11519,9 @@ msgstr "Стан та бездіяльність"
 
 msgid "Themes"
 msgstr "Теми"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "Дозволити доступ усім користувачам"
@@ -11505,6 +11605,43 @@ msgstr "Виберіть нове ім'я"
 
 msgid "Select Folder..."
 msgstr "Вибрати теку..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12867,35 +13004,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "Аудіо"
-
-msgid "Video"
-msgstr "Відео"
-
-msgid "Output"
-msgstr "Виведення"
-
 msgid "_Plugin"
 msgstr "_Додаток"
-
-msgid "_Device"
-msgstr "_Пристрій"
-
-msgid "Input"
-msgstr "Введення"
 
 msgid "P_lugin"
 msgstr "_Додаток"
 
 msgid "D_evice"
 msgstr "_Пристрій"
-
-msgid "DROP"
-msgstr "ПРОПУСК"
-
-msgid "Volume:"
-msgstr "Гучність:"
 
 msgid "Silence threshold:"
 msgstr "Поріг тиші:"

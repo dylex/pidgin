@@ -7,15 +7,15 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 23:42+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:10-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Kazakh (http://www.transifex.com/pidgin/pidgin/language/kk/)\n"
 "Language: kk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -606,6 +606,7 @@ msgstr ""
 msgid "List of %d user:\n"
 msgid_plural "List of %d users:\n"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Supported debug options are: plugins version"
 msgstr ""
@@ -699,6 +700,7 @@ msgstr "Аялдату"
 msgid "File Transfers - %d%% of %d file"
 msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] ""
+msgstr[1] ""
 
 #. Create the window.
 msgid "File Transfers"
@@ -862,6 +864,7 @@ msgstr "Тақырыбы"
 msgid "%s (%s) has %d new message."
 msgid_plural "%s (%s) has %d new messages."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "New Mail"
 msgstr ""
@@ -1721,6 +1724,10 @@ msgstr ""
 msgid "Unable to send message."
 msgstr ""
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr ""
 
@@ -2033,14 +2040,14 @@ msgstr ""
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
@@ -2102,6 +2109,27 @@ msgstr ""
 
 #, c-format
 msgid "Error creating session: %s"
+msgstr ""
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
 msgstr ""
 
 #, c-format
@@ -4591,6 +4619,19 @@ msgstr ""
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr ""
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr ""
 
@@ -5589,11 +5630,13 @@ msgstr "Тай_дыру"
 msgid "You missed %hu message from %s because it was invalid."
 msgid_plural "You missed %hu messages from %s because they were invalid."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
 msgid_plural "You missed %hu messages from %s because they were too large."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid ""
@@ -5601,6 +5644,7 @@ msgid ""
 msgid_plural ""
 "You missed %hu messages from %s because the rate limit has been exceeded."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid ""
@@ -5608,17 +5652,20 @@ msgid ""
 msgid_plural ""
 "You missed %hu messages from %s because his/her warning level is too high."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
 msgid_plural ""
 "You missed %hu messages from %s because your warning level is too high."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
 msgid_plural "You missed %hu messages from %s for an unknown reason."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Your AIM connection may be lost."
 msgstr ""
@@ -5640,6 +5687,7 @@ msgstr ""
 msgid "The following username is associated with %s"
 msgid_plural "The following usernames are associated with %s"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "No results found for email address %s"
@@ -5721,6 +5769,7 @@ msgid_plural ""
 "The maximum profile length of %d bytes has been exceeded.  It has been "
 "truncated for you."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Profile too long."
 msgstr ""
@@ -5733,6 +5782,7 @@ msgid_plural ""
 "The maximum away message length of %d bytes has been exceeded.  It has been "
 "truncated for you."
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Away message too long."
 msgstr ""
@@ -7850,31 +7900,37 @@ msgstr "Белгісіз."
 msgid "%d second"
 msgid_plural "%d seconds"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "%d day"
 msgid_plural "%d days"
 msgstr[0] "%d күн"
+msgstr[1] "%d күн"
 
 #, c-format
 msgid "%s, %d hour"
 msgid_plural "%s, %d hours"
 msgstr[0] "%s, %d сағат"
+msgstr[1] "%s, %d сағат"
 
 #, c-format
 msgid "%d hour"
 msgid_plural "%d hours"
 msgstr[0] "%d сағат"
+msgstr[1] "%d сағат"
 
 #, c-format
 msgid "%s, %d minute"
 msgid_plural "%s, %d minutes"
 msgstr[0] "%s, %d минут"
+msgstr[1] "%s, %d минут"
 
 #, c-format
 msgid "%d minute"
 msgid_plural "%d minutes"
 msgstr[0] "%d минут"
+msgstr[1] "%d минут"
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8224,6 +8280,7 @@ msgid "You have %d contact named %s. Would you like to merge them?"
 msgid_plural ""
 "You currently have %d contacts named %s. Would you like to merge them?"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid ""
 "Merging these contacts will cause them to share a single entry on the buddy "
@@ -8549,6 +8606,7 @@ msgstr ""
 msgid "%d unread message from %s\n"
 msgid_plural "%d unread messages from %s\n"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Manually"
 msgstr ""
@@ -8584,6 +8642,7 @@ msgid "%d account was disabled because you signed on from another location:"
 msgid_plural ""
 "%d accounts were disabled because you signed on from another location:"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "<b>Username:</b>"
 msgstr ""
@@ -8963,6 +9022,7 @@ msgstr ""
 msgid "%d person in room"
 msgid_plural "%d people in room"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Stopped Typing"
 msgstr ""
@@ -9074,6 +9134,9 @@ msgstr ""
 msgid "artist"
 msgstr ""
 
+msgid "lead developer"
+msgstr ""
+
 msgid "voice and video"
 msgstr ""
 
@@ -9108,9 +9171,6 @@ msgid "XMPP"
 msgstr ""
 
 msgid "original author"
-msgstr ""
-
-msgid "lead developer"
 msgstr ""
 
 msgid "Senior Contributor/QA"
@@ -9532,6 +9592,7 @@ msgid_plural ""
 "You are about to remove the contact containing %s and %d other buddies from "
 "your buddy list.  Do you want to continue?"
 msgstr[0] ""
+msgstr[1] ""
 
 msgid "Remove Contact"
 msgstr ""
@@ -10098,11 +10159,13 @@ msgstr ""
 msgid "%s has %d new message."
 msgid_plural "%s has %d new messages."
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "<b>%d new email.</b>"
 msgid_plural "<b>%d new emails.</b>"
 msgstr[0] ""
+msgstr[1] ""
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -10460,9 +10523,6 @@ msgstr ""
 msgid "Cannot start browser configuration program."
 msgstr ""
 
-msgid "Disabled"
-msgstr ""
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr ""
@@ -10724,6 +10784,37 @@ msgstr ""
 msgid "Status to a_pply at startup:"
 msgstr ""
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr ""
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr ""
+
+msgid "Audio"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Output"
+msgstr ""
+
+msgid "Video"
+msgstr ""
+
 msgid "Interface"
 msgstr ""
 
@@ -10734,6 +10825,9 @@ msgid "Status / Idle"
 msgstr ""
 
 msgid "Themes"
+msgstr ""
+
+msgid "Voice/Video"
 msgstr ""
 
 msgid "Allow all users to contact me"
@@ -10817,6 +10911,43 @@ msgid "Choose New Name"
 msgstr ""
 
 msgid "Select Folder..."
+msgstr ""
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
 msgstr ""
 
 #. list button
@@ -12123,34 +12254,13 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr ""
-
-msgid "Video"
-msgstr ""
-
-msgid "Output"
-msgstr ""
-
 msgid "_Plugin"
-msgstr ""
-
-msgid "_Device"
-msgstr ""
-
-msgid "Input"
 msgstr ""
 
 msgid "P_lugin"
 msgstr ""
 
 msgid "D_evice"
-msgstr ""
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
 msgstr ""
 
 msgid "Silence threshold:"

@@ -4,7 +4,7 @@
 #
 # Translators:
 # Andrej Herceg <herceg.andrej@zoznam.sk>, 2008
-# helix84 <helix84@centrum.sk>, 2007
+# Ivan Masár <helix84@centrum.sk>, 2007
 # Jozef Káčer <quickparser@gmail.com>, 2007
 # loptosko <loptosko@gmail.com>, 2007-2011
 # pavolzetor9c9a9991f1dc44b8 <pavolzetor@gmail.com>, 2008
@@ -12,15 +12,16 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Pidgin\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-03-07 20:59-0600\n"
-"PO-Revision-Date: 2017-09-19 19:26+0000\n"
-"Last-Translator: Richard Laager <rlaager@wiktel.com>\n"
+"POT-Creation-Date: 2020-06-09 22:13-0500\n"
+"PO-Revision-Date: 2020-06-06 08:16+0000\n"
+"Last-Translator: Gary Kramlich <grim@reaperworld.com>\n"
 "Language-Team: Slovak (http://www.transifex.com/pidgin/pidgin/language/sk/)\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n "
+">= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #. Translators may want to transliterate the name.
 #. It is not to be translated.
@@ -658,6 +659,7 @@ msgid_plural "List of %d users:\n"
 msgstr[0] "Zoznam %d používateľa:\n"
 msgstr[1] "Zoznam %d používateľov:\n"
 msgstr[2] "Zoznam %d používateľov:\n"
+msgstr[3] "Zoznam %d používateľov:\n"
 
 msgid "Supported debug options are: plugins version"
 msgstr "Podporované ladiace voľby sú: plugins version"
@@ -764,6 +766,7 @@ msgid_plural "File Transfers - %d%% of %d files"
 msgstr[0] "Prenosy súborov - %d%% z %d súboru"
 msgstr[1] "Prenosy súborov - %d%% z %d súborov"
 msgstr[2] "Prenosy súborov - %d%% z %d súborov"
+msgstr[3] "Prenosy súborov - %d%% z %d súborov"
 
 #. Create the window.
 msgid "File Transfers"
@@ -935,6 +938,7 @@ msgid_plural "%s (%s) has %d new messages."
 msgstr[0] "%s (%s) má %d nových správ."
 msgstr[1] "%s (%s) má %d novú správu."
 msgstr[2] "%s (%s) má %d nové správy."
+msgstr[3] "%s (%s) má %d nové správy."
 
 msgid "New Mail"
 msgstr "Nová pošta"
@@ -1824,6 +1828,10 @@ msgstr "Správa je príliš dlhá."
 msgid "Unable to send message."
 msgstr "Nepodarilo sa odoslať správu."
 
+#. Meaningful name in case a UI doesn't actually honour the INVISIBLE flag
+msgid "(internal) Temporary IM peers"
+msgstr ""
+
 msgid "Send Message"
 msgstr "Odoslať správu"
 
@@ -2159,19 +2167,15 @@ msgstr "XML"
 
 #, c-format
 msgid ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #16569E\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#16569E\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTOMATICKÁ "
-"ODPOVEĎ&gt;:</b></font> %s<br/>\n"
 
 #, c-format
 msgid ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTO-"
-"REPLY&gt;:</b></font> %s<br/>\n"
+"<span style=\"color: #A82F2F\"><span style=\"font-size: smaller\">(%s)</"
+"span> <b>%s &lt;AUTO-REPLY&gt;:</b></span> %s<br>\n"
 msgstr ""
-"<font color=\"#A82F2F\"><font size=\"2\">(%s)</font> <b>%s &lt;AUTOMATICKÁ "
-"ODPOVEĎ&gt;:</b></font> %s<br/>\n"
 
 msgid "<font color=\"red\"><b>Unable to find log path!</b></font>"
 msgstr "<font color=\"red\"><b>Nepodarilo sa nájsť cestu k záznamu!</b></font>"
@@ -2236,6 +2240,27 @@ msgstr "Chyba konferencie"
 #, c-format
 msgid "Error creating session: %s"
 msgstr "Chyba pri vytváraní sedenia: %s"
+
+msgid "Could not create media pipeline"
+msgstr ""
+
+#. Translators: This is a noun that refers to one
+#. * possible audio input device. The device can help the
+#. * user to check if her speakers or headphones have been
+#. * set up correctly for voice calling.
+msgid "Test Sound"
+msgstr ""
+
+msgid "Disabled"
+msgstr "Vypnuté"
+
+#. Translators: This is a noun that refers to one
+#. * possible video input device. The device produces
+#. * a test "monoscope" image that can help the user check
+#. * the video output has been set up correctly without
+#. * needing a webcam connected to the computer.
+msgid "Test Pattern"
+msgstr ""
 
 #, c-format
 msgid "You are using %s, but this plugin requires %s."
@@ -4837,6 +4862,19 @@ msgstr ""
 msgid "Please select the resource of %s to which you would like to send a file"
 msgstr "Vyberte, prosím, zdroj používateľa %s, na ktorý chcete odoslať súbor"
 
+#, c-format
+msgid "The queue for %s has reached its maximum length of %u."
+msgstr ""
+
+msgid "XMPP stream management"
+msgstr ""
+
+msgid "Stanza queue is full"
+msgstr ""
+
+msgid "No further messages will be queued"
+msgstr ""
+
 msgid "Afraid"
 msgstr "Ustráchaný"
 
@@ -5899,6 +5937,7 @@ msgid_plural "You missed %hu messages from %s because they were invalid."
 msgstr[0] "Prišli ste o %hu správ od používateľa %s, pretože boli chybné."
 msgstr[1] "Prišli ste o %hu správu od používateľa %s, pretože bola chybná."
 msgstr[2] "Prišli ste o %hu správy od používateľa %s, pretože boli chybné."
+msgstr[3] "Prišli ste o %hu správy od používateľa %s, pretože boli chybné."
 
 #, c-format
 msgid "You missed %hu message from %s because it was too large."
@@ -5906,6 +5945,7 @@ msgid_plural "You missed %hu messages from %s because they were too large."
 msgstr[0] "%hu správ od %s nebolo prijatých, pretože boli príliš veľké."
 msgstr[1] "%hu správa od %s nebola prijatá, pretože bola príliš veľká."
 msgstr[2] "%hu správy od %s neboli prijaté, pretože boli príliš veľké."
+msgstr[3] "%hu správy od %s neboli prijaté, pretože boli príliš veľké."
 
 #, c-format
 msgid ""
@@ -5920,6 +5960,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Prišli ste o %hu správy od používateľa %s, pretože hodnotenie bolo "
 "prekročené."
+msgstr[3] ""
+"Prišli ste o %hu správy od používateľa %s, pretože hodnotenie bolo "
+"prekročené."
 
 #, c-format
 msgid ""
@@ -5929,6 +5972,7 @@ msgid_plural ""
 msgstr[0] "Prišli ste o %hu správ od používateľa %s, pretože je varovaný."
 msgstr[1] "Prišli ste o %hu správu od používateľa %s, pretože je varovaný."
 msgstr[2] "Prišli ste o %hu správy od používateľa %s, pretože je varovaný."
+msgstr[3] "Prišli ste o %hu správy od používateľa %s, pretože je varovaný."
 
 #, c-format
 msgid "You missed %hu message from %s because your warning level is too high."
@@ -5937,6 +5981,7 @@ msgid_plural ""
 msgstr[0] "Prišli ste o %hu správ od používateľa %s, pretože ste varovaný."
 msgstr[1] "Prišli ste o %hu správu od používateľa %s, pretože ste varovaný."
 msgstr[2] "Prišli ste o %hu správy od používateľa %s, pretože ste varovaný."
+msgstr[3] "Prišli ste o %hu správy od používateľa %s, pretože ste varovaný."
 
 #, c-format
 msgid "You missed %hu message from %s for an unknown reason."
@@ -5944,6 +5989,7 @@ msgid_plural "You missed %hu messages from %s for an unknown reason."
 msgstr[0] "Z neznámeho dôvodu ste prišli o %hu správ od používateľa %s."
 msgstr[1] "Z neznámeho dôvodu ste prišli o %hu správu od používateľa %s."
 msgstr[2] "Z neznámeho dôvodu ste prišli o %hu správy od používateľa %s."
+msgstr[3] "Z neznámeho dôvodu ste prišli o %hu správy od používateľa %s."
 
 msgid "Your AIM connection may be lost."
 msgstr "Vaše AIM spojenie je zrejme prerušené."
@@ -5969,6 +6015,7 @@ msgid_plural "The following usernames are associated with %s"
 msgstr[0] "S nasledujúcim používateľským menom je asociovaných %s"
 msgstr[1] "S nasledujúcim používateľským menom je asociovaný %s"
 msgstr[2] "S nasledujúcim používateľským menom sú asociovaný %s"
+msgstr[3] "S nasledujúcim používateľským menom sú asociovaný %s"
 
 #, c-format
 msgid "No results found for email address %s"
@@ -6074,6 +6121,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Bola prekročená maximálna dĺžka profilu, %d bajty.  Profil bol automaticky "
 "skrátený."
+msgstr[3] ""
+"Bola prekročená maximálna dĺžka profilu, %d bajty.  Profil bol automaticky "
+"skrátený."
 
 msgid "Profile too long."
 msgstr "Profil je príliš dlhý."
@@ -6092,6 +6142,9 @@ msgstr[1] ""
 "Bola prekročená maximálna dĺžka správy o neprítomnosti, %d bajt. Správa bola "
 "automaticky skrátená."
 msgstr[2] ""
+"Bola prekročená maximálna dĺžka správy o neprítomnosti, %d bajty. Správa "
+"bola automaticky skrátená."
+msgstr[3] ""
 "Bola prekročená maximálna dĺžka správy o neprítomnosti, %d bajty. Správa "
 "bola automaticky skrátená."
 
@@ -8346,6 +8399,7 @@ msgid_plural "%d seconds"
 msgstr[0] "%d sekúnd"
 msgstr[1] "%d sekunda"
 msgstr[2] "%d sekundy"
+msgstr[3] "%d sekundy"
 
 #, c-format
 msgid "%d day"
@@ -8353,6 +8407,7 @@ msgid_plural "%d days"
 msgstr[0] "%d dní"
 msgstr[1] "%d deň"
 msgstr[2] "%d dni"
+msgstr[3] "%d dni"
 
 #, c-format
 msgid "%s, %d hour"
@@ -8360,6 +8415,7 @@ msgid_plural "%s, %d hours"
 msgstr[0] "%s, %d hodín"
 msgstr[1] "%s, %d hodina"
 msgstr[2] "%s, %d hodiny"
+msgstr[3] "%s, %d hodiny"
 
 #, c-format
 msgid "%d hour"
@@ -8367,6 +8423,7 @@ msgid_plural "%d hours"
 msgstr[0] "%d hodín"
 msgstr[1] "%d hodina"
 msgstr[2] "%d hodiny"
+msgstr[3] "%d hodiny"
 
 #, c-format
 msgid "%s, %d minute"
@@ -8374,6 +8431,7 @@ msgid_plural "%s, %d minutes"
 msgstr[0] "%s, %d minút"
 msgstr[1] "%s, %d minúta"
 msgstr[2] "%s, %d minúty"
+msgstr[3] "%s, %d minúty"
 
 #, c-format
 msgid "%d minute"
@@ -8381,6 +8439,7 @@ msgid_plural "%d minutes"
 msgstr[0] "%d minút"
 msgstr[1] "%d minúta"
 msgstr[2] "%d minúty"
+msgstr[3] "%d minúty"
 
 #, c-format
 msgid "Could not open %s: Redirected too many times"
@@ -8476,10 +8535,8 @@ msgstr "Internetový komunikátor Pidgin"
 msgid "Internet Messenger"
 msgstr "Internetový komunikátor"
 
-#, fuzzy
 msgid "Chat over IM.  Supports AIM, Google Talk, Jabber/XMPP, and more"
 msgstr ""
-"Chat cez IM.  Podporuje AIM, Google Talk, Jabber/XMPP, MSN, Yahoo a ďalšie"
 
 #. Build the login options frame.
 msgid "Login Options"
@@ -8751,6 +8808,7 @@ msgid_plural ""
 msgstr[0] "Máte %d kontaktov pomenovaných %s. Chcete ich spojiť?"
 msgstr[1] "Máte %d kontakt pomenovaný %s. Chcete ho spojiť?"
 msgstr[2] "Máte %d kontakty pomenované %s. Chcete ich spojiť?"
+msgstr[3] "Máte %d kontakty pomenované %s. Chcete ich spojiť?"
 
 msgid ""
 "Merging these contacts will cause them to share a single entry on the buddy "
@@ -9089,6 +9147,7 @@ msgid_plural "%d unread messages from %s\n"
 msgstr[0] "%d neprečítaných správ od používateľa %s\n"
 msgstr[1] "%d neprečítaná správa od používateľa %s\n"
 msgstr[2] "%d neprečítané správy od používateľa %s\n"
+msgstr[3] "%d neprečítané správy od používateľa %s\n"
 
 msgid "Manually"
 msgstr "Ručne"
@@ -9126,6 +9185,7 @@ msgid_plural ""
 msgstr[0] "%d účtov bolo vypnutých pretože ste sa prihlásili z iného miesta."
 msgstr[1] "%d účet bol vypnutý pretože ste sa prihlásili z iného miesta."
 msgstr[2] "%d účty boli vypnuté pretože ste sa prihlásili z iného miesta."
+msgstr[3] "%d účty boli vypnuté pretože ste sa prihlásili z iného miesta."
 
 msgid "<b>Username:</b>"
 msgstr "<b>Prihlasovacie meno:</b>"
@@ -9517,6 +9577,7 @@ msgid_plural "%d people in room"
 msgstr[0] "V miestnosti je %d osôb"
 msgstr[1] "V miestnosti je %d osoba"
 msgstr[2] "V miestnosti sú %d osoby"
+msgstr[3] "V miestnosti sú %d osoby"
 
 msgid "Stopped Typing"
 msgstr "Prestal písať"
@@ -9628,6 +9689,9 @@ msgstr "Závažná chyba"
 msgid "artist"
 msgstr "umelec"
 
+msgid "lead developer"
+msgstr "vedúci vývojár"
+
 msgid "voice and video"
 msgstr "hlas a video"
 
@@ -9663,9 +9727,6 @@ msgstr "XMPP"
 
 msgid "original author"
 msgstr "pôvodný autor"
-
-msgid "lead developer"
-msgstr "vedúci vývojár"
 
 msgid "Senior Contributor/QA"
 msgstr "Bývalý prispievateľ/QA"
@@ -10105,6 +10166,9 @@ msgstr[1] ""
 "Zo zoznamu priateľov sa chystáte odstrániť kontakt obsahujúci %s a %d "
 "ďalšieho priateľa. Chcete pokračovať?"
 msgstr[2] ""
+"Zo zoznamu priateľov sa chystáte odstrániť kontakt obsahujúci %s a %d "
+"ďalších priateľov. Chcete pokračovať?"
+msgstr[3] ""
 "Zo zoznamu priateľov sa chystáte odstrániť kontakt obsahujúci %s a %d "
 "ďalších priateľov. Chcete pokračovať?"
 
@@ -10708,6 +10772,7 @@ msgid_plural "%s has %d new messages."
 msgstr[0] "Používateľ %s má %d nových správ."
 msgstr[1] "Používateľ %s má %d novú správu."
 msgstr[2] "Používateľ %s má %d nové správy."
+msgstr[3] "Používateľ %s má %d nové správy."
 
 #, c-format
 msgid "<b>%d new email.</b>"
@@ -10715,6 +10780,7 @@ msgid_plural "<b>%d new emails.</b>"
 msgstr[0] "<b>%d nových e-mailov.</b>"
 msgstr[1] "<b>%d nový e-mail.</b>"
 msgstr[2] "<b>%d nové e-maily.</b>"
+msgstr[3] "<b>%d nové e-maily.</b>"
 
 #, c-format
 msgid "The browser command \"%s\" is invalid."
@@ -11079,9 +11145,6 @@ msgstr "Nebolo možné spustiť program na nastavenie proxy."
 msgid "Cannot start browser configuration program."
 msgstr "Nebolo možné spustiť program na nastavenie prehliadača."
 
-msgid "Disabled"
-msgstr "Vypnuté"
-
 #, c-format
 msgid "Use _automatically detected IP address: %s"
 msgstr "Použiť _automaticky zistenú IP adresu: %s"
@@ -11347,6 +11410,37 @@ msgstr "Po spustení použiť status ako pred odhlásením"
 msgid "Status to a_pply at startup:"
 msgstr "Po spustení použiť status:"
 
+msgid "DROP"
+msgstr ""
+
+#, c-format
+msgid "Silence threshold: %d%%"
+msgstr ""
+
+msgid "Volume:"
+msgstr ""
+
+msgid "Test Audio"
+msgstr ""
+
+msgid "Test Video"
+msgstr ""
+
+msgid "_Device"
+msgstr "_Zariadenie"
+
+msgid "Audio"
+msgstr "Zvuk"
+
+msgid "Input"
+msgstr "Vstup"
+
+msgid "Output"
+msgstr "Výstup"
+
+msgid "Video"
+msgstr " Video"
+
 msgid "Interface"
 msgstr "Rozhranie"
 
@@ -11358,6 +11452,9 @@ msgstr "Status / nečinný"
 
 msgid "Themes"
 msgstr "Témy"
+
+msgid "Voice/Video"
+msgstr ""
 
 msgid "Allow all users to contact me"
 msgstr "Povoliť všetkým používateľom kontaktovať ma"
@@ -11442,6 +11539,43 @@ msgstr "Vybrať iný názov"
 
 msgid "Select Folder..."
 msgstr "Vyberte priečinok..."
+
+msgid "Screen share error"
+msgstr ""
+
+msgid "Error creating screencast request"
+msgstr ""
+
+msgid "OpenPipeWireRemote request failed"
+msgstr ""
+
+msgid "No file descriptor found"
+msgstr ""
+
+msgid "Screencast \"Start\" failed"
+msgstr ""
+
+msgid "Screencast \"SelectSources\" failed"
+msgstr ""
+
+msgid "Screencast \"CreateSession\" failed."
+msgstr ""
+
+msgid "Test image"
+msgstr ""
+
+msgid "Select window"
+msgstr ""
+
+msgid "Use monitor"
+msgstr ""
+
+#, c-format
+msgid "%s (%d✕%d @ %d,%d)"
+msgstr ""
+
+msgid "Unknown output"
+msgstr ""
 
 #. list button
 msgid "_Get List"
@@ -12804,35 +12938,14 @@ msgstr ""
 msgid "Provides integration with Unity's messaging menu and launcher."
 msgstr ""
 
-msgid "Audio"
-msgstr "Zvuk"
-
-msgid "Video"
-msgstr " Video"
-
-msgid "Output"
-msgstr "Výstup"
-
 msgid "_Plugin"
 msgstr "_Modul"
-
-msgid "_Device"
-msgstr "_Zariadenie"
-
-msgid "Input"
-msgstr "Vstup"
 
 msgid "P_lugin"
 msgstr "_Modul"
 
 msgid "D_evice"
 msgstr "Z_ariadenie"
-
-msgid "DROP"
-msgstr ""
-
-msgid "Volume:"
-msgstr ""
 
 msgid "Silence threshold:"
 msgstr ""
