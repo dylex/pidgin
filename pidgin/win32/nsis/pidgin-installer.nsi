@@ -90,8 +90,8 @@ VIAddVersionKey "FileDescription" "Pidgin Installer"
 ;--------------------------------
 ;Reserve files used in .onInit
 ;for faster start-up
-ReserveFile "${NSISDIR}\Plugins\System.dll"
-ReserveFile "${NSISDIR}\Plugins\UserInfo.dll"
+ReserveFile "${NSISDIR}\Plugins\x86-unicode\System.dll"
+ReserveFile "${NSISDIR}\Plugins\x86-unicode\UserInfo.dll"
 !insertmacro MUI_RESERVEFILE_INSTALLOPTIONS
 !insertmacro MUI_RESERVEFILE_LANGDLL
 
@@ -257,10 +257,9 @@ Section $(GTKSECTIONTITLE) SecGtk
   retry:
   StrCpy $R2 "${DOWNLOADER_URL}&gtk_version=${GTK_INSTALL_VERSION}&dl_pkg=gtk"
   DetailPrint "Downloading GTK+ Runtime ... ($R2)"
-  NSISdl::download /TIMEOUT=10000 "$R2" "$R1"
+  inetc::get /CONNECTTIMEOUT=10 "$R2" "$R1"
   Pop $R0
-  ;StrCmp $R0 "cancel" done
-  StrCmp $R0 "success" 0 prompt_retry
+  StrCmp $R0 "OK" 0 prompt_retry
 
   Push "${GTK_SHA1SUM}"
   Push "$R1" ; Filename
@@ -388,7 +387,6 @@ SectionGroupEnd
   SectionEnd
 !macroend
 SectionGroup /e $(URIHANDLERSSECTIONTITLE) SecURIHandlers
-  !insertmacro URI_SECTION "aim"
   !insertmacro URI_SECTION "xmpp"
 SectionGroupEnd
 
@@ -437,10 +435,10 @@ Section /o $(DEBUGSYMBOLSSECTIONTITLE) SecDebugSymbols
   retry:
   StrCpy $R2 "${DOWNLOADER_URL}&dl_pkg=dbgsym"
   DetailPrint "Downloading Debug Symbols... ($R2)"
-  NSISdl::download /TIMEOUT=10000 "$R2" "$R1"
+  inetc::get /CONNECTTIMEOUT=10 "$R2" "$R1"
   Pop $R0
-  StrCmp $R0 "cancel" done
-  StrCmp $R0 "success" 0 prompt_retry
+  StrCmp $R0 "Cancelled" done
+  StrCmp $R0 "OK" 0 prompt_retry
 
   Push "${DEBUG_SYMBOLS_SHA1SUM}"
   Push "$R1" ; Filename
@@ -582,6 +580,7 @@ Section Uninstall
     Delete "$INSTDIR\plugins\ticker.dll"
     Delete "$INSTDIR\plugins\timestamp.dll"
     Delete "$INSTDIR\plugins\timestamp_format.dll"
+    Delete "$INSTDIR\plugins\transparency.dll"
     Delete "$INSTDIR\plugins\win2ktrans.dll"
     Delete "$INSTDIR\plugins\winprefs.dll"
     Delete "$INSTDIR\plugins\xmppconsole.dll"
@@ -617,6 +616,7 @@ Section Uninstall
     RMDir "$INSTDIR\spellcheck\lib"
     RMDir "$INSTDIR\spellcheck"
     Delete "$INSTDIR\freebl3.dll"
+    Delete "$INSTDIR\libgcc_s_dw2-1.dll"
     Delete "$INSTDIR\libjabber.dll"
     Delete "$INSTDIR\libnspr4.dll"
     Delete "$INSTDIR\libmeanwhile-1.dll"
@@ -628,6 +628,7 @@ Section Uninstall
     Delete "$INSTDIR\libsilc-1-1-4.dll"
     Delete "$INSTDIR\libsilcclient-1-1-4.dll"
     Delete "$INSTDIR\libssp-0.dll"
+    Delete "$INSTDIR\libwinpthread-1.dll"
     Delete "$INSTDIR\libxml2-2.dll"
     Delete "$INSTDIR\libymsg.dll"
     Delete "$INSTDIR\nss3.dll"

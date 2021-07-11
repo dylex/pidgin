@@ -27,15 +27,53 @@
 #ifndef PURPLE_GLIBCOMPAT_H
 #define PURPLE_GLIBCOMPAT_H
 
+#include <string.h>
+
 #include <glib.h>
+
+#if !GLIB_CHECK_VERSION(2,28,0)
+static inline void
+g_list_free_full(GList *l, GDestroyNotify free_func) {
+	GList *ll = NULL;
+
+	for(ll = l; ll != NULL; ll = ll->next) {
+		free_func(ll->data);
+	}
+
+	g_list_free(l);
+}
+
+static inline void
+g_slist_free_full(GSList *l, GDestroyNotify free_func) {
+	GSList *ll = NULL;
+
+	for(ll = l; ll != NULL; ll = ll->next) {
+		free_func(ll->data);
+	}
+
+	g_slist_free(l);
+}
+#endif /* !GLIB_CHECK_VERSION(2,23,0) */
 
 #if !GLIB_CHECK_VERSION(2,32,0)
 # define G_GNUC_BEGIN_IGNORE_DEPRECATIONS
 # define G_GNUC_END_IGNORE_DEPRECATIONS
 
-void g_queue_free_full(GQueue *queue, GDestroyNotify free_func);
+static inline void
+g_queue_free_full(GQueue *queue, GDestroyNotify free_func) {
+	GList *l = NULL;
 
-gboolean g_hash_table_contains (GHashTable *hash_table, gconstpointer key);
+	for(l = queue->head; l != NULL; l = l->next) {
+		free_func(l->data);
+	}
+
+	g_queue_free(queue);
+}
+
+static inline gboolean
+g_hash_table_contains(GHashTable *hash_table, gconstpointer key) {
+	return g_hash_table_lookup_extended(hash_table, key, NULL, NULL);
+}
 
 #endif /* !GLIB_CHECK_VERSION(2,32,0) */
 
@@ -51,6 +89,24 @@ gboolean g_hash_table_contains (GHashTable *hash_table, gconstpointer key);
 	_Pragma ("clang diagnostic pop")
 
 #endif /* __clang__ */
+
+/* Backport the static inline version of g_memdup2 if we don't have g_memdup2.
+ * see https://mail.gnome.org/archives/desktop-devel-list/2021-February/msg00000.html
+ * for more information.
+ */
+#if !GLIB_CHECK_VERSION(2, 67, 3)
+static inline gpointer
+g_memdup2(gconstpointer mem, gsize byte_size) {
+	gpointer new_mem = NULL;
+
+	if(mem && byte_size != 0) {
+		new_mem = g_malloc (byte_size);
+		memcpy (new_mem, mem, byte_size);
+	}
+
+	return new_mem;
+}
+#endif /* !GLIB_CHECK_VERSION(2, 67, 3) */
 
 #endif /* PURPLE_GLIBCOMPAT_H */
 

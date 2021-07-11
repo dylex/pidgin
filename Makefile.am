@@ -6,7 +6,6 @@ EXTRA_DIST = config.rpath  \
 		HACKING \
 		Makefile.mingw \
 		PLUGIN_HOWTO \
-		README.hg \
 		README.mingw \
 		config.h.mingw \
 		doxy2devhelp.xsl \
@@ -141,5 +140,9 @@ distuninstallcheck_listfiles = \
 
 DISTCLEANFILES= intltool-extract intltool-merge intltool-update \
 			package_revision_raw.txt
+
+# This file isn't cleaned up due to an upstream intltool bug
+# https://bugs.launchpad.net/intltool/+bug/1712194
+DISTCLEANFILES += po/.intltool-merge-cache.lock
 
 ACLOCAL_AMFLAGS = -I m4

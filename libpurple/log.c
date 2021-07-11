@@ -1387,7 +1387,7 @@ static void html_logger_create(PurpleLog *log)
 		data = log->logger_data;
 
 		/* if we can't write to the file, give up before we hurt ourselves */
-		if(!data->file)
+		if(data == NULL || data->file == NULL)
 			return;
 
 		date = purple_date_format_full(localtime(&log->time));
@@ -1558,7 +1558,7 @@ static void txt_logger_create(PurpleLog *log)
 		data = log->logger_data;
 
 		/* if we can't write to the file, give up before we hurt ourselves */
-		if(!data->file)
+		if(data == NULL || data->file == NULL)
 			return;
 
 		if (log->type == PURPLE_LOG_SYSTEM)

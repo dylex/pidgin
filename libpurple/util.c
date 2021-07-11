@@ -27,6 +27,7 @@
 #include "conversation.h"
 #include "core.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "notify.h"
 #include "ntlm.h"
 #include "prpl.h"
@@ -1500,7 +1501,7 @@ purple_markup_html_to_xhtml(const char *html, char **xhtml_out,
 						g_free(pt);
 					}
 					g_free(tag->data);
-					tags = g_list_remove(tags, tag->data);
+					tags = g_list_delete_link(tags, tag);
 				} else {
 					/* a closing tag we weren't expecting...
 					 * we'll let it slide, if it's really a tag...if it's
@@ -2009,7 +2010,7 @@ purple_markup_strip_html(const char *str)
 					{
 						str2[j++] = ' ';
 						str2[j++] = '(';
-						g_memmove(str2 + j, href, hrlen);
+						memmove(str2 + j, href, hrlen);
 						j += hrlen;
 						str2[j++] = ')';
 						g_free(href);
@@ -2285,8 +2286,9 @@ purple_markup_linkify(const char *text)
 
 					/* strip off trailing periods */
 					if (strlen(url_buf) > 0) {
-						for (d = url_buf + strlen(url_buf) - 1; *d == '.'; d--, t--)
+						for (d = url_buf + strlen(url_buf) - 1; (d >= url_buf) && (*d == '.'); d--, t--) {
 							*d = '\0';
+						}
 					}
 
 					tmpurlbuf = purple_unescape_html(url_buf);
@@ -3344,7 +3346,8 @@ purple_str_seconds_to_string(guint secs)
 	hrs  = secs / (60 * 60);
 	secs = secs % (60 * 60);
 	mins = secs / 60;
-	secs = secs % 60;
+	/* this is no longer used, but in case you need it it's here.. */
+	/* secs = secs % 60; */
 
 	if (days > 0)
 	{
@@ -3815,7 +3818,7 @@ process_chunked_data(char *data, gsize *len)
 		}
 
 		/* Move all data overtop of the chunk length that we read in earlier */
-		g_memmove(p, s, sz);
+		memmove(p, s, sz);
 		p += sz;
 		s += sz;
 		newlen += sz;
@@ -4229,7 +4232,7 @@ purple_util_fetch_url_request_data_len_with_account(PurpleAccount *account,
 	gfud->user_agent = g_strdup(user_agent);
 	gfud->http11 = http11;
 	gfud->full = full;
-	gfud->request = request_len ? g_memdup(request, request_len) : NULL;
+	gfud->request = request_len ? g_memdup2(request, request_len) : NULL;
 	gfud->request_len = request_len;
 	gfud->include_headers = include_headers;
 	gfud->fd = -1;

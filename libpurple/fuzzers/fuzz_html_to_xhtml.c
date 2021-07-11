@@ -16,28 +16,35 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA 02111-1301 USA
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02111-1301  USA
  */
 
-#include "glibcompat.h"
+#include <glib.h>
+#include <stdlib.h>
+#include <stdint.h>
+#include <stdio.h>
+#include <string.h>
+#include <purple.h>
 
-#if !GLIB_CHECK_VERSION(2,32,0)
+#include "../util.h"
 
-gboolean
-g_hash_table_contains(GHashTable *hash_table, gconstpointer key) {
-	return g_hash_table_lookup_extended(hash_table, key, NULL, NULL);
+int LLVMFuzzerTestOneInput(const uint8_t *data, size_t size);
+
+int
+LLVMFuzzerTestOneInput(const uint8_t *data, size_t size) {
+	gchar *xhtml = NULL, *plaintext = NULL;
+	gchar *malicious_html = g_new0(gchar, size + 1);
+
+	memcpy(malicious_html, data, size);
+	malicious_html[size] = '\0';
+
+	purple_markup_html_to_xhtml(malicious_html, &xhtml, &plaintext);
+
+	g_free(xhtml);
+	g_free(plaintext);
+
+	g_free(malicious_html);
+
+	return 0;
 }
-
-void
-g_queue_free_full(GQueue *queue, GDestroyNotify free_func) {
-	GList *l = NULL;
-
-	for(l = queue->head; l != NULL; l = l->next) {
-		free_func(l->data);
-	}
-
-	g_queue_free(queue);
-}
-
-#endif /* !GLIB_CHECK_VERSION(2,32,0) */
 

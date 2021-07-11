@@ -31,6 +31,7 @@
 #include "conversation.h"
 #include "dnsquery.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "notify.h"
 #include "privacy.h"
 #include "prpl.h"
@@ -357,7 +358,7 @@ static void fill_auth(struct simple_account_data *sip, const gchar *hdr, struct 
 		while(parts[i]) {
 			purple_debug_info("simple", "parts[i] %s\n", parts[i]);
 			if((tmp = parse_attribute("gssapi-data=\"", parts[i]))) {
-				auth->nonce = g_memdup(purple_ntlm_parse_type2(tmp, &auth->flags), 8);
+				auth->nonce = g_memdup2(purple_ntlm_parse_type2(tmp, &auth->flags), 8);
 				g_free(tmp);
 			}
 			if((tmp = parse_attribute("targetname=\"",
@@ -1813,14 +1814,14 @@ static void simple_udp_host_resolved(GSList *hosts, gpointer data, const char *e
 	}
 
 	addr_size = GPOINTER_TO_INT(hosts->data);
-	hosts = g_slist_remove(hosts, hosts->data);
+	hosts = g_slist_delete_link(hosts, hosts);
 	memcpy(&(sip->serveraddr), hosts->data, addr_size);
 	g_free(hosts->data);
-	hosts = g_slist_remove(hosts, hosts->data);
+	hosts = g_slist_delete_link(hosts, hosts);
 	while(hosts) {
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_delete_link(hosts, hosts);
 		g_free(hosts->data);
-		hosts = g_slist_remove(hosts, hosts->data);
+		hosts = g_slist_delete_link(hosts, hosts);
 	}
 
 	/* create socket for incoming connections */

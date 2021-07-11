@@ -42,6 +42,7 @@
 #include "cmds.h"
 #include "core.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "idle.h"
 #include "imgstore.h"
 #include "log.h"
@@ -218,8 +219,7 @@ close_this_sucker(gpointer data)
 {
 	PidginConversation *gtkconv = data;
 	GList *list = g_list_copy(gtkconv->convs);
-	g_list_foreach(list, (GFunc)purple_conversation_destroy, NULL);
-	g_list_free(list);
+	g_list_free_full(list, (GDestroyNotify)purple_conversation_destroy);
 	return FALSE;
 }
 
@@ -3976,7 +3976,6 @@ add_chat_buddy_common(PurpleConversation *conv, PurpleConvChatBuddy *cb, const c
 	PidginChatPane *gtkchat;
 	PurpleConvChat *chat;
 	PurpleConnection *gc;
-	PurplePluginProtocolInfo *prpl_info;
 	GtkTreeModel *tm;
 	GtkListStore *ls;
 	GtkTreePath *newpath;
@@ -3997,7 +3996,7 @@ add_chat_buddy_common(PurpleConversation *conv, PurpleConvChatBuddy *cb, const c
 	gtkchat = gtkconv->u.chat;
 	gc      = purple_conversation_get_gc(conv);
 
-	if (!gc || !(prpl_info = PURPLE_PLUGIN_PROTOCOL_INFO(gc->prpl)))
+	if (!gc || !(PURPLE_PLUGIN_PROTOCOL_INFO(gc->prpl)))
 		return;
 
 	tm = gtk_tree_view_get_model(GTK_TREE_VIEW(gtkchat->list));
@@ -4275,10 +4274,13 @@ tab_complete(PurpleConversation *conv)
 
 		while (matches) {
 			char *tmp = addthis;
+
 			addthis = g_strconcat(tmp, matches->data, " ", NULL);
+
 			g_free(tmp);
 			g_free(matches->data);
-			matches = g_list_remove(matches, matches->data);
+
+			matches = g_list_delete_link(matches, matches);
 		}
 
 		purple_conversation_write(conv, NULL, addthis, PURPLE_MESSAGE_NO_LOG,
@@ -5544,8 +5546,7 @@ pidgin_conv_destroy(PurpleConversation *conv)
 	gtk_object_sink(GTK_OBJECT(gtkconv->tooltips));
 
 	gtkconv->send_history = g_list_first(gtkconv->send_history);
-	g_list_foreach(gtkconv->send_history, (GFunc)g_free, NULL);
-	g_list_free(gtkconv->send_history);
+	g_list_free_full(gtkconv->send_history, (GDestroyNotify)g_free);
 
 	if (gtkconv->attach.timer) {
 		g_source_remove(gtkconv->attach.timer);
@@ -5964,11 +5965,10 @@ pidgin_conv_write_conv(PurpleConversation *conv, const char *name, const char *a
 
 		gtk_imhtml_append_text(GTK_IMHTML(gtkconv->imhtml), buf2, gtk_font_options_all);
 	} else {
-		char *new_message = g_memdup(displaying, length);
+		char *new_message = g_memdup2(displaying, length);
 		char *alias_escaped = (alias ? g_markup_escape_text(alias, strlen(alias)) : g_strdup(""));
 		/* The initial offset is to deal with
 		 * escaped entities making the string longer */
-		int tag_start_offset = 0;
 		const char *tagname = NULL;
 
 		GtkTextIter start, end;
@@ -5985,25 +5985,18 @@ pidgin_conv_write_conv(PurpleConversation *conv, const char *name, const char *a
 			/* If we're whispering, it's not an autoresponse. */
 			if (purple_message_meify(new_message, -1 )) {
 				g_snprintf(str, 1024, "***%s", alias_escaped);
-				tag_start_offset += 3;
 				tagname = "whisper-action-name";
 			}
 			else {
 				g_snprintf(str, 1024, "*%s*:", alias_escaped);
-				tag_start_offset += 1;
-#if 0
-				tag_end_offset = 2;
-#endif
 				tagname = "whisper-name";
 			}
 		} else {
 			if (purple_message_meify(new_message, -1)) {
 				if (flags & PURPLE_MESSAGE_AUTO_RESP) {
 					g_snprintf(str, 1024, "%s ***%s", AUTO_RESPONSE, alias_escaped);
-					tag_start_offset += strlen(AUTO_RESPONSE) - 6 + 4;
 				} else {
 					g_snprintf(str, 1024, "***%s", alias_escaped);
-					tag_start_offset += 3;
 				}
 
 				if (flags & PURPLE_MESSAGE_NICK)
@@ -6013,12 +6006,8 @@ pidgin_conv_write_conv(PurpleConversation *conv, const char *name, const char *a
 			} else {
 				if (flags & PURPLE_MESSAGE_AUTO_RESP) {
 					g_snprintf(str, 1024, "%s %s", alias_escaped, AUTO_RESPONSE);
-					tag_start_offset += strlen(AUTO_RESPONSE) - 6 + 1;
 				} else {
 					g_snprintf(str, 1024, "%s:", alias_escaped);
-#if 0
-					tag_end_offset = 1;
-#endif
 				}
 
 				if (flags & PURPLE_MESSAGE_NICK) {
@@ -6082,10 +6071,14 @@ pidgin_conv_write_conv(PurpleConversation *conv, const char *name, const char *a
 			memcpy(with_font_tag + pre_len, new_message, length);
 			strcpy(with_font_tag + pre_len + length, post);
 
-			length += pre_len + post_len;
+			/* Previously this might have been used later in the fuction, so
+			 * I'm just commenting it for now. -- GK 2021-06-01
+			 */
+			/* length += pre_len + post_len; */
+
 			g_free(pre);
 		} else
-			with_font_tag = g_memdup(new_message, length);
+			with_font_tag = g_memdup2(new_message, length);
 
 		gtk_imhtml_append_text(GTK_IMHTML(gtkconv->imhtml),
 							 with_font_tag, gtk_font_options | gtk_font_options_all);
@@ -6423,7 +6416,7 @@ pidgin_conv_custom_smiley_write(PurpleConversation *conv, const char *smile,
 		return;
 
 	smiley->data = g_realloc(smiley->data, smiley->datasize + size);
-	g_memmove((guchar *)smiley->data + smiley->datasize, data, size);
+	memmove((guchar *)smiley->data + smiley->datasize, data, size);
 	smiley->datasize += size;
 
 	if (!smiley->loader)
@@ -6755,11 +6748,22 @@ pidgin_conv_update_fields(PurpleConversation *conv, PidginConvFields fields)
 
 		if (gtkchat->topic_text != NULL)
 		{
+			gchar *tmp1 = NULL, *tmp2 = NULL;
+
 			topic = purple_conv_chat_get_topic(chat);
 
-			gtk_entry_set_text(GTK_ENTRY(gtkchat->topic_text), topic ? topic : "");
+			/* replace \r\n with a space */
+			tmp1 = purple_strreplace(topic, "\r\n", " ");
+
+			/* replace \n with a space */
+			tmp2 = purple_strreplace(tmp1, "\n", " ");
+			g_free(tmp1);
+
+			gtk_entry_set_text(GTK_ENTRY(gtkchat->topic_text), tmp2 ? tmp2 : "");
 			gtk_tooltips_set_tip(gtkconv->tooltips, gtkchat->topic_text,
-			                     topic ? topic : "", NULL);
+			                     tmp2 ? tmp2 : "", NULL);
+
+			g_free(tmp2);
 		}
 	}
 
@@ -10238,16 +10242,17 @@ color_is_visible(GdkColor foreground, GdkColor background, guint color_contrast,
 	fgreen = foreground.green >> 8 ;
 	fblue = foreground.blue >> 8 ;
 
-
 	bred = background.red >> 8 ;
 	bgreen = background.green >> 8 ;
 	bblue = background.blue >> 8 ;
 
 	fg_brightness = (fred * 299 + fgreen * 587 + fblue * 114) / 1000;
 	bg_brightness = (bred * 299 + bgreen * 587 + bblue * 114) / 1000;
-	br_diff = abs(fg_brightness - bg_brightness);
+	br_diff = MAX(fg_brightness, bg_brightness) - MIN(fg_brightness, bg_brightness);
 
-	col_diff = abs(fred - bred) + abs(fgreen - bgreen) + abs(fblue - bblue);
+	col_diff = (MAX(fred, bred) - MIN(fred, bred)) +
+	           (MAX(fgreen, bgreen) - MIN(fgreen, bgreen)) +
+	           (MAX(fblue, bblue) - MIN(fblue, bblue));
 
 	return ((col_diff > color_contrast) && (br_diff > brightness_contrast));
 }
@@ -10312,7 +10317,7 @@ generate_nick_colors(guint *color_count, GdkColor background)
 	if (i < numcolors) {
 		GdkColor *c = colors;
 		purple_debug_warning("gtkconv", "Unable to generate enough random colors before timeout. %u colors found.\n", i);
-		colors = g_memdup(c, i * sizeof(GdkColor));
+		colors = g_memdup2(c, i * sizeof(GdkColor));
 		g_free(c);
 		*color_count = i;
 	}

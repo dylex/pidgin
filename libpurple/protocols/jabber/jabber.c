@@ -31,6 +31,7 @@
 #include "conversation.h"
 #include "debug.h"
 #include "dnssrv.h"
+#include "glibcompat.h"
 #include "imgstore.h"
 #include "message.h"
 #include "notify.h"
@@ -177,6 +178,9 @@ static void jabber_bind_result_cb(JabberStream *js, const char *from,
 		return;
 	}
 
+	if (js->sm_state == SM_PLANNED) {
+		jabber_sm_enable(js);
+	}
 	jabber_session_init(js);
 }
 
@@ -318,7 +322,7 @@ void jabber_stream_features_parse(JabberStream *js, xmlnode *packet)
 	if (xmlnode_get_child_with_namespace(packet, "sm", NS_STREAM_MANAGEMENT)
 	    && (js->sm_state == SM_DISABLED) )
 	{
-		jabber_sm_enable(js);
+		js->sm_state = SM_PLANNED;
 	}
 }
 
@@ -831,8 +835,7 @@ txt_resolved_cb(GList *responses, gpointer data)
 	}
 
 	if (responses) {
-		g_list_foreach(responses, (GFunc)purple_txt_response_destroy, NULL);
-		g_list_free(responses);
+		g_list_free_full(responses, (GDestroyNotify)purple_txt_response_destroy);
 	}
 }
 
@@ -2782,7 +2785,7 @@ char *jabber_parse_error(JabberStream *js,
 			/* Clear the pasword if it isn't being saved */
 			if (!purple_account_get_remember_password(js->gc->account))
 				purple_account_set_password(js->gc->account, NULL);
-			text = _("Not Authorized");
+			text = _("Incorrect username or password");
 		} else if(xmlnode_get_child(packet, "temporary-auth-failure")) {
 			text = _("Temporary Authentication Failure");
 		} else {

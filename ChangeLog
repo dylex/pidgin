@@ -1,5 +1,103 @@
 Pidgin and Finch: The Pimpin' Penguin IM Clients That're Good for the Soul
 
+version 2.14.6 (07/08/2021):
+	General:
+	* Update references to point to our current websites. (RR 766) (Gary
+	  Kramlich)
+	* Add a donate link to the help menu. (RR 749) (Gary Kramlich)
+
+	Finch:
+	* Check pkg-config for ncurses before looking for it manually. (RR 729)
+	  (Justin Lecher)
+
+	Pidgin:
+	* Replace newlines in topics with spaces. (PIDGIN-16704) (RR 730) (Gary
+	  Kramlich)
+
+	libpurple:
+	* Added support for the no_proxy environment variable. (PIDGIN-17518)
+	  (RR #667) (Alynx Zhou and Gary Kramlich)
+	* Added infrastructure for fuzzing as well as some initial fuzzers.
+	  (RR #760) (Jordy Zomer)
+	* Fix an out of bounds write in purple_markup_linkify. (RR 781) (Thomas
+	  Roth, Dominik Maier, and Fabian Freyer)
+
+	XMPP:
+	* Enable session management after binding a resource. (PIDGIN-17520) (RR
+	  759) (defanor)
+
+	Zephyr:
+	* Fix a clang logical-not-parentheses warning. (PIDGIN-17528) (RR 731)
+	  (Gary Kramlich)
+
+version 2.14.5 (06/03/2021):
+	General:
+	* Updated our bundled certificates to the latest version from Mozilla.
+	  (RR #722) (PIDGIN-17535) (Gary Kramlich)
+	* Made the project scan-build clean. (RR #692-705, #707-714, #716-#719)
+	  (Gary Kramlich)
+	* Fixed some of Gary's scan-build fixes that were a bit verbose. (RR #715)
+	  (Elliott Sales de Andrade)
+	* Disabled UPnP and NAT-PMP by default for new user. (RR #706) (Gary
+	  Kramlich)
+
+	IRC:
+	* Changed the default server to irc.libera.chat. (RR #675) (Gary Kramlich)
+
+	Windows Specific Changes:
+	* Fixed the installer not running when Mandatory ASLR was turned on.
+	  (RR #721) (PIDGIN-17524) (Gary Kramlich)
+
+version 2.14.4 (04/29/2021):
+	General:
+	* Use LT_LIB_M to find the math library.  This should simplify things for
+	  various distros including the BSD's. (RR #608) (and, Justin Lechner)
+
+	libpurple:
+	* Removed a dangling reference to oscar that was causing the unit tests
+	  to fail. (RR #605) (Gary Kramlich)
+	* Update purple-remote and purple-url-handler to have a Python 3 shebang.
+	  (RR #609) (Richard Laager)
+
+	Pidgin:
+	* Install our AppData file into the $prefix/share/metainfo. (RR 607)
+	  (Lars Wendler)
+	* Re-enable the Gevolution plugin and set the evolution-data-server
+	  requirement to >= 3.6. (RR #610) (Ed Catmur, Lars Wendler)
+
+	Windows-Specific Changes:
+	* Output pkg-config files so that our Windows builds can be seen by meson.
+	  Grim owes a blog post on how this works. (RR #615) (Gary Kramlich)
+	* Update the debug symbols download in the installer to the inetc plugin.
+	  (RR #627) (Gary Kramlich)
+	* Make sure the uninstaller removes all files that we install. (RR #612)
+	  (Gary Kramlich)
+
+version 2.14.3 (04/08/2021):
+	libpurple:
+	* Removed the AIM protocol plugin. AIM has been shut down since December
+	  15th of 2017. We left it around because of a third party server, but our
+	  plugin no longer works with it. (RR #598) (Gary Kramlich)
+
+	Windows-Specific Changes:
+	* Standardize on wprintf in pidgin/win32/winpidgin.c (RR #593) (Gary
+	  Kramlich)
+	* Use the inetc nsis plugin that supports https (RR #593, #594)
+	  (PIDGIN-17511) (Gary Kramlich)
+	* If building under msys2 copy libgcc_s_dw2-1.dll and libwinpthread to the
+	  install directory. (RR #593) (PIDGIN-17511) (Gary Kramlich)
+
+version 2.14.2 (04/01/2021):
+	* Fix a build issue when compiling with gstreamer but without voice and
+	  video. (RR #25)
+	* Enable cyrus-sasl by default. (RR #26)
+	* Fix an issue with opening link in Firefox. (RR #503) (PIDGIN-16589)
+	* Fix a regression from 2.14.0 where extra whitespace would be displayed
+	  when pasting <p> elements from HTML. (RR #504) (PIDGIN-17437)
+	* Require Python 3 for generating the D-Bus bindings. (RR #550)
+	* Fix an issue where pasting <hr>'s and other HTML elements would
+	  eventually lead to a crash. (RR #514) (PIDGIN-17446)
+
 version 2.14.1 (11/06/2020):
 	* Fixed issues with Windows installer that always thought Pidgin was
 	  running. (Eion Robb)

@@ -24,7 +24,7 @@ AC_PREREQ([2.50])
 m4_define([purple_lt_current], [14])
 m4_define([purple_major_version], [2])
 m4_define([purple_minor_version], [14])
-m4_define([purple_micro_version], [1])
+m4_define([purple_micro_version], [6])
 m4_define([purple_version_suffix], [])
 m4_define([purple_version],
           [purple_major_version.purple_minor_version.purple_micro_version])
@@ -90,6 +90,9 @@ AC_CHECK_SIZEOF(time_t, ,[
 #include <time.h>])
 
 AC_C_BIGENDIAN
+
+LT_LIB_M
+AC_SUBST(LIBM)
 
 dnl Checks for library functions.
 AC_TYPE_SIGNAL
@@ -257,7 +260,7 @@ dnl #######################################################################
 AC_ARG_ENABLE(nls, AC_HELP_STRING([--disable-nls], [disable installation of translation files]), enable_i18n="$enableval", enable_i18n=yes)
 
 if test x$enable_i18n = xyes; then
-	AC_PROG_INTLTOOL
+AC_PROG_INTLTOOL
 	GETTEXT_PACKAGE=pidgin
 	AC_SUBST(GETTEXT_PACKAGE)
 
@@ -355,7 +358,7 @@ AC_ARG_ENABLE(gtkspell,
 AC_ARG_ENABLE(gevolution,
 	[AC_HELP_STRING([--enable-gevolution],
 		[compile with the Evolution plugin])],
-	enable_gevolution="$enableval", enable_gevolution="no")
+	enable_gevolution="$enableval", enable_gevolution="yes")
 AC_ARG_ENABLE(cap,
 	[AC_HELP_STRING([--enable-cap],
 		[compile with Contact Availability Prediction plugin])],
@@ -529,18 +532,10 @@ Use --disable-gtkspell if you do not need it.
 	dnl # Check for stuff needed by the Evolution integration plugin.
 	dnl #######################################################################
 	if test "x$enable_gevolution" = "xyes"; then
-		evo_deps="libebook-1.2 libedata-book-1.2 evolution-data-server-1.2 < 3.6"
+		evo_deps="libebook-1.2 libedata-book-1.2 evolution-data-server-1.2 >= 3.6"
 		PKG_CHECK_MODULES(EVOLUTION_ADDRESSBOOK, $evo_deps, , [
 			enable_gevolution="no"
 		])
-		if test "x$enable_gevolution" = "xno"; then
-			evo_deps="libebook-1.0 libedata-book-1.0"
-			PKG_CHECK_MODULES(EVOLUTION_ADDRESSBOOK, $evo_deps, [
-				enable_gevolution="yes"
-			], [
-				enable_gevolution="no"
-			])
-		fi
 		if test "x$enable_gevolution" = "xyes"; then
 			AC_DEFINE(HAVE_EVOLUTION_ADDRESSBOOK, 1, [Define if we're using evolution addressbook.])
 			AC_SUBST(EVOLUTION_ADDRESSBOOK_CFLAGS)
@@ -548,7 +543,7 @@ Use --disable-gtkspell if you do not need it.
 		else
 			if test "x$force_deps" = "xyes" ; then
 				AC_MSG_ERROR([
-Evolution development headers not found (libebook, libedata-book, evolution-data-server < 3.6).
+Evolution development headers not found (libebook, libedata-book, evolution-data-server >= 3.6).
 Use --disable-gevolution if you do not need it.
 ])
 			fi
@@ -608,9 +603,11 @@ AC_ARG_WITH(ncurses-headers, [AC_HELP_STRING([--with-ncurses-headers=DIR],
 		[compile finch against the ncurses includes in DIR])],
 		[ac_ncurses_includes="$withval"], [ac_ncurses_includes=""])
 if test "x$enable_consoleui" = "xyes"; then
-	AC_CHECK_LIB(ncursesw, initscr, [GNT_LIBS="-lncursesw"], [enable_consoleui=no])
-	AC_CHECK_LIB(panelw, update_panels, [GNT_LIBS="$GNT_LIBS -lpanelw"],
-	    [enable_consoleui=no], [$GNT_LIBS])
+	PKG_CHECK_MODULES([GNT], [ncursesw panelw], [], [
+		AC_CHECK_LIB(ncursesw, initscr, [GNT_LIBS="-lncursesw"], [enable_consoleui=no])
+		AC_CHECK_LIB(panelw, update_panels, [GNT_LIBS="$GNT_LIBS -lpanelw"],
+		    [enable_consoleui=no], [$GNT_LIBS])
+	])
 
 	if test "x$enable_consoleui" = "xyes"; then
 		dnl # Some distros put the headers in ncursesw/, some don't
@@ -660,9 +657,13 @@ if test "x$enable_consoleui" = "xyes"; then
 	else
 		# ncursesw was not found. Look for plain old ncurses
 		enable_consoleui=yes
-		AC_CHECK_LIB(ncurses, initscr, [GNT_LIBS="-lncurses"], [enable_consoleui=no])
-		AC_CHECK_LIB(panel, update_panels, [GNT_LIBS="$GNT_LIBS -lpanel"],
-		    [enable_consoleui=no], [$GNT_LIBS])
+
+		PKG_CHECK_MODULES([GNT], [ncurses panel], [] , [
+			AC_CHECK_LIB(ncurses, initscr, [GNT_LIBS="-lncurses"], [enable_consoleui=no])
+			AC_CHECK_LIB(panel, update_panels, [GNT_LIBS="$GNT_LIBS -lpanel"],
+			    [enable_consoleui=no], [$GNT_LIBS])
+		])
+
 		AC_DEFINE(NO_WIDECHAR, 1, [Define to 1 if you don't have wide-character support.])
 		if test x"$ac_ncurses_includes" != "x"; then
 			GNT_CFLAGS="-I$ac_ncurses_includes"
@@ -1160,7 +1161,7 @@ if test "x$STATIC_PRPLS" != "x" -a "x$DYNAMIC_PRPLS" = "xall"; then
 fi
 
 if test "x$STATIC_PRPLS" = "xall" ; then
-	STATIC_PRPLS="bonjour gg irc jabber novell oscar sametime silc simple zephyr"
+	STATIC_PRPLS="bonjour gg irc jabber novell sametime silc simple zephyr"
 fi
 if test "x$have_meanwhile" != "xyes" ; then
 	STATIC_PRPLS=`echo $STATIC_PRPLS | $sedpath 's/sametime//'`
@@ -1180,33 +1181,22 @@ extern_init=
 load_proto=
 for i in $STATIC_PRPLS ; do
 	dnl Ugly special case for "libsilcpurple.la":
-	dnl ... and Ugly special case for multi-protocol oscar
-	if test \( "x$i" = "xoscar" -o "x$i" = "xaim" -o "x$i" = "xicq" \) -a "x$static_oscar" != "xyes"; then
-		STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/oscar/liboscar.la"
-		extern_init="$extern_init extern gboolean purple_init_aim_plugin();"
-		extern_init="$extern_init extern gboolean purple_init_icq_plugin();"
-		load_proto="$load_proto purple_init_aim_plugin();"
-		load_proto="$load_proto purple_init_icq_plugin();"
+	if test "x$i" = "xsilc"; then
+		STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/lib${i}purple.la"
+	elif test "x$i" = "xsilc10"; then
+		STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/libsilcpurple.la"
 	else
-		if test "x$i" = "xsilc"; then
-			STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/lib${i}purple.la"
-		elif test "x$i" = "xsilc10"; then
-			STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/libsilcpurple.la"
-		else
-			STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/lib$i.la"
-		fi
-		extern_init="$extern_init extern gboolean purple_init_${i}_plugin();"
-		load_proto="$load_proto purple_init_${i}_plugin();"
+		STATIC_LINK_LIBS="$STATIC_LINK_LIBS \$(top_builddir)/libpurple/protocols/$i/lib$i.la"
 	fi
+	extern_init="$extern_init extern gboolean purple_init_${i}_plugin();"
+	load_proto="$load_proto purple_init_${i}_plugin();"
+
 	case $i in
 		bonjour)	static_bonjour=yes ;;
 		gg)			static_gg=yes ;;
 		irc)		static_irc=yes ;;
 		jabber)		static_jabber=yes ;;
 		novell)		static_novell=yes ;;
-		oscar)		static_oscar=yes ;;
-		aim)		static_oscar=yes ;;
-		icq)		static_oscar=yes ;;
 		sametime)	static_sametime=yes ;;
 		silc)		static_silc=yes ;;
 		silc10)		static_silc=yes ;;
@@ -1220,7 +1210,6 @@ AM_CONDITIONAL(STATIC_GG, test "x$static_gg" = "xyes")
 AM_CONDITIONAL(STATIC_IRC, test "x$static_irc" = "xyes")
 AM_CONDITIONAL(STATIC_JABBER, test "x$static_jabber" = "xyes")
 AM_CONDITIONAL(STATIC_NOVELL, test "x$static_novell" = "xyes")
-AM_CONDITIONAL(STATIC_OSCAR, test "x$static_oscar" = "xyes")
 AM_CONDITIONAL(STATIC_SAMETIME, test "x$static_sametime" = "xyes" -a "x$have_meanwhile" = "xyes")
 AM_CONDITIONAL(STATIC_SILC, test "x$static_silc" = "xyes" -a "x$have_silc" = "xyes")
 AM_CONDITIONAL(STATIC_SIMPLE, test "x$static_simple" = "xyes")
@@ -1231,7 +1220,7 @@ AC_DEFINE_UNQUOTED(STATIC_PROTO_INIT, $extern_init static void static_proto_init
 
 AC_ARG_WITH(dynamic_prpls, [AC_HELP_STRING([--with-dynamic-prpls], [specify which protocols to build dynamically])], [DYNAMIC_PRPLS=`echo $withval | $sedpath 's/,/ /g'`])
 if test "x$DYNAMIC_PRPLS" = "xall" ; then
-	DYNAMIC_PRPLS="bonjour gg irc jabber novell oscar sametime silc simple zephyr"
+	DYNAMIC_PRPLS="bonjour gg irc jabber novell sametime silc simple zephyr"
 fi
 if test "x$have_meanwhile" != "xyes"; then
 	DYNAMIC_PRPLS=`echo $DYNAMIC_PRPLS | $sedpath 's/sametime//'`
@@ -1254,9 +1243,6 @@ for i in $DYNAMIC_PRPLS ; do
 		jabber)		dynamic_jabber=yes ;;
 		novell)		dynamic_novell=yes ;;
 		null)		dynamic_null=yes ;;
-		oscar)		dynamic_oscar=yes ;;
-		aim)		dynamic_oscar=yes ;;
-		icq)		dynamic_oscar=yes ;;
 		sametime)	dynamic_sametime=yes ;;
 		silc)		dynamic_silc=yes ;;
 		silc10)		dynamic_silc=yes ;;
@@ -1458,23 +1444,18 @@ dnl auto-generated stuff to the repository is inelegant.
 dnl Alternatively, these python scripts could be rewritten
 dnl in C (brrrr ...).
 
-AC_ARG_WITH([python],
-			AC_HELP_STRING([--with-python=PATH],
+AC_ARG_WITH([python3],
+			AC_HELP_STRING([--with-python3=PATH],
 						   [which python interpreter to use for dbus code generation]),
-			PYTHON=$withval)
+			PYTHON3=$withval)
 
 if test "x$enable_dbus" = "xyes" ; then
-	if test -z "$PYTHON" -o "x$PYTHON" = "xyes"; then
-	AC_PATH_PROG([PYTHON], [python], [no])
+	if test -z "$PYTHON3" -o "x$PYTHON3" = "xyes"; then
+		AC_PATH_PROG([PYTHON3], [python3], [no])
 	fi
 
-	if test x"$PYTHON" = x"no" ; then
-		AC_MSG_WARN([python interpreter not found in your path])
-		enable_dbus=no
-	fi
-
-	if $PYTHON -c "import sys; sys.exit(sys.version[[:3]] >= '2.4')" ; then
-		AC_MSG_WARN([python version >= 2.4 required])
+	if test x"$PYTHON3" = x"no" ; then
+		AC_MSG_WARN([python3 interpreter not found in your path])
 		enable_dbus=no
 	fi
 fi
@@ -2332,7 +2313,7 @@ dnl #######################################################################
 dnl AC_CHECK_SIZEOF(short)
 AC_CHECK_FUNCS(snprintf connect)
 AC_SUBST(SASL_LIBS)
-AC_ARG_ENABLE(cyrus-sasl, AC_HELP_STRING([--enable-cyrus-sasl], [enable Cyrus SASL support for xmpp/irc]), enable_cyrus_sasl=$enableval, enable_cyrus_sasl=no)
+AC_ARG_ENABLE(cyrus-sasl, AC_HELP_STRING([--enable-cyrus-sasl], [enable Cyrus SASL support for xmpp/irc]), enable_cyrus_sasl=$enableval, enable_cyrus_sasl=yes)
 if test "x$enable_cyrus_sasl" = "xyes" ; then
 	AC_CHECK_LIB(sasl2, sasl_client_init, [
 			AM_CONDITIONAL(USE_CYRUS_SASL, true)
@@ -2551,6 +2532,18 @@ AC_SUBST(enable_devhelp)
 AM_CONDITIONAL(HAVE_DOXYGEN, test "x$enable_doxygen" = "xyes")
 AM_CONDITIONAL(HAVE_XSLTPROC, test "x$enable_devhelp" = "xyes")
 
+
+AC_ARG_ENABLE([fuzzing], [--enable-fuzzing    Turn on fuzzing],
+	      [case "${enableval}" in yes) fuzzing=true ;; no)  fuzzing=false ;; *) AC_MSG_ERROR([bad value ${enableval} for --enable-fuzzing]) ;; esac],[fuzzing=false])
+AM_CONDITIONAL([FUZZ], [test x$fuzzing = xtrue])
+
+if test "x$enable_fuzzing" = "xyes" ; then
+	if ! test "x$CC" = "xclang" ; then
+		AC_MSG_ERROR(["You need to set CC=clang to use --enable-fuzzing, used $CC"])
+	fi
+fi
+
+
 AC_ARG_ENABLE(debug, [AC_HELP_STRING([--enable-debug],
 	[compile with debugging support])], , enable_debug=no)
 
@@ -2593,6 +2586,7 @@ AC_CONFIG_FILES([Makefile
 		   libpurple/data/purple-2-uninstalled.pc
 		   libpurple/ciphers/Makefile
 		   libpurple/example/Makefile
+		   libpurple/fuzzers/Makefile
 		   libpurple/plugins/Makefile
 		   libpurple/plugins/mono/Makefile
 		   libpurple/plugins/mono/api/Makefile
@@ -2609,7 +2603,6 @@ AC_CONFIG_FILES([Makefile
 		   libpurple/protocols/jabber/Makefile
 		   libpurple/protocols/novell/Makefile
 		   libpurple/protocols/null/Makefile
-		   libpurple/protocols/oscar/Makefile
 		   libpurple/protocols/sametime/Makefile
 		   libpurple/protocols/silc/Makefile
 		   libpurple/protocols/silc10/Makefile

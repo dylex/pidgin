@@ -27,6 +27,7 @@
 #include "conversation.h"
 #include "dbus-maybe.h"
 #include "debug.h"
+#include "glibcompat.h"
 #include "notify.h"
 #include "pounce.h"
 #include "prefs.h"
@@ -1416,14 +1417,16 @@ purple_buddy_destroy(PurpleBuddy *buddy)
 	g_free(buddy->server_alias);
 
 	PURPLE_DBUS_UNREGISTER_POINTER(buddy);
-	g_free(buddy);
 
 	/* FIXME: Once PurpleBuddy is a GObject, timeout callbacks can
 	 * g_object_ref() it when connecting the callback and
 	 * g_object_unref() it in the handler.  That way, it won't
 	 * get freed while the timeout is pending and this line can
 	 * be removed. */
-	while (g_source_remove_by_user_data((gpointer *)buddy));
+	while (g_source_remove_by_user_data((gpointer *)buddy)) {
+	}
+
+	g_free(buddy);
 }
 
 void
@@ -2422,8 +2425,7 @@ const char *purple_chat_get_name(PurpleChat *chat)
 		GList *parts = prpl_info->chat_info(purple_account_get_connection(chat->account));
 		pce = parts->data;
 		ret = g_hash_table_lookup(chat->components, pce->identifier);
-		g_list_foreach(parts, (GFunc)g_free, NULL);
-		g_list_free(parts);
+		g_list_free_full(parts, (GDestroyNotify)g_free);
 	}
 
 	return ret;
@@ -2570,8 +2572,7 @@ purple_blist_find_chat(PurpleAccount *account, const char *name)
 				pce = parts->data;
 				chat_name = g_hash_table_lookup(chat->components,
 												pce->identifier);
-				g_list_foreach(parts, (GFunc)g_free, NULL);
-				g_list_free(parts);
+				g_list_free_full(parts, (GDestroyNotify)g_free);
 
 				if (chat->account == account && chat_name != NULL &&
 					purple_strequal(purple_normalize(account, chat_name), normname)) {

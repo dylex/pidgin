@@ -162,6 +162,8 @@ pidgin_LDADD = \
 	$(LIBXML_LIBS) \
 	$(GTK_LIBS) \
 	$(GIO_UNIX_LIBS) \
+	$(X11_LIBS) \
+	$(LIBM) \
 	$(top_builddir)/libpurple/libpurple.la
 
 AM_CPPFLAGS = \
@@ -194,7 +196,7 @@ apps_in_files = data/pidgin.desktop.in
 apps_DATA = $(apps_in_files:.desktop.in=.desktop)
 @INTLTOOL_DESKTOP_RULE@
 
-appdatadir = $(datarootdir)/appdata
+appdatadir = $(datarootdir)/metainfo
 appdata_DATA = $(appdata_in_files:.xml.in=.xml)
 appdata_in_files = data/pidgin.appdata.xml.in
 
