@@ -798,48 +798,6 @@ jabber_login_callback_ssl(gpointer data, PurpleSslConnection *gsc,
 }
 
 static void
-txt_resolved_cb(GList *responses, gpointer data)
-{
-	JabberStream *js = data;
-	gboolean found = FALSE;
-
-	js->srv_query_data = NULL;
-
-	while (responses) {
-		PurpleTxtResponse *resp = responses->data;
-		gchar **token;
-		token = g_strsplit(purple_txt_response_get_content(resp), "=", 2);
-		if (purple_strequal(token[0], "_xmpp-client-xbosh")) {
-			purple_debug_info("jabber","Found alternative connection method using %s at %s.\n", token[0], token[1]);
-			js->bosh = jabber_bosh_connection_init(js, token[1]);
-			g_strfreev(token);
-			break;
-		}
-		g_strfreev(token);
-		purple_txt_response_destroy(resp);
-		responses = g_list_delete_link(responses, responses);
-	}
-
-	if (js->bosh) {
-		found = TRUE;
-		jabber_bosh_connection_connect(js->bosh);
-	}
-
-	if (!found) {
-		purple_debug_warning("jabber", "Unable to find alternative XMPP connection "
-				  "methods after failing to connect directly.\n");
-		purple_connection_error_reason(js->gc,
-				PURPLE_CONNECTION_ERROR_NETWORK_ERROR,
-				_("Unable to connect"));
-		return;
-	}
-
-	if (responses) {
-		g_list_free_full(responses, (GDestroyNotify)purple_txt_response_destroy);
-	}
-}
-
-static void
 jabber_login_callback(gpointer data, gint source, const gchar *error)
 {
 	PurpleConnection *gc = data;
@@ -850,10 +808,9 @@ jabber_login_callback(gpointer data, gint source, const gchar *error)
 			purple_debug_error("jabber", "Unable to connect to server: %s.  Trying next SRV record or connecting directly.\n", error);
 			try_srv_connect(js);
 		} else {
-			purple_debug_info("jabber","Couldn't connect directly to %s.  Trying to find alternative connection methods, like BOSH.\n", js->user->domain);
-			js->srv_query_data = purple_txt_resolve_account(
-					purple_connection_get_account(gc), "_xmppconnect",
-					js->user->domain, txt_resolved_cb, js);
+			purple_connection_error_reason(js->gc,
+				PURPLE_CONNECTION_ERROR_NETWORK_ERROR,
+				_("Unable to connect"));
 		}
 		return;
 	}
@@ -1622,6 +1579,27 @@ void jabber_unregister_account(PurpleAccount *account, PurpleAccountUnregistrati
 	jabber_unregister_account_cb(js);
 }
 
+static void
+jabber_terminate_transfers(JabberStream *js)
+{
+	while(js->file_transfers != NULL) {
+		gpointer data = js->file_transfers->data;
+
+		purple_xfer_end(data);
+
+		if(js->file_transfers == NULL) {
+			break;
+		}
+
+		/* Forcefully remove the link if jabber_si_xfer_free doesn't
+		   remove the link. */
+		if(js->file_transfers->data == data) {
+			js->file_transfers = g_list_delete_link(js->file_transfers,
+								js->file_transfers);
+		}
+	}
+}
+
 /* TODO: As Will pointed out in IRC, after being notified by the core to
  * shutdown, we should async. wait for the server to send us the stream
  * termination before destorying everything. That seems like it would require
@@ -1633,6 +1611,8 @@ void jabber_close(PurpleConnection *gc)
 
 	/* Close all of the open Jingle sessions on this stream */
 	jingle_terminate_sessions(js);
+
+	jabber_terminate_transfers(js);
 
 	if (js->bosh)
 		jabber_bosh_connection_close(js->bosh);
@@ -1920,10 +1900,6 @@ static void jabber_blocklist_parse(JabberStream *js, const char *from,
 	if (type == JABBER_IQ_ERROR || blocklist == NULL)
 		return;
 
-	/* This is the only privacy method supported by XEP-0191 */
-	if (account->perm_deny != PURPLE_PRIVACY_DENY_USERS)
-		account->perm_deny = PURPLE_PRIVACY_DENY_USERS;
-
 	/*
 	 * TODO: When account->deny is something more than a hash table, this can
 	 * be re-written to find the set intersection and difference.
@@ -1959,6 +1935,7 @@ void jabber_add_deny(PurpleConnection *gc, const char *who)
 	JabberStream *js;
 	JabberIq *iq;
 	xmlnode *block, *item;
+	const char *norm = NULL;
 
 	g_return_if_fail(who != NULL && *who != '\0');
 
@@ -1979,13 +1956,15 @@ void jabber_add_deny(PurpleConnection *gc, const char *who)
 		return;
 	}
 
+	norm = jabber_normalize(purple_connection_get_account(gc), who);
+
 	iq = jabber_iq_new(js, JABBER_IQ_SET);
 
 	block = xmlnode_new_child(iq->node, "block");
 	xmlnode_set_namespace(block, NS_SIMPLE_BLOCKING);
 
 	item = xmlnode_new_child(block, "item");
-	xmlnode_set_attrib(item, "jid", who);
+	xmlnode_set_attrib(item, "jid", norm ? norm : who);
 
 	jabber_iq_send(iq);
 }
@@ -1995,6 +1974,7 @@ void jabber_rem_deny(PurpleConnection *gc, const char *who)
 	JabberStream *js;
 	JabberIq *iq;
 	xmlnode *unblock, *item;
+	const char *norm = NULL;
 
 	g_return_if_fail(who != NULL && *who != '\0');
 
@@ -2011,13 +1991,15 @@ void jabber_rem_deny(PurpleConnection *gc, const char *who)
 	if (!(js->server_caps & JABBER_CAP_BLOCKING))
 		return;
 
+	norm = jabber_normalize(purple_connection_get_account(gc), who);
+
 	iq = jabber_iq_new(js, JABBER_IQ_SET);
 
 	unblock = xmlnode_new_child(iq->node, "unblock");
 	xmlnode_set_namespace(unblock, NS_SIMPLE_BLOCKING);
 
 	item = xmlnode_new_child(unblock, "item");
-	xmlnode_set_attrib(item, "jid", who);
+	xmlnode_set_attrib(item, "jid", norm ? norm : who);
 
 	jabber_iq_send(iq);
 }
@@ -3179,7 +3161,12 @@ static gboolean _jabber_send_buzz(JabberStream *js, const char *username, char *
 		xmlnode *buzz, *msg = xmlnode_new("message");
 		gchar *to;
 
-		to = g_strdup_printf("%s/%s", username, jbr->name);
+		if((strchr(username, '/') == NULL) && jbr && (jbr->name != NULL)) {
+			to = g_strdup_printf("%s/%s", username, jbr->name);
+		} else {
+			to = g_strdup(username);
+		}
+
 		xmlnode_set_attrib(msg, "to", to);
 		g_free(to);
 
