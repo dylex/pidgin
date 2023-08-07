@@ -538,6 +538,33 @@ view_log_cb(GntMenuItem *n, gpointer ggc)
 }
 
 static void
+set_blist_node_alertcount(PurpleBlistNode *node, PurpleRequestFields *fields)
+{
+	int alert = purple_request_fields_get_integer(fields, "alert");
+	purple_blist_node_set_int(node, "alertcount", alert);
+}
+
+static void
+set_alertcount_cb(GntMenuItem *n, gpointer ggc) {
+	FinchConv *fc = ggc;
+	PurpleConversation *conv = fc->active_conv;
+	PurpleBlistNode *node = get_conversation_blist_node(conv);
+	g_return_if_fail(node);
+	int alert = purple_blist_node_get_int(node, "alertcount");
+	PurpleRequestFields *fields = purple_request_fields_new();
+	PurpleRequestFieldGroup *group = purple_request_field_group_new(NULL);
+	purple_request_fields_add_group(fields, group);
+	PurpleRequestField *field = purple_request_field_int_new("alert", "Alert", alert);
+	purple_request_field_group_add_field(group, field);
+	purple_request_fields(node, "Alert count", "Enter alert count color value", NULL,
+			fields,
+			"Set", G_CALLBACK(set_blist_node_alertcount),
+			"Cancel", NULL,
+			NULL, NULL, fc->active_conv,
+			node);
+}
+
+static void
 generate_send_to_menu(FinchConv *ggc)
 {
 	GntWidget *sub, *menu = ggc->menu;
@@ -666,6 +693,10 @@ gg_create_menu(FinchConv *ggc)
 			!(ggc->flags & FINCH_CONV_NO_SOUND));
 	gnt_menu_add_item(GNT_MENU(sub), item);
 	gnt_menuitem_set_callback(item, toggle_sound_cb, ggc);
+
+	item = gnt_menuitem_new(_("Set alertcount..."));
+	gnt_menu_add_item(GNT_MENU(sub), item);
+	gnt_menuitem_set_callback(item, set_alertcount_cb, ggc);
 }
 
 static void
