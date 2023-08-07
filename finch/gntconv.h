@@ -47,6 +47,7 @@ typedef struct _FinchConvIm FinchConvIm;
 typedef enum
 {
 	FINCH_CONV_NO_SOUND     = 1 << 0,
+	FINCH_CONV_NO_USERLIST  = 1 << 1,
 } FinchConversationFlag;
 
 struct _FinchConv

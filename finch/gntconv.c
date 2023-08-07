@@ -490,6 +490,16 @@ toggle_sound_cb(GntMenuItem *item, gpointer ggconv)
 }
 
 static void
+toggle_userlist_cb(GntMenuItem *item, gpointer ggconv)
+{
+	FinchConv *fc = ggconv;
+	PurpleBlistNode *node = get_conversation_blist_node(fc->active_conv);
+	fc->flags ^= FINCH_CONV_NO_USERLIST;
+	if (node)
+		purple_blist_node_set_bool(node, "gnt-no-userlist", !!(fc->flags & FINCH_CONV_NO_USERLIST));
+}
+
+static void
 send_to_cb(GntMenuItem *m, gpointer n)
 {
 	PurpleAccount *account = g_object_get_data(G_OBJECT(m), "purple_account");
@@ -693,6 +703,14 @@ gg_create_menu(FinchConv *ggc)
 			!(ggc->flags & FINCH_CONV_NO_SOUND));
 	gnt_menu_add_item(GNT_MENU(sub), item);
 	gnt_menuitem_set_callback(item, toggle_sound_cb, ggc);
+
+	if (purple_conversation_get_type(ggc->active_conv) == PURPLE_CONV_TYPE_CHAT) {
+		item = gnt_menuitem_check_new(_("Enable User List"));
+		gnt_menuitem_check_set_checked(GNT_MENU_ITEM_CHECK(item),
+				!(ggc->flags & FINCH_CONV_NO_USERLIST));
+		gnt_menu_add_item(GNT_MENU(sub), item);
+		gnt_menuitem_set_callback(item, toggle_userlist_cb, ggc);
+	}
 
 	item = gnt_menuitem_new(_("Set alertcount..."));
 	gnt_menu_add_item(GNT_MENU(sub), item);
@@ -900,6 +918,9 @@ finch_create_conversation(PurpleConversation *conv)
 			!finch_sound_is_enabled())
 		ggc->flags |= FINCH_CONV_NO_SOUND;
 
+	if (convnode && purple_blist_node_get_bool(convnode, "gnt-no-userlist"))
+		ggc->flags |= FINCH_CONV_NO_USERLIST;
+
 	gg_create_menu(ggc);
 	gg_setup_commands(ggc, FALSE);
 
@@ -1097,7 +1118,7 @@ finch_chat_add_users(PurpleConversation *conv, GList *users, gboolean new_arriva
 	FinchConv *ggc = FINCH_GET_DATA(conv);
 	GntEntry *entry = GNT_ENTRY(ggc->entry);
 
-	if (!new_arrivals)
+	if (!new_arrivals && !(ggc->flags & FINCH_CONV_NO_USERLIST))
 	{
 		/* Print the list of users in the room */
 		GString *string = g_string_new(NULL);
