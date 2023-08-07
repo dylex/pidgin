@@ -558,7 +558,15 @@ static void
 set_alertcount_cb(GntMenuItem *n, gpointer ggc) {
 	FinchConv *fc = ggc;
 	PurpleConversation *conv = fc->active_conv;
-	PurpleBlistNode *node = get_conversation_blist_node(conv);
+	PurpleBlistNode *node = NULL;
+	switch (conv->type) {
+		case PURPLE_CONV_TYPE_IM:
+			node = PURPLE_BLIST_NODE(find_buddy_for_conversation(conv));
+			break;
+		case PURPLE_CONV_TYPE_CHAT:
+			node = PURPLE_BLIST_NODE(find_chat_for_conversation(conv));
+			break;
+	}
 	g_return_if_fail(node);
 	int alert = purple_blist_node_get_int(node, "alertcount");
 	PurpleRequestFields *fields = purple_request_fields_new();
