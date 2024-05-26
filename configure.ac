@@ -24,7 +24,7 @@ AC_PREREQ([2.50])
 m4_define([purple_lt_current], [14])
 m4_define([purple_major_version], [2])
 m4_define([purple_minor_version], [14])
-m4_define([purple_micro_version], [12])
+m4_define([purple_micro_version], [13])
 m4_define([purple_version_suffix], [])
 m4_define([purple_version],
           [purple_major_version.purple_minor_version.purple_micro_version])
@@ -1099,7 +1099,7 @@ dnl #######################################################################
 PKG_CHECK_MODULES(LIBGADU, [libgadu >= 1.12.0], [have_libgadu=yes], [have_libgadu=no])
 
 if test "x$have_libgadu" = "xyes"; then
-	AC_CHECK_LIB(gadu, gg_is_gpl_compliant, , [
+	AC_CHECK_LIB(gadu, gg_is_gpl_compliant, [:], [
 		LIBGADU_LIBS=""
 		LIBGADU_CFLAGS=""
 		have_libgadu=no
@@ -1267,7 +1267,8 @@ if test "x$GCC" = "xyes"; then
 	dnl We enable -Wall later.
 	dnl If it's set after the warning CFLAGS in the compiler invocation, it counteracts the -Wno... flags.
 	dnl This leads to warnings we don't want.
-	CFLAGS=`echo $CFLAGS |$sedpath 's/-Wall//'`
+	starting_CFLAGS=`echo $CFLAGS |$sedpath 's/-Wall//'`
+	orig_CFLAGS="$CFLAGS"
 
 	dnl ENABLE WARNINGS SUPPORTED BY THE VERSION OF GCC IN USE
 	dnl
@@ -1301,18 +1302,16 @@ if test "x$GCC" = "xyes"; then
 			"-Wpointer-arith" \
 			"-Wundef" \
 	; do
-		orig_CFLAGS="$CFLAGS"
-		CFLAGS="$CFLAGS $newflag"
+		CFLAGS="$starting_CFLAGS $newflag"
 		AC_MSG_CHECKING(for $newflag option to gcc)
 		AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[]], [[]])], [
 			AC_MSG_RESULT(yes)
-			CFLAGS="$orig_CFLAGS"
 			DEBUG_CFLAGS="$DEBUG_CFLAGS $newflag"
 		], [
 			AC_MSG_RESULT(no)
-			CFLAGS="$orig_CFLAGS"
 		])
 	done
+	CFLAGS="$orig_CFLAGS"
 
 	if test "x$enable_fortify" = "xyes"; then
 		AC_MSG_CHECKING(for FORTIFY_SOURCE support)
