@@ -15,7 +15,7 @@ If concerns are raised as to the copyright holder of a particular
 piece of code, then that code should be traced through our version
 control system to see from where it came and who has modified it.
 
-Copyright (C) 1998-2017 by the following:
+Copyright (C) 1998-2024 by the following:
 
 Mark
 Saleem Abdulrasool
@@ -125,6 +125,7 @@ Graham Cole
 Jono Cole
 Lorenzo Colitti
 Collabora Ltd.
+Yoann Congal
 Jeff Connelly
 Chris Connett
 Nathan Conrad
@@ -368,6 +369,7 @@ Christof Meerwald
 Mihály Mészáros
 Robert Mibus
 David Michael
+Oliver Middleton
 Lars T. Mikkelsen
 Mantas Mikulėnas
 Benjamin Miller
@@ -502,6 +504,7 @@ Andrew Sayman
 Alceste Scalas
 Carsten Schaar
 Toby Schaffer
+John Schanck
 Jonathan Schleifer <js-pidgin@webkeks.org>
 Luke Schierer
 Sebastian Schmidt <yath@yath.de>

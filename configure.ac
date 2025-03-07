@@ -24,7 +24,7 @@ AC_PREREQ([2.50])
 m4_define([purple_lt_current], [14])
 m4_define([purple_major_version], [2])
 m4_define([purple_minor_version], [14])
-m4_define([purple_micro_version], [13])
+m4_define([purple_micro_version], [14])
 m4_define([purple_version_suffix], [])
 m4_define([purple_version],
           [purple_major_version.purple_minor_version.purple_micro_version])
@@ -200,7 +200,7 @@ AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <time.h>
 #include <stdio.h>
 
-int main()
+int main(void)
 {
 	char buf[6];
 	time_t t = time(NULL);
