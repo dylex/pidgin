@@ -54,6 +54,8 @@ conversation_ident(PurpleConversation *conv)
 	blist = conversation_buddy(conv);
 	if (blist) {
 		int r = purple_blist_node_get_int(blist, "alertcount");
+		if (r < 0)
+			return 0;
 		if (r)
 			return r;
 	}
