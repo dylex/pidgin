@@ -35,7 +35,7 @@ conversation_created_cb(PurpleConversation *conv, void *data)
 	const char *path = g_build_filename(dir, filename, NULL);
 	g_free(dir);
 	g_free(filename);
-	ssize_t r = sendto(s, path, strlen(path), 0, &ADDR, SUN_LEN(&ADDR)+1);
+	ssize_t r = sendto(s, path, strlen(path), 0, (const struct sockaddr*)&ADDR, SUN_LEN(&ADDR)+1);
 	if (r < 0 && errno != ENOENT && errno != ECONNREFUSED)
 		purple_debug_warning("syncnotify", "sendto: %m\n");
 	close(s);
